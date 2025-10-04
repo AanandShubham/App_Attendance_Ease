@@ -8,9 +8,9 @@ const onboarding = () => {
   const router = useRouter()
 
   return (
-    <View className='w-full h-full bg-indigo-300'>
+    <View className='w-full h-full bg-indigo-300 flex justify-center items-center'>
       <Text className='text-xl bg-blue-600'>onboarding</Text>
-      <Pressable  onPress={()=>router.replace("/(tabs)")}>
+      <Pressable  onPress={()=>router.replace("/(tabs)/home")}>
         <Text>Tabs</Text>
       </Pressable>
     </View>

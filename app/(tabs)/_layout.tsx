@@ -1,15 +1,13 @@
-import { Stack, Tabs } from "expo-router"
+import { Tabs } from "expo-router"
 
 const TabsLayout = () => {
     return (
-        <Tabs >
+        <Tabs>
             <Tabs.Screen
-                name="index"
-                
+                name="home"
                 options={{ title: "Home", headerShown: false }}
-
             />
-
+        
             <Tabs.Screen
                 name="settings"
                 options={{ title: "Settings", headerShown: false }}
