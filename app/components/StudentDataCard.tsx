@@ -1,21 +1,52 @@
-import React from 'react'
-import { View,Text, Pressable } from 'react-native'
-type StudentDataCardProps = {
-  onPressAction?:()=>void,
-}       
+import React, { useState } from 'react'
+import { View, Text, Pressable } from 'react-native'
+import Fontisto from '@expo/vector-icons/Fontisto'
 
-const StudentDataCard:React.FC<StudentDataCardProps> = ({onPressAction=()=>{}}) => {
+
+type StudentDataCardProps = {
+  onPressAction?: () => void,
+  tcaNumber?: string,
+  name?: string,
+  totalAttendance?: number,
+  showCheckbox?: boolean,
+  isPresent?: boolean
+}
+
+const StudentDataCard: React.FC<StudentDataCardProps> = (
+  {
+    tcaNumber,
+    name,
+    totalAttendance,
+    onPressAction = () => { },
+    showCheckbox = false,
+    isPresent
+
+  }
+) => {
+
+  const [checked, setChecked] = useState(isPresent)
+
   return (
     <Pressable
-        onPress={onPressAction}
-        className='w-full h-[84px] bg-[#90C4EE] rounded-lg shadow-black elevation-4 shadow-[#3A87BD] border-1 border-[#1B64A8]  rounded-tl-[5px] rounded-tr-[25px] rounded-bl-[25px] rounded-br-[5px]'>
-        <View className='h-full justify-center items-start gap-0 pl-6 '>
-            <Text className='text-black text-lg font-semibold'>TCA Number</Text>
-            <Text className='text-black text-lg font-semibold'>Name</Text>
-            <Text className='text-black text-lg font-semibold'>Total Attendance</Text>
-        </View>
+      onPress={onPressAction}
+      className='w-full h-[84px] bg-[#90C4EE] rounded-lg shadow-black elevation-4 shadow-[#3A87BD] border-1 border-[#1B64A8]  rounded-tl-[5px] rounded-tr-[25px] rounded-bl-[25px] rounded-br-[5px]'>
+      <View className=' w-full h-full justify-center items-start gap-0 pl-6 '>
+        <Text className='w-full text-black text-lg font-semibold'>{tcaNumber || "TCA Number"}</Text>
+        <Text className='w-full text-black text-lg font-semibold'>{name || "Name"}</Text>
+        <Text className='w-full text-black text-lg font-semibold'>Total Attendance : {totalAttendance || "0"}</Text>
+        {
+          showCheckbox && <Pressable
+            onPress={() => setChecked((prev) => !prev)}
+            className='absolute right-8 top-[35%] '>
+            {
+              checked ? <Fontisto name="checkbox-active" size={25} color="black" />
+                : <Fontisto name="checkbox-passive" size={25} color="black" />
+            }
+          </Pressable>
+        }
+      </View>
 
-       </Pressable>
+    </Pressable>
   )
 }
 

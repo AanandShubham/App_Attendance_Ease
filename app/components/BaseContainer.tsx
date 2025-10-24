@@ -1,11 +1,15 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import UniqueButton from './UniqueButton'
+import { Animated } from 'react-native'
+
 type baseContainerProps = {
     children: React.ReactNode,
     styleClass?: String,
     headerLabel?: String,
     btnLabel?: String,
+    btnAction?: () => void,
+    shakeAnim?: Animated.Value
 
 }
 const BaseContainer: React.FC<baseContainerProps> = (
@@ -13,7 +17,9 @@ const BaseContainer: React.FC<baseContainerProps> = (
         children,
         styleClass,
         headerLabel,
-        btnLabel = "Add"
+        btnLabel = "Add",
+        btnAction,
+        shakeAnim
     }
 ) => {
     return (
@@ -38,6 +44,8 @@ const BaseContainer: React.FC<baseContainerProps> = (
                 </View>
 
                 <UniqueButton
+                shakeAnim={shakeAnim}
+                    btnAction={btnAction}
                     btnStyleClass={"w-[90px] h-[80px]  rotate-[41.60deg]  bottom-[-40.20px]"}
                     itemStyleClass={"-rotate-[40deg] text-[20px] text-white font-bold "}
                     label={btnLabel}

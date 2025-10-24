@@ -7,7 +7,7 @@ import BaseContainer from '@/app/components/BaseContainer'
 const addClass = () => {
     return (
         <SafeAreaProvider>
-            <SafeAreaView edges={['top', 'bottom']} className='w-full h-full bg-white '>
+            <SafeAreaView edges={['top', 'bottom']} className='w-full h-full bg-[#3A87BD] '>
               <BaseContainer headerLabel={"Add Class"} btnLabel={"Add"} >
                 <InputBox labelData={"Class Name"} />
                 <InputBox labelData={"Subject"} />

@@ -8,7 +8,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 const updateClass = () => {
     return (
         <SafeAreaProvider>
-            <SafeAreaView edges={['top', 'bottom']} className='w-full h-full bg-white '>
+            <SafeAreaView edges={['top', 'bottom']} className='w-full h-full bg-[#3A87BD] '>
                 <BaseContainer headerLabel={"Edit Class"} btnLabel={"Update"} >
                     <InputBox labelData={"Class Name"} inputValue={"MCA 2024 - 26"} />
                     <InputBox labelData={"Subject"} inputValue={"Android"} />

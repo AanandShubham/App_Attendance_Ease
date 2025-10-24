@@ -29,7 +29,7 @@ const InputBox:React.FC<inputBoxProps> = ({labelData="Label",inputValue=""}) => 
     }),
     left: labelAnim.interpolate({
       inputRange: [0, 1],
-      outputRange: [10, 25],
+      outputRange: [10, 20],
     }),
     fontSize: labelAnim.interpolate({
       inputRange: [0, 1],

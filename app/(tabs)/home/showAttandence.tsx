@@ -1,12 +1,10 @@
 import React from 'react'
-import { useRouter } from 'expo-router'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import HomeContainer from '@/app/components/HomeContainer'
 import StudentDataCard from '@/app/components/StudentDataCard'
-import addStudent from '@/assets/images/AddStudent.png'
+import DownloadPdf from '../../../assets/images/DownloadPDF.png'
 
-const studentList = () => {
-    const router = useRouter()
+const showAttandence = () => {
     return (
         <SafeAreaProvider>
             <SafeAreaView
@@ -14,16 +12,17 @@ const studentList = () => {
                 className='w-full h-full bg-[#3A87BD] flex justify-start items-center'
             >
                 <HomeContainer
-                    headerLabel={"Student List"}
-                    btnAction={() => router.push("/home/addStudent")}
+                    headerLabel={"18/11/2025"}
+                    // btnLabel={"PDF"}
+                    // btnAction={() => router.push("/home/addStudent")}
                     showButton={true}
-                    btnImageSource={addStudent}
+                    btnImageSource={DownloadPdf}
                 >
                     <StudentDataCard
                         tcaNumber='tca2463...'
                         name="Ankit Kumar Dubey"
                         totalAttendance={42}
-                        onPressAction={() => router.push("/home/updateStudent")}
+                        // onPressAction={() => router.push("/home/updateStudent")}
                     />
                     <StudentDataCard />
                     <StudentDataCard />
@@ -34,4 +33,4 @@ const studentList = () => {
     )
 }
 
-export default studentList
+export default showAttandence

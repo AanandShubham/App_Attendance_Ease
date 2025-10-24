@@ -1,22 +1,53 @@
-import React, { Component } from 'react'
+import React, { useRef } from 'react'
 import { Text, Pressable } from 'react-native'
+import { Animated } from 'react-native'
+import AddStudent from '@/assets/images/AddStudent.png'
 
 type uniqueButtonProps = {
-  btnStyleClass?:String,
-  itemStyleClass?:String,
-  label?:String,
-  btnAction?:()=>void,
-  
+  btnStyleClass?: String,
+  itemStyleClass?: String,
+  label?: String,
+  btnAction?: () => void,
+  shakeAnim?: Animated.Value,
+  btnImageSource?: any,
+
 }
 
-const UniqueButton:React.FC<uniqueButtonProps> = ({btnStyleClass="",itemStyleClass,label="Click",btnAction}) => {
+const UniqueButton: React.FC<uniqueButtonProps> = (
+  {
+    btnStyleClass = "",
+    itemStyleClass,
+    label = "Click",
+    btnAction,
+    shakeAnim = new Animated.Value(0),
+    btnImageSource = "",
+  }
+) => {
 
   return (
-    <Pressable 
+    <Pressable
       onPress={btnAction}
       className={`rounded-tr-[2px]  rounded-bl-[2px] rounded-tl-[48px] rounded-br-[48px] rounded-md flex justify-center items-center absolute  ${btnStyleClass}  bg-[#3A87BD] shadow-2xl elevation-xl shadow-[#1B64A8] border-2 border-[#1B64A8] absolute  `}
     >
-      <Text className={`${itemStyleClass}`}>{label}</Text>
+
+      {
+        btnImageSource ? <Animated.Image
+          source={btnImageSource || AddStudent}
+          className={`w-full h-full ${itemStyleClass}`}
+        /> : <Animated.View
+          style={{
+            transform: [{ translateX: shakeAnim }]
+          }}
+        >
+          <Text className={`${itemStyleClass}`}>
+            {label}
+          </Text>
+        </Animated.View>
+      }
+
+
+
+
 
     </Pressable>
   )

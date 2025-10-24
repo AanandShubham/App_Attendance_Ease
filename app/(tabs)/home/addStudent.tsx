@@ -7,8 +7,14 @@ import InputBox from '@/app/components/InputBox'
 const addStudent = () => {
     return (
         <SafeAreaProvider>
-            <SafeAreaView edges={['top', 'bottom']} className='w-full h-full bg-white '>
-                <BaseContainer headerLabel={"Add Student"} btnLabel={"Add"} >
+            <SafeAreaView
+                edges={['top', 'bottom']}
+                className='w-full h-full bg-[#3A87BD] '
+            >
+                <BaseContainer
+                    headerLabel={"Add Student"}
+                    btnLabel={"Add"}
+                >
                     <InputBox labelData={"TCA Number"} />
                     <InputBox labelData={"Name"} />
                     <InputBox labelData={"Total Attendance"} />

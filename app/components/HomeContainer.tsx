@@ -1,12 +1,17 @@
 import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import UniqueButton from './UniqueButton'
+import { Animated } from 'react-native'
+
 type baseContainerProps = {
   children: React.ReactNode,
   styleClass?: String,
   headerLabel?: String,
   btnLabel?: String,
   btnAction?: () => void,
+  showButton?: Boolean,
+  shakeAnim?: Animated.Value,
+  btnImageSource?: any,
 
 }
 const HomeContainer: React.FC<baseContainerProps> = (
@@ -15,14 +20,18 @@ const HomeContainer: React.FC<baseContainerProps> = (
     styleClass = "",
     headerLabel,
     btnLabel = "",
-    btnAction = () => { console.log("addBtnClicked") }
+    btnAction = () => { console.log("addBtnClicked") },
+    showButton = false,
+    shakeAnim = new Animated.Value(0),
+    btnImageSource = "",
+
   }
 ) => {
 
   return (
-    <View className='w-full h-[88vh] p-2  relative flex  justify-start items-center'>
-      <View className='w-[95vw] h-full  bg-[#e9eff6e8]   flex justify-start items-center  rounded-tl-[10px] rounded-tr-[10px]
-      rounded-br-[80px] rounded-bl-[10px]  border border-[#0C5AA2] p-4 '>
+    <View className='w-full h-full bg-white p-2 py-6 relative flex  justify-start items-center'>
+      <View className={`w-[95vw] h-[84.8vh]  bg-[#e9eff6e8]   flex justify-start items-center  rounded-tl-[10px] rounded-tr-[10px]
+      ${showButton ? "rounded-br-[80px]" : "rounded-br-[10px]"}  rounded-bl-[10px]  border border-[#0C5AA2] p-4 `}>
         <Text
           style={{
             textShadowColor: '#000',
@@ -46,11 +55,14 @@ const HomeContainer: React.FC<baseContainerProps> = (
 
         {/* w-[80px] h-[70px]  -rotate-[186.90deg] right-[-6px] bottom-[3px] */}
 
-        <UniqueButton
-        btnAction={btnAction}
+        {showButton && <UniqueButton
+          btnImageSource={btnImageSource}
+          shakeAnim={shakeAnim}
+          btnAction={btnAction}
           btnStyleClass={"w-[80px] h-[70px]  -rotate-[5.7deg] right-[-5px] bottom-[3px]"}
           itemStyleClass={"rotate-[6deg]"}
           label={btnLabel} />
+        }
 
 
 
