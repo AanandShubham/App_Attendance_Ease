@@ -12,7 +12,7 @@ const index = () => {
 
       <SafeAreaView 
       edges={['top', 'bottom']}
-       className='w-full h-full bg-[#3A87BD] flex justify-start items-center'
+       className='w-full h-[100vh] bg-[#3A87BD] flex justify-start items-center'
        >
         <HomeContainer
          headerLabel={"Home"} 

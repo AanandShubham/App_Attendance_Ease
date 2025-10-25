@@ -96,20 +96,22 @@ const TabsLayout = () => {
                     }}
                 />
             </Tabs>
-            <Pressable
-                onPress={startShake}
-                className="w-[50px] h-[40px] absolute bottom-[4.8%] left-[45%] bg-[#3A87BD] p-1 rounded-[25px]">
-                {/* <Text style={{color:"#fff"}} >Menu</Text> */}
-                <Animated.Image
-                    style={{
-                        transform: [{ translateX: shakeAnim }]
-                    }}
-                    source={require("../../assets/images/AddStudent.png")}
-                    className='w-[50px] h-[40px] mt-2'
-                />
-            </Pressable>
+           
         </SafeAreaProvider>
     );
 }
 
 export default TabsLayout 
+
+//  <Pressable
+//                 onPress={startShake}
+//                 className="w-[50px] h-[40px] absolute bottom-[4.8%] left-[45%] bg-[#3A87BD] p-1 rounded-[25px]">
+//                 {/* <Text style={{color:"#fff"}} >Menu</Text> */}
+//                 <Animated.Image
+//                     style={{
+//                         transform: [{ translateX: shakeAnim }]
+//                     }}
+//                     source={require("../../assets/images/AddStudent.png")}
+//                     className='w-[50px] h-[40px] mt-2'
+//                 />
+//             </Pressable>

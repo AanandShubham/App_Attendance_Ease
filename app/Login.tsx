@@ -4,10 +4,12 @@ import { Link } from 'expo-router'
 import BaseContainer from './components/BaseContainer'
 import React, { useRef } from 'react'
 import { Animated } from 'react-native'
+import useLogin from './hooks/useLogin'
 
 
 const Login = () => {
   const shakeAnim = useRef(new Animated.Value(0)).current;
+  const { login } = useLogin()
 
   const startShake = () => {
     Animated.sequence([
@@ -41,11 +43,13 @@ const Login = () => {
 
   const btnControl = () => {
     console.log("Button Pressed")
+    login("testUser", "testPassword")
     startShake()
   }
 
   return (
     <BaseContainer
+      styleClass={"h-[35vh]"}
       shakeAnim={shakeAnim}
       btnAction={btnControl}
       headerLabel={"Login"} >
