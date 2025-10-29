@@ -9,7 +9,7 @@ const showAttandence = () => {
         <SafeAreaProvider>
             <SafeAreaView
                 edges={['top', 'bottom']}
-                className='w-full h-full bg-[#3A87BD] flex justify-start items-center'
+                className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
             >
                 <HomeContainer
                     headerLabel={"18/11/2025"}

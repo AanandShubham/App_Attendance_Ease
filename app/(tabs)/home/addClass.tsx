@@ -9,7 +9,7 @@ const addClass = () => {
  
   return (
     <SafeAreaProvider>
-      <SafeAreaView edges={['top', 'bottom']} className='w-full h-full bg-[#3A87BD] '>
+      <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526]  bg-[#3A87BD] '>
         <BaseContainer headerLabel={"Add Class"} btnLabel={"Add"} >
           <InputBox labelData={"Class Name"} />
           <InputBox labelData={"Subject"} />

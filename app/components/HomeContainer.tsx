@@ -29,9 +29,9 @@ const HomeContainer: React.FC<baseContainerProps> = (
 ) => {
 
   return (
-    <View className='w-full h-full bg-white p-2 py-6 relative flex  justify-start items-center'>
-      <View className={`w-[95vw] h-[84.8vh]  bg-[#e9eff6e8]   flex justify-start items-center  rounded-tl-[10px] rounded-tr-[10px]
-      ${showButton ? "rounded-br-[80px]" : "rounded-br-[10px]"}  rounded-bl-[10px]  border border-[#0C5AA2] p-4 `}>
+    <View className='w-full h-full dark:bg-[#061526] bg-white p-2 py-6 relative flex  justify-start items-center'>
+      <View className={`w-[95vw] h-[84.8vh]  dark:bg-[#061526] bg-[#e9eff6e8]   flex justify-start items-center  rounded-tl-[10px] rounded-tr-[10px]
+      ${showButton ? "rounded-br-[80px]" : "rounded-br-[10px]"}  rounded-bl-[10px]  border-2 dark:border-[#17242d] border-[#0C5AA2] p-4 `}>
         <Text
           style={{
             textShadowColor: '#000',
@@ -40,7 +40,7 @@ const HomeContainer: React.FC<baseContainerProps> = (
           }}
 
           className='w-[70%] h-fit p-1  text-2xl text-white text-center font-bold rounded-md 
-          absolute top-[-19px] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-&lsqb;#1B64A8&rsqb;'
+          absolute top-[-19px] dark:bg-[#183448] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px] dark:outline-red-900   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-&lsqb;#1B64A8&rsqb;'
         >
           {headerLabel}
         </Text>

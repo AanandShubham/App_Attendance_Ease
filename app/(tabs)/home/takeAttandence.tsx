@@ -7,21 +7,29 @@ import { Pressable } from 'react-native'
 import { View } from 'react-native'
 import { Text } from 'react-native'
 import saveData from '../../../assets/images/saveData.png'
+import { useColorScheme } from 'nativewind'
 
 
 
 const takeAttandence = () => {
+
+    const {colorScheme} = useColorScheme()
+
     const [allChecked, setAllChecked] = useState(false)
 
-    useEffect(()=>{
+    const toggleAllChecked = () => {
+        setAllChecked(!allChecked);
+    };
 
-    },[allChecked,setAllChecked])
+    // useEffect(()=>{
+
+    // },[allChecked,setAllChecked])
 
     return (
         <SafeAreaProvider>
             <SafeAreaView
                 edges={['top', 'bottom']}
-                className='w-full h-full bg-[#3A87BD] flex justify-start items-center'
+                className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
             >
                 <HomeContainer
                     headerLabel={"18/11/2025"}
@@ -34,13 +42,13 @@ const takeAttandence = () => {
 
                     <Pressable
                         onPress={() => setAllChecked((prev) => !prev)}
-                        className='w-full flex items-end justify-start pr-2 bg-[#e9eff6e2]'>
-                        <View className='flex flex-row justify-center items-center gap-3 px-4 py-1 bg-[#90C4EE] shadow-black elevation-4 shadow-[#3A87BD] border-1 border-[#1B64A8] rounded-tl-[5px] rounded-tr-[15px] rounded-bl-[15px] rounded-br-[5px]'
+                        className='w-full flex items-end justify-start pr-2 dark:bg-[#061526] bg-[#e9eff6e2]'>
+                        <View className='flex flex-row justify-center items-center gap-3 px-4 py-1 dark:bg-[#0b202e] bg-[#90C4EE] shadow-black elevation-4 shadow-[#3A87BD] border-1 border-[#1B64A8] rounded-tl-[5px] rounded-tr-[15px] rounded-bl-[15px] rounded-br-[5px]'
                         >
-                            <Text className='font-extrabold'>Present All </Text>
+                            <Text className='font-extrabold dark:text-white'>Present All </Text>
                             {
-                                allChecked ? <Fontisto name="checkbox-active" size={25} color="black" />
-                                    : <Fontisto name="checkbox-passive" size={25} color="black" />
+                                allChecked ? <Fontisto name="checkbox-active" size={25} color={colorScheme === "dark" ? "white" : "black"} />
+                                    : <Fontisto name="checkbox-passive" size={25} color={colorScheme === "dark" ? "white" : "black"} />
                             }
 
 

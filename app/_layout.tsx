@@ -1,6 +1,24 @@
-import { Stack } from "expo-router";
+import { Stack } from "expo-router"
+import { useEffect } from "react"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useColorScheme } from "nativewind"
 
 export default function RootLayout() {
+
+  const { colorScheme, setColorScheme } = useColorScheme()
+  // setColorScheme("dark")
+
+  // npm i @react-native-async-storage/async-storage
+
+  useEffect(() => {
+    (async () => {
+      const saved = await AsyncStorage.getItem("theme")
+      if (saved === "light" || saved === "dark" ) {
+        setColorScheme(saved as "light" | "dark")
+      }
+    })()
+  }, [setColorScheme])
+
   return (
     <Stack >
       <Stack.Screen name="index" options={{ headerShown: false }} />

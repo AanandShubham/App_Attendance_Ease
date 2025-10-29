@@ -26,7 +26,7 @@ const BaseContainer: React.FC<baseContainerProps> = (
     return (
         <KeyboardAwareScrollView
 
-            className='w-full h-[60vh] bg-white'
+            className='w-full h-[60vh] dark:bg-[#061526] bg-white'
             contentContainerStyle={{
                 flexGrow: 1,
                 justifyContent: "center",
@@ -38,10 +38,9 @@ const BaseContainer: React.FC<baseContainerProps> = (
             enableOnAndroid={true}
             extraScrollHeight={40}
             keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-        >
+            showsVerticalScrollIndicator={false}>
             {/* <View className='w-full h-full  relative bg-white flex  justify-center items-center'> */}
-            <View className='w-[90vw] h-fit  bg-[#e9eff6e8] flex justify-evenly items-center rounded-tl-[20px] rounded-tr-[80px] rounded-bl-[80px] rounded-br-[20px]  border border-[#0C5AA2] p-4 '>
+            <View className='w-[90vw] h-fit dark:bg-[#061526]  bg-[#e9eff6e8] relative flex justify-evenly items-center rounded-tl-[20px] rounded-tr-[80px] rounded-bl-[80px] rounded-br-[20px]  border-2 dark:border-[#17242d] border-[#0C5AA2] p-4 '>
                 <Text
                     style={{
                         textShadowColor: '#000',
@@ -50,7 +49,7 @@ const BaseContainer: React.FC<baseContainerProps> = (
                     }}
 
                     className='w-[70%] h-fit p-1  text-2xl text-white text-center font-bold rounded-md 
-                     absolute  top-[-19px] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-[#3A87BD]'>
+                     absolute  top-[-19px] dark:bg-[#183448] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-[#3A87BD]'>
                     {headerLabel}
                 </Text>
 

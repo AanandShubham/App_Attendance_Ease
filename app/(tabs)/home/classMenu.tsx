@@ -9,11 +9,11 @@ const classMenu = () => {
         <SafeAreaProvider>
             <SafeAreaView
                 edges={['top', 'bottom']}
-                className='w-full h-full bg-[#3A87BD] flex justify-center items-center'
+                className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-center items-center'
             >
-                <View className='w-full h-full p-2 bg-white flex justify-center items-center'>
+                <View className='w-full h-full p-2 dark:bg-[#061526]  bg-white flex justify-center items-center'>
                     <View
-                        className=' w-[90vw] h-[60vh] flex justify-center items-center gap-5 border-2 border-[#0C5AA2] rounded-tr-[70px] rounded-tl-[10px] rounded-bl-[70px] rounded-br-[10px] bg-[#e9eff6e8] p-4'>
+                        className=' w-[90vw] h-[60vh] flex justify-center items-center gap-5 border-2 border-[#0C5AA2] dark:border-[#17242D] rounded-tr-[70px] rounded-tl-[10px] rounded-bl-[70px] rounded-br-[10px] dark:bg-[#061526] bg-[#e9eff6e8] p-4'>
                         <Text
                             style={{
                                 textShadowColor: '#000',
@@ -22,16 +22,16 @@ const classMenu = () => {
                             }}
 
                             className='w-[70%] h-fit p-1  text-2xl text-white text-center font-bold rounded-md 
-                          absolute  top-[-19px] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-[#3A87BD]'
+                          absolute  top-[-19px] dark:bg-[#183448] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-[#3A87BD]'
                         >
                             {"MCA 2024 - 26"}
                         </Text>
                         <View className='w-full flex-row justify-between items-center'>
                             <Pressable
                                 onPress={() => { router.push("/home/updateClass") }}
-                                className='bg-[#90C4EE] w-[45%] h-[202px] rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2'>
+                                className=' dark:bg-[#17242D] bg-[#90C4EE] w-[45%] h-[202px] rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2'>
                                 <Text
-                                    className='text-lg text-[#1B64A8] text-center font-bold'>
+                                    className='text-lg dark:text-white text-[#1B64A8] text-center font-bold'>
                                     Edit Class
                                 </Text>
                                 <Image
@@ -42,9 +42,9 @@ const classMenu = () => {
 
                             <Pressable
                                 onPress={() => { router.push("/home/studentList") }}
-                                className='bg-[#90C4EE] w-[45%]  h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2'>
+                                className='dark:bg-[#17242D] bg-[#90C4EE] w-[45%]  h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2'>
                                 <Text
-                                    className='text-lg text-[#1B64A8] text-center font-medium'>
+                                    className='text-lg dark:text-white text-[#1B64A8] text-center font-medium'>
                                     Student List
                                 </Text>
                                 <Image
@@ -56,18 +56,18 @@ const classMenu = () => {
                         <View className='w-full  flex-row justify-between items-center'>
                             <Pressable
                                 onPress={() => { router.push("/home/attendanceList") }}
-                                className='bg-[#90C4EE] w-[45%] h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2 '>
+                                className='dark:bg-[#17242D] bg-[#90C4EE] w-[45%] h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2 '>
                                 <Text
-                                    className='text-lg text-[#1B64A8] text-center font-medium'>
+                                    className='text-lg dark:text-white text-[#1B64A8] text-center font-medium'>
                                     Attendance List
                                 </Text>
                                 <Image source={require("../../../assets/images/attendanceList.png")} className='w-[90%] h-[145px] p-2 mt-2 ml-3' />
                             </Pressable>
                             <Pressable
                                 onPress={() => { router.push("/home/takeAttandence") }}
-                                className='bg-[#90C4EE] w-[45%] h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2 '>
+                                className='dark:bg-[#17242D] bg-[#90C4EE] w-[45%] h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2 '>
                                 <Text
-                                    className='text-lg text-[#1B64A8] text-center font-medium'>
+                                    className='text-lg dark:text-white text-[#1B64A8] text-center font-medium'>
                                     Take Attendance
                                 </Text>
                                 <Image

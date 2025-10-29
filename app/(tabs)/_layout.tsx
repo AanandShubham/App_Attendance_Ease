@@ -3,105 +3,133 @@ import { Ionicons } from '@expo/vector-icons'
 import { Image, Pressable, View } from "react-native"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import { Text } from "@react-navigation/elements"
-import React, { useRef } from "react"
+import React, { useRef,useEffect } from "react"
 import { Animated } from "react-native"
+import { useColorScheme } from "nativewind"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 const TabsLayout = () => {
 
-    const shakeAnim = useRef(new Animated.Value(0)).current;
-    
-      const startShake = () => {
-        Animated.sequence([
-          Animated.timing(shakeAnim, {
-            toValue: 10,
-            duration: 50,
-            useNativeDriver: true,
-          }),
-          Animated.timing(shakeAnim, {
-            toValue: -10,
-            duration: 50,
-            useNativeDriver: true,
-          }),
-          Animated.timing(shakeAnim, {
-            toValue: 6,
-            duration: 50,
-            useNativeDriver: true,
-          }),
-          Animated.timing(shakeAnim, {
-            toValue: -6,
-            duration: 50,
-            useNativeDriver: true,
-          }),
-          Animated.timing(shakeAnim, {
-            toValue: 0,
-            duration: 50,
-            useNativeDriver: true,
-          }),
-        ]).start();
+  // dark Color : #183448
+  // light Color : #3A87BD
+
+  // const { colorScheme, setColorScheme } = useColorScheme()
+  const { colorScheme, setColorScheme } = useColorScheme()
+  // setColorScheme("dark")
+
+  // npm i @react-native-async-storage/async-storage
+
+  useEffect(() => {
+    (async () => {
+      const saved = await AsyncStorage.getItem("theme")
+      if (saved === "light" || saved === "dark") {
+        setColorScheme(saved as "light" | "dark")
       }
-    
-      const btnControl = () => {
-        console.log("Button Pressed")
-        startShake()
-      }
-    
+    })()
+  }, [setColorScheme])
 
-    return (
-        <SafeAreaProvider
-            className="w-full h-full flex-1 relative justify-center items-center bg-white">
-            <Tabs
-                screenOptions={{
-                    headerShown: false,
-                    tabBarStyle: {
-                        position: 'absolute',
-                        backgroundColor: '#3A87BD', // 💡 Your color here
-                        borderTopWidth: 0,
-                        elevation: 0,
-                        borderRadius: 50,
-                        shadowColor: '#3A87BD',
-                        shadowOffset: {
-                            width: 0,
-                            height: 4,
-                        },
-                    },
-                    tabBarActiveTintColor: '#0D1164',
-                    tabBarInactiveTintColor: '#fff',
-                }}
+  const tabBackgroundColor = colorScheme === "dark" ? "#183448" : "#3A87BD";
+  // const activeTintColor = colorScheme === "dark" ? "#fff" : "#fff";
+  // const inactiveTintColor = colorScheme === "dark" ? "#90C4EE" : "red";
+  const shakeAnim = useRef(new Animated.Value(0)).current;
 
-            >
-                <Tabs.Screen
-                    name="home"
-                    options={{
-                        title: "Home",
-                        headerShown: false,
-                        tabBarIcon: ({ color, size }) => (
-                            <Ionicons name="home" color={color} size={size} />
-                        ),
-                        // sceneStyle:{
+  const startShake = () => {
+    Animated.sequence([
+      Animated.timing(shakeAnim, {
+        toValue: 10,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(shakeAnim, {
+        toValue: -10,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(shakeAnim, {
+        toValue: 6,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(shakeAnim, {
+        toValue: -6,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(shakeAnim, {
+        toValue: 0,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }
 
-                        // }
+  const btnControl = () => {
+    console.log("Button Pressed")
+    startShake()
+  }
 
-                    }}
 
-                />
+  return (
+    // <ThemeProvider >
 
-                <Tabs.Screen
-                    name="settings"
-                    options={{
-                        title: "Settings",
-                        headerShown: false,
-                        tabBarIcon: ({ color, size }) => (
-                            <Ionicons name="settings-outline" color={color} size={size} />
-                        ),
-                    }}
-                />
-            </Tabs>
-           
-        </SafeAreaProvider>
-    );
+    <SafeAreaProvider
+      className="w-full h-full flex-1 relative justify-center items-center bg-white">
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            position: 'absolute',
+            backgroundColor: tabBackgroundColor, // 💡 Your color here
+            borderTopWidth: 0,
+            elevation: 0,
+            borderRadius: 50,
+            shadowColor: '#3A87BD',
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+          },
+          tabBarActiveTintColor: "red",
+          tabBarInactiveTintColor: "white",
+        }}
+
+      >
+        <Tabs.Screen
+          name="home"
+          options={{
+            title: "Home",
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" color={color} size={size} />
+            ),
+            // sceneStyle:{
+
+            // }
+
+          }}
+
+        />
+
+        <Tabs.Screen
+          name="settings"
+          options={{
+            title: "Settings",
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="settings-outline" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tabs>
+
+    </SafeAreaProvider>
+    // </ThemeProvider>
+
+  );
 }
 
-export default TabsLayout 
+export default TabsLayout
 
 //  <Pressable
 //                 onPress={startShake}

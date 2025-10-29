@@ -1,6 +1,6 @@
 import { View, TextInput, Text, Animated, StyleSheet } from 'react-native'
 import React, { useState, useRef, use } from 'react'
-// import { } from 'nativewind'
+import { useColorScheme } from 'nativewind'
 
 type inputBoxProps = {
   labelData?:String,
@@ -13,6 +13,12 @@ const InputBox:React.FC<inputBoxProps> = ({labelData="Label",inputValue=""}) => 
   const [labelTextData,setLabelTextData] = useState(inputValue || labelData)
 
   const labelAnim = useRef(new Animated.Value(0)).current
+  const {colorScheme} = useColorScheme()
+  const labelBackgroundColorFinal = colorScheme === "dark" ? '#061526' : '#e9eff6e8'
+  const labelBackgrondColorInitial = colorScheme === "dark" ? '#17242D' : '#90C4EE'
+  const labelTextColorInitial = colorScheme === "dark" ? '#FFFFFF' : '#333333'
+  const labelTextColorFinal = colorScheme === "dark" ? '#fff' : '#017ED8'
+
 
   React.useEffect(() => {
     Animated.timing(labelAnim, {
@@ -37,21 +43,21 @@ const InputBox:React.FC<inputBoxProps> = ({labelData="Label",inputValue=""}) => 
     }),
     color: labelAnim.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#333', '#017ED8'],
+      outputRange: [labelTextColorInitial, labelTextColorFinal],
     }),
     backgroundColor: labelAnim.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#90C4EE', '#e9eff6'],
+      outputRange: [labelBackgrondColorInitial, labelBackgroundColorFinal],
     })
     
   }
 
   return (
     <View
-      className='w-full h-[55px] rounded-tr-[20px] rounded-tl-[5px] rounded-bl-[20px] rounded-br-[5px] bg-[#90C4EE] border-2 elevation-md shadow-xl shadow-[#3A87BD] border-[#3A87BD] flex flex-col justify-center px-4'
+      className='w-full h-[55px] rounded-tr-[20px] rounded-tl-[5px] rounded-bl-[20px] rounded-br-[5px]   dark:bg-[#17242D] bg-[#90C4EE] border-2 dark:border-[#17242D]  border-[#3A87BD] elevation-md shadow-xl shadow-[#3A87BD] flex flex-col justify-center px-4'
     >
       <Animated.Text
-        className={'rounded-b-[8px] pb-[2px] text-neutral-950 font-semibold '}
+        className={'rounded-b-[8px] pb-[2px] dark:text-white text-neutral-950 font-semibold '}
         style={[styles.label, labelStyle]}
       >
        {labelTextData}
@@ -65,8 +71,9 @@ const InputBox:React.FC<inputBoxProps> = ({labelData="Label",inputValue=""}) => 
           setValue(inputValue.toString())
           setIsFocused(true)
           }}
+        inputMode='text'
         onBlur={() => setIsFocused(false)}
-        className= ' w-full h-[90%] text-xl text-neutral-950 mt-2 pl-2 pr-2  ' 
+        className= ' w-full h-[90%] text-xl dark:placeholder:text-white   dark:text-white text-neutral-950 mt-2 pl-2 pr-2  ' 
         placeholder={ isFocused ?' ' :'________________________'}
       /> 
     </View>
