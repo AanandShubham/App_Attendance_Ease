@@ -1,21 +1,24 @@
 import { View, Text, Image } from 'react-native'
-import React, { useState } from 'react'
-import { Link } from 'expo-router'
+import React, { SetStateAction, useState } from 'react'
+import { Link, router } from 'expo-router'
 import BaseContainer from './components/BaseContainer'
 import InputBox from './components/InputBox'
 import { Animated } from 'react-native'
 import { useRef } from 'react'
 import { RegisterTypeFormData } from './FromTypes'
 import ImageSelector from './components/ImageSelector'
+import useRegister from './hooks/useRegister'
+import Toast from 'react-native-toast-message'
 
 const Register = () => {
 
   const [imageUrl, setImageUrl] = useState<string | null>(null)
 
+  const { loading, register } = useRegister()
+
 
   const shakeAnim = useRef(new Animated.Value(0)).current
   const [formData, setFormData] = React.useState<RegisterTypeFormData>({
-    profile: '',
     fullname: '',
     username: '',
     password: '',
@@ -23,7 +26,7 @@ const Register = () => {
     securityKey: ''
   })
 
-  const handleInputChange = (key: keyof RegisterTypeFormData, value: string) => {
+  const handleInputChange = (key: keyof RegisterTypeFormData, value: SetStateAction<string>) => {
     setFormData(prev => ({ ...prev, [key]: value }))
   }
 
@@ -57,12 +60,24 @@ const Register = () => {
     ]).start();
   }
 
-  const btnControl = () => {
+  const btnControl = async () => {
     console.log("Button Pressed")
-    formData['profile'] = imageUrl 
+    
+    if (!await register(formData,imageUrl)) {
+      startShake()
+    } else {
+      Toast.show({
+        type: "success",
+        text1: "Register Successfull"
+      })
+      router.replace("/(tabs)/home")
+    }
     console.log(formData)
+
+
+
+
     // console.log("Image Url : ",imageUrl)
-    startShake()
   }
 
   return (

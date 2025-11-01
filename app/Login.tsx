@@ -1,12 +1,13 @@
 import { View, Text, Pressable } from 'react-native'
 import InputBox from './components/InputBox'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import BaseContainer from './components/BaseContainer'
-import React, { useRef, useState } from 'react'
+import React, { SetStateAction, useRef, useState } from 'react'
 import { Animated } from 'react-native'
 import useLogin from './hooks/useLogin'
 
-import {LoginTypeFormData} from './FromTypes'
+import { LoginTypeFormData } from './FromTypes'
+import Toast from 'react-native-toast-message'
 
 const Login = () => {
   const shakeAnim = useRef(new Animated.Value(0)).current
@@ -15,7 +16,7 @@ const Login = () => {
     password: ''
   })
 
-  const handleInputChange = (key: keyof LoginTypeFormData, value: string):void => {
+  const handleInputChange = (key: keyof LoginTypeFormData, value: SetStateAction<string>): void => {
     setFormData(prev => ({ ...prev, [key]: value }))
   }
 
@@ -52,11 +53,22 @@ const Login = () => {
     ]).start()
   }
 
-  const btnControl = () => {
-    console.log("Button Pressed")
-    console.log("form Data : ",formData)
-    login(formData)
-    startShake()
+  const btnControl = async () => {
+    // console.log("Button Pressed")
+    // console.log("form Data : ",formData)
+
+    if (! await login(formData)) {
+      startShake()
+
+    } else {
+      Toast.show({
+        type: "success",
+        text1: "Login Successfull"
+      })
+
+      router.replace("/(tabs)/home")
+    }
+
   }
 
   return (
@@ -64,8 +76,9 @@ const Login = () => {
       styleClass={"h-[35vh]"}
       shakeAnim={shakeAnim}
       btnAction={btnControl}
-      headerLabel={"Login"} >
-
+      headerLabel={"Login"}
+      btnLabel={"Login"}
+    >
 
       <InputBox
         labelData={"username"}

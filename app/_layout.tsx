@@ -24,8 +24,8 @@ export default function RootLayout() {
 
   return (
     <>
-      <AuthContextProvider>
-        <ClassContextProvider>
+      <ClassContextProvider>
+        <AuthContextProvider>
           <Stack >
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="Login" options={{ headerShown: false }} />
@@ -33,8 +33,8 @@ export default function RootLayout() {
             <Stack.Screen name="ForgetPassword" options={{ headerShown: false }} />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>
-        </ClassContextProvider>
-      </AuthContextProvider>
+        </AuthContextProvider>
+      </ClassContextProvider>
       <Toast />
     </>
   )

@@ -84,7 +84,7 @@ const InputBox = <T,>(
         onChangeText={setDataValue}
         onFocus={() => {
           setLabelTextData(labelData)
-          setDataValue(inputValue as unknown as T)
+          setDataValue(inputValue as string as T)
           setIsFocused(true)
         }}
         inputMode='text'

@@ -13,15 +13,15 @@ const useLogin = () => {
   const { setClasses } = useClassContext()
 
   const login = async (loginForm: LoginTypeFormData) => {
-    // Implement login logic here
+   
     const flag = InputValidation(loginForm)
 
-    if (!flag) return
+    if (!flag) return false
 
     setLoading(true)
 
     try {
-      const response = await fetch("http://10.218.123.162:3000/api/auth/login", {
+      const response = await fetch("http://10.141.201.162:3000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -38,14 +38,16 @@ const useLogin = () => {
 
       // setting and storing token to the context and and the async storage 
       setToken(data.token)
-      AsyncStorage.setItem("AuthToken", JSON.stringify(data.token))
+      await AsyncStorage.setItem("AuthToken", JSON.stringify(data.token))
       
       // setting and storing user  to the context and the async storage 
       setUser(data.user)
-      AsyncStorage.setItem("AuthUser", JSON.stringify(data.user))
+      await AsyncStorage.setItem("AuthUser", JSON.stringify(data.user))
 
       // setting the classes of the user to the class context 
       setClasses(data.user["classes"])
+
+      return true
 
     } catch (error: any) {
       Toast.show({
@@ -56,6 +58,8 @@ const useLogin = () => {
     } finally {
       setLoading(false)
     }
+
+    return false 
   }
 
   return { loading, login };
@@ -66,13 +70,13 @@ export default useLogin
 const InputValidation = (formData: LoginTypeFormData): Boolean => {
   let flag = true
 
-  if (formData.username === "" && formData.password === "") {
+  if (formData.username === "" || formData.password === "") {
     // Alert.alert("Field Can't be empty")
     // ToastAndroid.show("Fields Can't be Emplty",ToastAndroid.LONG)
 
     Toast.show({
       type: "error",
-      text1: " Fields Can not be Emplty !!!!!",
+      text1: " Fields Can't be Emplty !!!!!",
       text1Style: {
         backgroundColor: 'red',
         padding: 4,
@@ -81,7 +85,7 @@ const InputValidation = (formData: LoginTypeFormData): Boolean => {
       },
       text2: ""
     })
-    flag = false
+    return false 
   }
 
   if (formData.password.length < 6) {
@@ -95,9 +99,9 @@ const InputValidation = (formData: LoginTypeFormData): Boolean => {
       },
       text2: "Password Should be greater than 6 ! "
     })
-    flag = false
+    return false
   }
 
-  return flag
+  return true
 
 }

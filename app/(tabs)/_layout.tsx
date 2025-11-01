@@ -1,10 +1,12 @@
 import { Tabs } from "expo-router"
 import { Ionicons } from '@expo/vector-icons'
 import { SafeAreaProvider } from "react-native-safe-area-context"
-import React, { useRef,useEffect } from "react"
+import React, { useRef, useEffect } from "react"
 import { Animated } from "react-native"
 import { useColorScheme } from "nativewind"
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ClassContextProvider } from "../context/ClassContext"
+import { AuthContextProvider } from "../context/AuthContext"
 
 
 const TabsLayout = () => {
@@ -69,59 +71,65 @@ const TabsLayout = () => {
 
 
   return (
-    
 
-    <SafeAreaProvider
-      className="w-full h-full flex-1 relative justify-center items-center bg-white">
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarStyle: {
-            position: 'absolute',
-            backgroundColor: tabBackgroundColor,
-            borderTopWidth: 0,
-            elevation: 0,
-            borderRadius: 50,
-            shadowColor: '#3A87BD',
-            shadowOffset: {
-              width: 0,
-              height: 4,
-            },
-          },
-          tabBarActiveTintColor: "red",
-          tabBarInactiveTintColor: "white",
-        }}
+    <>
+      <ClassContextProvider>
+        <AuthContextProvider>
 
-      >
-        <Tabs.Screen
-          name="home"
-          options={{
-            title: "Home",
-            headerShown: false,
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
-            ),
-            // sceneStyle:{
+          <SafeAreaProvider
+            className="w-full h-full flex-1 relative justify-center items-center bg-white">
+            <Tabs
+              screenOptions={{
+                headerShown: false,
+                tabBarStyle: {
+                  position: 'absolute',
+                  backgroundColor: tabBackgroundColor,
+                  borderTopWidth: 0,
+                  elevation: 0,
+                  borderRadius: 50,
+                  shadowColor: '#3A87BD',
+                  shadowOffset: {
+                    width: 0,
+                    height: 4,
+                  },
+                },
+                tabBarActiveTintColor: "red",
+                tabBarInactiveTintColor: "white",
+              }}
 
-            // }
+            >
+              <Tabs.Screen
+                name="home"
+                options={{
+                  title: "Home",
+                  headerShown: false,
+                  tabBarIcon: ({ color, size }) => (
+                    <Ionicons name="home" color={color} size={size} />
+                  ),
+                  // sceneStyle:{
 
-          }}
+                  // }
 
-        />
+                }}
 
-        <Tabs.Screen
-          name="settings"
-          options={{
-            title: "Settings",
-            headerShown: false,
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="settings-outline" color={color} size={size} />
-            ),
-          }}
-        />
-      </Tabs>
+              />
 
-    </SafeAreaProvider>
+              <Tabs.Screen
+                name="settings"
+                options={{
+                  title: "Settings",
+                  headerShown: false,
+                  tabBarIcon: ({ color, size }) => (
+                    <Ionicons name="settings-outline" color={color} size={size} />
+                  ),
+                }}
+              />
+            </Tabs>
+
+          </SafeAreaProvider>
+        </AuthContextProvider>
+      </ClassContextProvider>
+    </>
   );
 }
 

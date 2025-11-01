@@ -7,7 +7,8 @@ const ClassDataCard:React.FC<DataCardProps> = ({onPressAction=()=>{console.log("
   return (
    <Pressable
     onPress={onPressAction}
-    className='w-full h-[133px] dark:bg-[#17242D] dark:border dark:border-[#0d4162] bg-[#90C4EE] rounded-lg shadow-xl elevation-2 shadow-blue-800 border  border-[#1B64A8]  flex-1 flex-row justify-center items-center rounded-tl-[5px] rounded-tr-[40px] rounded-bl-[40px] rounded-br-[5px]'>
+    className='w-full h-[133px] dark:bg-[#17242D] dark:border dark:border-[#0d4162] bg-[#90C4EE] rounded-lg shadow-xl elevation-2 shadow-blue-800 border  border-[#1B64A8]  flex-1 flex-row justify-center items-center rounded-tl-[5px] rounded-tr-[40px] rounded-bl-[40px] rounded-br-[5px] px'>
+      
     <View className='w-[50%] h-full justify-center items-start gap-1 pl-6 '>
         <Text className='text-black dark:text-white text-lg font-semibold'>MCA 2024 - 2026</Text>
         <Text className='text-black dark:text-white text-lg font-semibold'>Android</Text>

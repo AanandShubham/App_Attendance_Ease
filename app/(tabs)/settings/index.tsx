@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Switch, Pressable,useWindowDimensions } from 'react-native'
+import { View, Text, Switch, Pressable, useWindowDimensions } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
 import { useColorScheme } from 'nativewind'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { router } from 'expo-router'
 
-const settings = () => {
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import useAuthContext from '@/app/context/AuthContext'
 
-  const {height, width} =  useWindowDimensions()  
+
+const settings = () => {
+  const { logout } = useAuthContext()
+
+  const { height, width } = useWindowDimensions()
 
   const { colorScheme, setColorScheme } = useColorScheme()
 
@@ -46,7 +51,7 @@ const settings = () => {
             </Text>
 
             <Pressable
-            onPress={()=>router.push("/settings/profile")}
+              onPress={() => router.push("/settings/profile")}
               className='w-full h-[55px] dark:bg-[#17242D] bg-[#90C4EE] flex flex-row justify-between items-center rounded-tr-[20px] rounded-bl-[20px] rounded-tl-[5px] rounded-br-[5px] p-2 px-4  '>
               <Text
                 className='text-[24px] font-bold dark:text-white text-black'
@@ -81,7 +86,22 @@ const settings = () => {
                 Help
               </Text>
               <Ionicons name='help-circle' size={38} color={colorScheme === "dark" ? "white" : "black"} className='' />
+            </Pressable>
 
+            <Pressable
+              onPress={() => {
+                logout()
+                router.replace("/Login")
+              }
+              }
+              className='w-full h-[55px] dark:bg-[#17242D] bg-[#90C4EE] flex flex-row justify-between items-center rounded-tr-[20px] rounded-bl-[20px] rounded-tl-[5px] rounded-br-[5px] p-2 px-4'>
+              <Text
+                className='text-[24px] font-bold dark:text-white text-black'
+              >
+                Logout
+              </Text>
+              {/* <Ionicons name='eye' size={30} color={colorScheme === "dark" ? "white" : "black"} className='' /> */}
+              <MaterialCommunityIcons name="logout" size={32} color={colorScheme === "dark" ? "white" : "black"} />
 
             </Pressable>
 

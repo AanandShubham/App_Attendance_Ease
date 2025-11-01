@@ -5,7 +5,6 @@ export type LoginTypeFormData = {
 }
 
 export type RegisterTypeFormData = {
-    profile: string,
     fullname: string,
     username: string,
     password: string,

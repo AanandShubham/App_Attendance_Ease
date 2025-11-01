@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 type ImageSelectorProps = {
     setImage: (image: string | null) => void
-    imgUrl: string
+    imgUrl: string | null
 }
 
 const ImageSelector: React.FC<ImageSelectorProps> = ({ setImage, imgUrl }) => {
@@ -20,14 +20,14 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({ setImage, imgUrl }) => {
             return
         }
 
-        // Open picker
+        // open  image picker
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             quality: 1,
         })
 
-        // Handle selected image
+        // handle selected image for null checks
         if (!result.canceled) {
             const uri = result.assets[0].uri
             setImageUrl(uri)

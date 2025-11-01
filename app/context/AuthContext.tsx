@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import useClassContext from "./ClassContext"
+import Toast from "react-native-toast-message"
 
 
 type AuthContextType = {
@@ -11,7 +12,13 @@ type AuthContextType = {
     logout: () => void
 }
 
-export const AuthContext = React.createContext<AuthContextType | undefined>(undefined)
+export const AuthContext = React.createContext<AuthContextType>({
+    user: [],
+    token: '',
+    setUser: (user: any) =>[],
+    setToken: (token: string) => '',
+    logout: () => {}
+})
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [token, setToken] = useState<string | null>(null)
@@ -22,10 +29,15 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
     const logout = async () => {
         try {
-            setUser({})
-            setToken('')
+            setUser(null)
+            setToken(null)
+            setClasses(null)
             await AsyncStorage.removeItem("AuthToken")
             await AsyncStorage.removeItem("AuthUser")
+            Toast.show({
+                type: "info",
+                text1: "Logout Completed"
+            })
         }
         catch {
             console.log("Error in clearing the auth data !!")

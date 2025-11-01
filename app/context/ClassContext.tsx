@@ -12,7 +12,12 @@ type ClassContextType = {
     setSelectedClass: (selectedClasse: SelectedClass) => void
 }
 
-export const ClassContext = React.createContext<ClassContextType | undefined>(undefined)
+export const ClassContext = React.createContext<ClassContextType>({
+    classes: [],
+    setClasses: (classes: any) => [] ,
+    selectedClass: null,
+    setSelectedClass: (selectedClass: SelectedClass) => {}
+})
 
 export const ClassContextProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -26,7 +31,7 @@ export const ClassContextProvider = ({ children }: { children: React.ReactNode }
     )
 }
 
-const useClassContext = ()=>{
+const useClassContext = () => {
     return useContext(ClassContext)
 }
 

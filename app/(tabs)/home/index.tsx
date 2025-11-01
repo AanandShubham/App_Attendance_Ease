@@ -4,9 +4,21 @@ import HomeContainer from '@/app/components/HomeContainer'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import ClassDataCard from '@/app/components/ClassDataCard'
 import addClass3d from '../../../assets/images/addClass3d.png'
+import useAuthContext from '@/app/context/AuthContext'
+import useClassContext from '@/app/context/ClassContext'
 
 const index = () => {
   const router = useRouter()
+
+  const {user,token} = useAuthContext()
+  const {classes} = useClassContext()
+  console.log("-------------------------------------------")
+  console.log("HOME User : ",user)
+  console.log("HOME Token : ",token)
+  console.log("HOME Classes : ",classes);
+  console.log("-------------------------------------------")
+  
+
   return (
     <SafeAreaProvider>
 
