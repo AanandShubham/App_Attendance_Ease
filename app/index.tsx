@@ -30,8 +30,8 @@ const onboarding = () => {
         <Text>Login</Text>
       </Link>
 
-      <Pressable className='p-2 bg-green-400 rounded' onPress={() => router.navigate("./Signup")}>
-        <Text>Signup</Text>
+      <Pressable className='p-2 bg-green-400 rounded' onPress={() => router.navigate("./Register")}>
+        <Text>Register</Text>
       </Pressable>
 
     </View>

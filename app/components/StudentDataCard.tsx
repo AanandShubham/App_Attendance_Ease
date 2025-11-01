@@ -21,7 +21,6 @@ const StudentDataCard: React.FC<StudentDataCardProps> = (
     onPressAction = () => { },
     showCheckbox = false,
     isPresent
-
   }
 ) => {
 

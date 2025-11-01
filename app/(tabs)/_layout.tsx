@@ -1,8 +1,6 @@
 import { Tabs } from "expo-router"
 import { Ionicons } from '@expo/vector-icons'
-import { Image, Pressable, View } from "react-native"
 import { SafeAreaProvider } from "react-native-safe-area-context"
-import { Text } from "@react-navigation/elements"
 import React, { useRef,useEffect } from "react"
 import { Animated } from "react-native"
 import { useColorScheme } from "nativewind"
@@ -34,44 +32,44 @@ const TabsLayout = () => {
   // const inactiveTintColor = colorScheme === "dark" ? "#90C4EE" : "red";
   const shakeAnim = useRef(new Animated.Value(0)).current;
 
-  const startShake = () => {
-    Animated.sequence([
-      Animated.timing(shakeAnim, {
-        toValue: 10,
-        duration: 50,
-        useNativeDriver: true,
-      }),
-      Animated.timing(shakeAnim, {
-        toValue: -10,
-        duration: 50,
-        useNativeDriver: true,
-      }),
-      Animated.timing(shakeAnim, {
-        toValue: 6,
-        duration: 50,
-        useNativeDriver: true,
-      }),
-      Animated.timing(shakeAnim, {
-        toValue: -6,
-        duration: 50,
-        useNativeDriver: true,
-      }),
-      Animated.timing(shakeAnim, {
-        toValue: 0,
-        duration: 50,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }
+  // const startShake = () => {
+  //   Animated.sequence([
+  //     Animated.timing(shakeAnim, {
+  //       toValue: 10,
+  //       duration: 50,
+  //       useNativeDriver: true,
+  //     }),
+  //     Animated.timing(shakeAnim, {
+  //       toValue: -10,
+  //       duration: 50,
+  //       useNativeDriver: true,
+  //     }),
+  //     Animated.timing(shakeAnim, {
+  //       toValue: 6,
+  //       duration: 50,
+  //       useNativeDriver: true,
+  //     }),
+  //     Animated.timing(shakeAnim, {
+  //       toValue: -6,
+  //       duration: 50,
+  //       useNativeDriver: true,
+  //     }),
+  //     Animated.timing(shakeAnim, {
+  //       toValue: 0,
+  //       duration: 50,
+  //       useNativeDriver: true,
+  //     }),
+  //   ]).start();
+  // }
 
-  const btnControl = () => {
-    console.log("Button Pressed")
-    startShake()
-  }
+  // const btnControl = () => {
+  //   console.log("Button Pressed")
+  //   startShake()
+  // }
 
 
   return (
-    // <ThemeProvider >
+    
 
     <SafeAreaProvider
       className="w-full h-full flex-1 relative justify-center items-center bg-white">
@@ -80,7 +78,7 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarStyle: {
             position: 'absolute',
-            backgroundColor: tabBackgroundColor, // 💡 Your color here
+            backgroundColor: tabBackgroundColor,
             borderTopWidth: 0,
             elevation: 0,
             borderRadius: 50,
@@ -124,8 +122,6 @@ const TabsLayout = () => {
       </Tabs>
 
     </SafeAreaProvider>
-    // </ThemeProvider>
-
   );
 }
 

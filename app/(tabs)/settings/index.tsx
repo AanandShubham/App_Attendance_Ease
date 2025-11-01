@@ -4,6 +4,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
 import { useColorScheme } from 'nativewind'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { router } from 'expo-router'
 
 const settings = () => {
 
@@ -45,6 +46,7 @@ const settings = () => {
             </Text>
 
             <Pressable
+            onPress={()=>router.push("/settings/profile")}
               className='w-full h-[55px] dark:bg-[#17242D] bg-[#90C4EE] flex flex-row justify-between items-center rounded-tr-[20px] rounded-bl-[20px] rounded-tl-[5px] rounded-br-[5px] p-2 px-4  '>
               <Text
                 className='text-[24px] font-bold dark:text-white text-black'
