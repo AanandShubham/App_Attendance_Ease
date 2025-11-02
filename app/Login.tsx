@@ -89,6 +89,7 @@ const Login = () => {
         labelData={"password"}
         dataValue={formData.password}
         setDataValue={text => handleInputChange('password', text)}
+        passwordMode = {true}
       />
       <View
         className='w-full h-fit flex rounded-md flex-row justify-around items-center'>

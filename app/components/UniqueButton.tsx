@@ -33,7 +33,7 @@ const UniqueButton: React.FC<uniqueButtonProps> = (
       {
         btnImageSource ? <Animated.Image
           source={btnImageSource || AddStudent}
-          className={`w-full h-full ${itemStyleClass}`}
+          className={`w-[100%] h-[100%] p-2 ${itemStyleClass}`}
         /> : <Animated.View
           style={{
             transform: [{ translateX: shakeAnim }]

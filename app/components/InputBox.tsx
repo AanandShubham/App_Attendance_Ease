@@ -1,12 +1,14 @@
-import { View, TextInput, Animated, StyleSheet } from 'react-native'
+import { View, TextInput, Animated, StyleSheet, Pressable } from 'react-native'
 import React, { useState, useRef } from 'react'
 import { useColorScheme } from 'nativewind'
+import { Ionicons } from '@expo/vector-icons'
 
 type inputBoxProps<T> = {
-  labelData?: String,
-  inputValue?: String,
+  labelData?: string,
+  inputValue?: string,
   dataValue: T,
-  setDataValue: React.Dispatch<React.SetStateAction<T>>
+  setDataValue: React.Dispatch<React.SetStateAction<T>>,
+  passwordMode?: boolean
 }
 
 const InputBox = <T,>(
@@ -14,24 +16,27 @@ const InputBox = <T,>(
     labelData = "Label",
     inputValue = "",
     dataValue,
-    setDataValue
+    setDataValue,
+    passwordMode = false
   }: inputBoxProps<T>
 
 ) => {
   const labelAnim = useRef(new Animated.Value(0)).current
-  
+
+  const [showPassword, setShowPassword] = useState(false)
+
   const { colorScheme } = useColorScheme()
-  
+
   const [isFocused, setIsFocused] = useState(false)
-  
+
   const [labelTextData, setLabelTextData] = useState(inputValue || labelData)
 
   const labelBackgroundColorFinal = colorScheme === "dark" ? '#061526' : '#e9eff6e8'
-  
+
   const labelBackgrondColorInitial = colorScheme === "dark" ? '#17242D' : '#90C4EE'
-  
+
   const labelTextColorInitial = colorScheme === "dark" ? '#FFFFFF' : '#333333'
-  
+
   const labelTextColorFinal = colorScheme === "dark" ? '#fff' : '#017ED8'
 
 
@@ -78,20 +83,34 @@ const InputBox = <T,>(
         {labelTextData}
       </Animated.Text>
 
-      <TextInput
-        // secureTextEntry={true}
-        value={dataValue}
-        onChangeText={setDataValue}
-        onFocus={() => {
-          setLabelTextData(labelData)
-          setDataValue(inputValue as string as T)
-          setIsFocused(true)
-        }}
-        inputMode='text'
-        onBlur={() => setIsFocused(false)}
-        className=' w-full h-[90%] text-xl dark:placeholder:text-white   dark:text-white text-neutral-950 mt-2 pl-2 pr-2  '
-        placeholder={isFocused ? ' ' : '________________________'}
-      />
+      <View>
+        <TextInput
+          secureTextEntry={passwordMode ? !showPassword : false}
+          value={dataValue}
+          onChangeText={setDataValue}
+          onFocus={() => {
+            setLabelTextData(labelData)
+            setDataValue(inputValue as string as T)
+            setIsFocused(true)
+          }}
+          inputMode='text'
+          onBlur={() => setIsFocused(false)}
+          className=' w-full h-[90%] text-xl dark:placeholder:text-white   dark:text-white text-neutral-950 mt-2 pl-2 pr-2  '
+          placeholder={isFocused ? ' ' : '________________________'}
+        />
+
+        {passwordMode &&
+          <Pressable
+            onPress={() => setShowPassword(prev => !prev)}
+            className='absolute top-1 -right-3 p-2'>
+            <Ionicons
+              name={showPassword ? 'eye-off' : 'eye'}
+              color={colorScheme === 'dark' ? 'white' : 'black'}
+              size={30}
+            />
+          </Pressable>
+        }
+      </View>
     </View>
   )
 }

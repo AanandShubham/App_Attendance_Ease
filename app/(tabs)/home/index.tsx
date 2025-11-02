@@ -6,40 +6,74 @@ import ClassDataCard from '@/app/components/ClassDataCard'
 import addClass3d from '../../../assets/images/addClass3d.png'
 import useAuthContext from '@/app/context/AuthContext'
 import useClassContext from '@/app/context/ClassContext'
+import { FlatList } from 'react-native'
 
 const index = () => {
   const router = useRouter()
 
-  const {user,token} = useAuthContext()
-  const {classes} = useClassContext()
+  const { user, token } = useAuthContext()
+  const { classes } = useClassContext()
   console.log("-------------------------------------------")
-  console.log("HOME User : ",user)
-  console.log("HOME Token : ",token)
-  console.log("HOME Classes : ",classes);
+  console.log("HOME User : ", user)
+  console.log("HOME Token : ", token)
+  console.log("HOME Classes : ", classes);
   console.log("-------------------------------------------")
-  
+
+  // const dataCard = [
+  //   {
+  //     id: 1,
+  //     name: "mohan"
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "sohan"
+  //   }, {
+  //     id: 3,
+  //     name: "rohan"
+  //   }, {
+  //     id: 4,
+  //     name: "mohanlal"
+  //   },
+  // ]
 
   return (
     <SafeAreaProvider>
 
-      <SafeAreaView 
-      edges={['top', 'bottom']}
-       className='w-full h-[100vh] dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
-       >
+      <SafeAreaView
+        edges={['top', 'bottom']}
+        className='w-full h-[100vh] dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
+      >
         <HomeContainer
-         headerLabel={"Home"} 
-         btnLabel={"Add"}
-         btnAction={()=>router.push("/home/addClass")}
-         showButton={true}
-         btnImageSource={addClass3d}
-         >
-          
-          <ClassDataCard onPressAction={()=>{router.push("/home/classMenu")}} />
+          headerLabel={"Home"}
+          btnLabel={"Add"}
+          btnAction={() => router.push("/home/addClass")}
+          showButton={true}
+          btnImageSource={addClass3d}
+        >
+
+          <ClassDataCard onPressAction={() => { router.push("/home/classMenu") }} />
           <ClassDataCard />
           <ClassDataCard />
           <ClassDataCard />
           <ClassDataCard />
           <ClassDataCard />
+
+          {/* <FlatList
+            data={classes}
+            extraData={itm => itm._Id}
+            renderItem={({ item }) => <ClassDataCard />}
+          /> */}
+
+          {/* <FlatList
+            data={dataCard}
+            extraData={item => item.id}
+            renderItem={({ item }) =>
+              <View className='w-full h-fit bg-sky-400 p-2'>
+                <Text>id : {item.id}</Text>
+                <Text>name : {item.name}</Text>
+              </View>
+            }
+          /> */}
 
 
         </HomeContainer>

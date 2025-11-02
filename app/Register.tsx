@@ -62,8 +62,8 @@ const Register = () => {
 
   const btnControl = async () => {
     console.log("Button Pressed")
-    
-    if (!await register(formData,imageUrl)) {
+
+    if (!await register(formData, imageUrl)) {
       startShake()
     } else {
       Toast.show({
@@ -105,18 +105,21 @@ const Register = () => {
         setDataValue={text => handleInputChange('username', text)}
       />
       <InputBox
-        labelData={"password"}
-        dataValue={formData.password}
-        setDataValue={text => handleInputChange('password', text)}
-      />
-      <InputBox labelData={"confirm password"}
-        dataValue={formData.confirmPassword}
-        setDataValue={text => handleInputChange('confirmPassword', text)}
-      />
-      <InputBox
         labelData={"security key"}
         dataValue={formData.securityKey}
         setDataValue={text => handleInputChange('securityKey', text)}
+      />
+      <InputBox
+        labelData={"password"}
+        dataValue={formData.password}
+        setDataValue={text => handleInputChange('password', text)}
+        passwordMode={true}
+      />
+      <InputBox
+        labelData={"confirm password"}
+        dataValue={formData.confirmPassword}
+        setDataValue={text => handleInputChange('confirmPassword', text)}
+        passwordMode={true}
       />
       <Link href={'./Login'}>
         <Text className='text-blue-500 text-lg font-semibold underline'>already have an account , Login</Text>

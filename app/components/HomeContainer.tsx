@@ -60,7 +60,7 @@ const HomeContainer: React.FC<baseContainerProps> = (
           shakeAnim={shakeAnim}
           btnAction={btnAction}
           btnStyleClass={"w-[80px] h-[70px]  -rotate-[5.7deg] right-[-5px] bottom-[3px]"}
-          itemStyleClass={"rotate-[6deg]"}
+          itemStyleClass={"rotate-[6deg] "}
           label={btnLabel}
         />
         }
