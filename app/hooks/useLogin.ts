@@ -68,11 +68,9 @@ const useLogin = () => {
 export default useLogin
 
 const InputValidation = (formData: LoginTypeFormData): Boolean => {
-  let flag = true
+
 
   if (formData.username === "" || formData.password === "") {
-    // Alert.alert("Field Can't be empty")
-    // ToastAndroid.show("Fields Can't be Emplty",ToastAndroid.LONG)
 
     Toast.show({
       type: "error",
