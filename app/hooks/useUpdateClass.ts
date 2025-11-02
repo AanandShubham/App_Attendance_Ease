@@ -30,7 +30,7 @@ const useUpdateClass = () => {
 
             if (data.error) throw new Error(data.error)
 
-            const updatedClasses = classes.map((item: any) => item._id == data.updatedClass ? data.updatedClass : item)
+            const updatedClasses = classes.map((item: any) => item._id == data.updatedClass._id ? data.updatedClass : item)
 
             setClasses(updatedClasses)
             setSelectedClass(data.updatedClass)
