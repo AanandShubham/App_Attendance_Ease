@@ -71,6 +71,7 @@ const Register = () => {
         text1: "Register Successfull"
       })
       router.replace("/(tabs)/home")
+      
     }
     console.log(formData)
 
