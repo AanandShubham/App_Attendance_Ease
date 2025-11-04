@@ -12,10 +12,9 @@ const useRegister = () => {
 
     const register = async (registerForm: RegisterTypeFormData, imageUrl: string | null) => {
 
-
         const flag = inputValidation(registerForm, imageUrl)
 
-        if (!flag) return
+        if (!flag) return false
 
         setLoading(true)
 
@@ -94,7 +93,7 @@ const inputValidation = (formData: RegisterTypeFormData, imageUrl: string | null
             formData.password,
             formData.confirmPassword,
             formData.securityKey
-        ].some(itm => itm === "")) {
+        ].some(item => item?.trim() === "")) {
         Toast.show({
             type: "error",
             text1: " Fields Can't be Emplty !!!!!",

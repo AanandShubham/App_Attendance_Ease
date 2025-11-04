@@ -1,11 +1,11 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
-import { Link } from 'expo-router'
+import React, { SetStateAction, useState } from 'react'
 import BaseContainer from '@/app/components/BaseContainer'
 import InputBox from '@/app/components/InputBox'
 import { Animated } from 'react-native'
 import { useRef } from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { RegisterTypeFormData } from '@/app/FromTypes'
+import ImageSelector from '@/app/components/ImageSelector'
 
 type formData = {
     profile: string,
@@ -17,9 +17,9 @@ type formData = {
 }
 
 const Profile = () => {
-    const shakeAnim = useRef(new Animated.Value(0)).current;
-    const [fromData, setFormData] = React.useState<formData>({
-        profile: '',
+    const shakeAnim = useRef(new Animated.Value(0)).current
+    const [imageUrl,setImageUrl] = useState<string | null>(null)
+    const [fromData, setFormData] = React.useState<RegisterTypeFormData>({
         fullname: '',
         username: '',
         password: '',
@@ -27,7 +27,8 @@ const Profile = () => {
         securityKey: ''
     })
 
-    const handleInputChange = (key: keyof formData, value: string) => {
+    const handleInputChange = (key: keyof formData, value:SetStateAction<string>
+    ) => {
         setFormData(prev => ({ ...prev, [key]: value }));
     }
 
@@ -79,7 +80,12 @@ const Profile = () => {
                     headerLabel={"Profile"}
                     btnLabel={"Update"} >
 
-                    <Image className='w-[100px] h-[100px] bg-neutral-800 mb-2 mt-2' />
+                    {/* <Image className='w-[100px] h-[100px] bg-neutral-800 mb-2 mt-2' /> */}
+
+                    <ImageSelector
+                        imgUrl={imageUrl}
+                        setImage={setImageUrl}
+                    />
 
                     <InputBox
                         // inputValue={"Ankit Kumar Dubey"}
@@ -94,10 +100,17 @@ const Profile = () => {
                         setDataValue={text => handleInputChange('username', text)}
                     />
                     <InputBox
+                        // inputValue={"*************"}
+                        labelData={"security key"}
+                        dataValue={fromData.securityKey}
+                        setDataValue={text => handleInputChange('securityKey', text)}
+                    />
+                    <InputBox
                         // inputValue={"*********"}
                         labelData={"password"}
                         dataValue={fromData.password}
                         setDataValue={text => handleInputChange('password', text)}
+                        passwordMode={true}
                     />
 
                     <InputBox
@@ -105,16 +118,9 @@ const Profile = () => {
                         labelData={"confirm password"}
                         dataValue={fromData.confirmPassword}
                         setDataValue={text => handleInputChange('confirmPassword', text)}
+                        passwordMode={true}
                     />
-                    <InputBox
-                        // inputValue={"*************"}
-                        labelData={"security key"}
-                        dataValue={fromData.securityKey}
-                        setDataValue={text => handleInputChange('securityKey', text)}
-                    />
-                    {/* <Link href={'./Login'}>
-                        <Text className='text-blue-500 text-lg font-semibold underline'>already have an account , Login</Text>
-                    </Link> */}
+                  
                 </BaseContainer>
             </SafeAreaView>
         </SafeAreaProvider>

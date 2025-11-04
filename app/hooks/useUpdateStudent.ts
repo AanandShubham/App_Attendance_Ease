@@ -1,43 +1,45 @@
 import { useState } from "react"
-import { ClassTypeFormData } from "../FromTypes"
+import { StudentTypeFormData } from "../FromTypes"
 import Toast from "react-native-toast-message"
 import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
 
-const useUpdateClass = () => {
+const useUpdateStudent = () => {
+
     const { token } = useAuthContext()
-    const { classes, setClasses, selectedClass, setSelectedClass } = useClassContext()
+    const { students, setStudents } = useClassContext()
     const [loading, setLoading] = useState(false)
 
-    const updateClass = async (classData: ClassTypeFormData) => {
-        const flag = inputValidation(classData)
+    const updateStudent = async (studentData: StudentTypeFormData) => {
 
-        if (!flag) return false 
+        const flag = inputValidation(studentData)
+
+        if (!flag) return false
 
         setLoading(true)
 
         try {
-            const response = await fetch("http://10.131.201.161:3000/api/class/update", {
+
+            const response = await fetch("http://10.140.202.160:3000/api/student/update", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authentication": `Token ${token}`
                 },
-                body: JSON.stringify(classData)
+                body: JSON.stringify(studentData)
             })
 
             const data = await response.json()
 
             if (data.error) throw new Error(data.error)
 
-            const updatedClasses = classes.map((item: any) => item._id == data.updatedClass._id ? data.updatedClass : item)
+            const updatedStudents = students.map((student: any) => student._id == data.student._id ? data.student : student)
 
-            setClasses(updatedClasses)
-            setSelectedClass(data.updatedClass)
+            setStudents(updatedStudents)
 
-            return true 
+            return true
 
-        } catch (error:any) {
+        } catch (error: any) {
             Toast.show({
                 type: "error",
                 text1: `Error message : ${error.message}`
@@ -46,24 +48,23 @@ const useUpdateClass = () => {
         } finally {
             setLoading(false)
         }
+
         return false
     }
 
-    return { loading, updateClass }
-
+    return { loading, updateStudent }
 }
 
-export default useUpdateClass
+export default useUpdateStudent
 
-const inputValidation = (classData: ClassTypeFormData) => {
+
+const inputValidation = (studentData: StudentTypeFormData) => {
 
     if (
         [
-            classData.className,
-            classData.roomNo,
-            classData.subject,
-            classData.time,
-            classData.totalClass
+            studentData.tcaNumber,
+            studentData.name,
+            studentData.totalAttendance
         ].some(item => item?.trim() === "")
     ) {
         Toast.show({

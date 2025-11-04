@@ -70,7 +70,7 @@ export default useLogin
 const InputValidation = (formData: LoginTypeFormData): Boolean => {
 
 
-  if (formData.username === "" || formData.password === "") {
+  if (formData.username?.trim() === "" || formData.password?.trim() === "") {
 
     Toast.show({
       type: "error",

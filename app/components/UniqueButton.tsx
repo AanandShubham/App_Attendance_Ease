@@ -36,7 +36,7 @@ const UniqueButton: React.FC<uniqueButtonProps> = (
           className={`w-[100%] h-[100%] p-2 ${itemStyleClass}`}
         /> : <Animated.View
           style={{
-            transform: [{ translateX: shakeAnim }]
+            transform: [{ translateY: shakeAnim }]
           }}
         >
           <Text className={`${itemStyleClass}`}>

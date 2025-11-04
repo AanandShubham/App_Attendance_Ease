@@ -55,7 +55,7 @@ const BaseContainer: React.FC<baseContainerProps> = (
                     {headerLabel}
                 </Text>
 
-                <View className={`w-full ${styleClass} flex flex-col gap-9  p-8 py-14 justify-evenly items-center`}>
+                <View className={`w-full ${styleClass} flex flex-col gap-9  p-8 py-10 justify-evenly items-center`}>
                     {children}
                 </View>
 

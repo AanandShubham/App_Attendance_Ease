@@ -12,7 +12,7 @@ const useAddClass = () => {
     const addClass = async (classData: ClassTypeFormData) => {
         const flag = inputValidation(classData)
 
-        if (!flag) return
+        if (!flag) return false
 
         setLoading(true)
 
@@ -32,13 +32,16 @@ const useAddClass = () => {
 
             console.log("new Added Class ",data.newClass)
             
-            setClasses([...classes,data.newClass])            
+            setClasses([...classes,data.newClass])  
+            
+            return true 
 
         } catch (error) {
 
         }finally{
             setLoading(false)
         }
+        return false
     }
 
     return { loading, addClass }
@@ -55,7 +58,7 @@ const inputValidation = (classData: ClassTypeFormData) => {
             classData.subject,
             classData.time,
             classData.totalClass
-        ].some(item => item === '')
+        ].some(item => item?.trim() === "")
     ) {
         Toast.show({
             type: "error",

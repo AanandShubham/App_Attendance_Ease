@@ -23,13 +23,13 @@ export type ClassTypeFormData = {
     className: string,
     subject: string,
     time: string,
-    totalClass: Number,
-    roomNo: Number
+    totalClass: string,
+    roomNo: string
 }
 
 export type StudentTypeFormData = {
     tcaNumber: string,
     name: string,
-    totalAttendance: Number
+    totalAttendance:string
 }
 
