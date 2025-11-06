@@ -62,11 +62,11 @@ const inputValidation = (studentData: StudentTypeFormData) => {
 
     if (
         [
-            studentData.tcaNumber,
+            studentData.tca,
             studentData.name,
-            studentData.totalAttendance
+
         ].some(item => item?.trim() === "")
-    ) {
+        || !studentData.totalAttendance) {
         Toast.show({
             type: "error",
             text1: " Fields Can't be Emplty !!!!!",

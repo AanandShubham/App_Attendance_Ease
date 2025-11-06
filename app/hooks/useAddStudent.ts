@@ -7,7 +7,7 @@ import useClassContext from "../context/ClassContext"
 const useAddStudent = () => {
 
     const { token } = useAuthContext()
-    const { classes, setClasses, setSelectedClass, students, setStudents } = useClassContext()
+    const { classes, setClasses, selectedClass, setSelectedClass, students, setStudents } = useClassContext()
 
     const [loading, setLoading] = useState(false)
 
@@ -18,11 +18,13 @@ const useAddStudent = () => {
 
         setLoading(true)
         try {
-            const response = await fetch("http://10.151.202.163:3000/api/student/add", {
+            studentData.classId = selectedClass._id
+
+            const response = await fetch("http://10.222.211.162:3000/api/student/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authentication": `Token ${token}`
+                    "Authorization": `Token ${token}`
                 },
                 body: JSON.stringify(studentData)
             })
@@ -39,10 +41,10 @@ const useAddStudent = () => {
 
             setStudents([...students, data.student])
 
-            return true 
+            return true
 
 
-        } catch (error:any) {
+        } catch (error: any) {
             Toast.show({
                 type: "error",
                 text1: `Error message : ${error.message}`
@@ -65,11 +67,10 @@ const inputValidation = (studentData: StudentTypeFormData) => {
 
     if (
         [
-            studentData.tcaNumber,
+            studentData.tca,
             studentData.name,
-            studentData.totalAttendance
         ].some(item => item?.trim() === "")
-    ) {
+        || !studentData.totalAttendance) {
         Toast.show({
             type: "error",
             text1: " Fields Can't be Emplty !!!!!",

@@ -1,19 +1,41 @@
 import BaseContainer from '@/app/components/BaseContainer'
-import React, { useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import InputBox from '@/app/components/InputBox'
 import { StudentTypeFormData } from '@/app/FromTypes'
+import useAddStudent from '@/app/hooks/useAddStudent'
+import Toast from 'react-native-toast-message'
+import { router } from 'expo-router'
 
 const addStudent = () => {
 
+    const {loading,addStudent} = useAddStudent()
+
     const [formData, setFormData] = useState<StudentTypeFormData>({
-        tcaNumber: '',
+        tca: '',
         name: '',
-        totalAttendance: 0
+        totalAttendance: 0,
+        classId:''
     })
 
-    const handleInputChange = (key: keyof StudentTypeFormData, value: string) => {
+    const handleInputChange = (key: keyof StudentTypeFormData, value:SetStateAction<string>) => {
         setFormData(prev => ({ ...prev, [key]: value }))
+    }
+
+    const handleClick = async ()=>{
+        const flag = await addStudent(formData)
+
+        if(flag){
+            Toast.show({
+                type:'success',
+                text1:"Student details Added "
+            })
+            router.back()
+        }else{
+            console.log("Error to add student data !!!")
+            console.log("Student Data : ",formData)
+
+        }
     }
 
     return (
@@ -28,8 +50,8 @@ const addStudent = () => {
                 >
                     <InputBox
                         labelData={"TCA Number"}
-                        dataValue={formData.tcaNumber}
-                        setDataValue={text => handleInputChange('tcaNumber', text)}
+                        dataValue={formData.tca}
+                        setDataValue={text => handleInputChange('tca', text)}
                     />
                     <InputBox
                         labelData={"Name"}
@@ -39,7 +61,7 @@ const addStudent = () => {
                     <InputBox
                         labelData={"Total Attendance"}
                         dataValue={formData.totalAttendance}
-                        setDataValue={text => handleInputChange("totalAttendance", text)}
+                        setDataValue={text => handleInputChange("totalAttendance", text.toString())}
                     />
                 </BaseContainer>
             </SafeAreaView>
