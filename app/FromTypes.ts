@@ -20,16 +20,18 @@ export type ForgetTypeFormData = {
 }
 
 export type ClassTypeFormData = {
-    className: string,
+    id: string | null
+    name: string,
     subject: string,
-    time: string,
-    totalClass: string,
+    timeTable: string,
+    totalClass: Number,
     roomNo: string
 }
 
 export type StudentTypeFormData = {
-    tcaNumber: string,
+    tca: string,
     name: string,
-    totalAttendance:string
+    totalAttendance: Number,
+    classId: string
 }
 
