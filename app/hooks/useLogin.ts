@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { LoginTypeFormData } from "../FromTypes";
-import { Alert, ToastAndroid } from "react-native";
-import Toast from "react-native-toast-message";
-import useAuthContext from "../context/AuthContext";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import useClassContext from "../context/ClassContext";
+import { useState } from "react"
+import { LoginTypeFormData } from "../FromTypes"
+import Toast from "react-native-toast-message"
+import useAuthContext from "../context/AuthContext"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import useClassContext from "../context/ClassContext"
 
 const useLogin = () => {
 
@@ -21,7 +20,7 @@ const useLogin = () => {
     setLoading(true)
 
     try {
-      const response = await fetch("http://10.141.201.162:3000/api/auth/login", {
+      const response = await fetch("http://10.222.211.162:3000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

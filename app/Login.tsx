@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, GestureResponderEvent } from 'react-native'
 import InputBox from './components/InputBox'
 import { Link, router } from 'expo-router'
 import BaseContainer from './components/BaseContainer'
@@ -54,8 +54,8 @@ const Login = () => {
   }
 
   const btnControl = async () => {
-    // console.log("Button Pressed")
-    // console.log("form Data : ",formData)
+    console.log("Button Pressed")
+    console.log("form Data : ",formData)
 
     if (! await login(formData)) {
       startShake()
@@ -66,8 +66,13 @@ const Login = () => {
         text1: "Login Successfull"
       })
 
+
+
       router.replace("/(tabs)/home")
     }
+
+
+    // console.log("Event : ",event.currentTarget)
 
   }
 
