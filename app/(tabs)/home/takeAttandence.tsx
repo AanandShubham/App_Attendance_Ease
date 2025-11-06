@@ -13,7 +13,7 @@ import { useColorScheme } from 'nativewind'
 
 const takeAttandence = () => {
 
-    const {colorScheme} = useColorScheme()
+    const { colorScheme } = useColorScheme()
 
     const [allChecked, setAllChecked] = useState(false)
 
@@ -37,7 +37,7 @@ const takeAttandence = () => {
                     btnAction={() => console.log("Generate PDF")}
                     showButton={true}
                     btnImageSource={saveData}
-                
+
                 >
 
                     <Pressable
@@ -65,7 +65,6 @@ const takeAttandence = () => {
                     />
                     <StudentDataCard
                         isPresent={allChecked}
-
                         showCheckbox={true}
                         tcaNumber='tca2463...'
                         name="Ankit Kumar Dubey"
