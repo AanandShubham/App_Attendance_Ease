@@ -6,22 +6,22 @@ import useClassContext from "../context/ClassContext"
 
 const useUpdateClass = () => {
     const { token } = useAuthContext()
-    const { classes, setClasses, selectedClass, setSelectedClass } = useClassContext()
+    const { classes, setClasses, setSelectedClass } = useClassContext()
     const [loading, setLoading] = useState(false)
 
     const updateClass = async (classData: ClassTypeFormData) => {
         const flag = inputValidation(classData)
 
-        if (!flag) return false 
+        if (!flag) return false
 
         setLoading(true)
 
         try {
-            const response = await fetch("http://10.131.201.161:3000/api/class/update", {
+            const response = await fetch("http://192.168.137.130:3000/api/class/update", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authentication": `Token ${token}`
+                    "Authorization": `Token ${token}`
                 },
                 body: JSON.stringify(classData)
             })
@@ -35,9 +35,9 @@ const useUpdateClass = () => {
             setClasses(updatedClasses)
             setSelectedClass(data.updatedClass)
 
-            return true 
+            return true
 
-        } catch (error:any) {
+        } catch (error: any) {
             Toast.show({
                 type: "error",
                 text1: `Error message : ${error.message}`
@@ -59,13 +59,12 @@ const inputValidation = (classData: ClassTypeFormData) => {
 
     if (
         [
-            classData.className,
+            classData.name,
             classData.roomNo,
             classData.subject,
-            classData.time,
-            classData.totalClass
+            classData.timeTable,
         ].some(item => item?.trim() === "")
-    ) {
+        || !classData.totalClass) {
         Toast.show({
             type: "error",
             text1: " Fields Can't be Emplty !!!!!",
