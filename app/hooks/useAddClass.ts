@@ -5,8 +5,8 @@ import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
 
 const useAddClass = () => {
-    const {token} = useAuthContext()
-    const {classes,setClasses} = useClassContext()
+    const { token } = useAuthContext()
+    const { classes, setClasses } = useClassContext()
     const [loading, setLoading] = useState(false)
 
     const addClass = async (classData: ClassTypeFormData) => {
@@ -17,11 +17,11 @@ const useAddClass = () => {
         setLoading(true)
 
         try {
-            const response = await fetch("http://10.141.201.160:3000/api/class/addClass", {
+            const response = await fetch("http://192.168.137.130:3000/api/class/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization":`Token ${token}`
+                    "Authorization": `Token ${token}`
                 },
                 body: JSON.stringify(classData)
             })
@@ -30,15 +30,15 @@ const useAddClass = () => {
 
             if (data.error) throw new Error(data.error)
 
-            console.log("new Added Class ",data.newClass)
-            
-            setClasses([...classes,data.newClass])  
-            
-            return true 
+            console.log("new Added Class ", data.newClass)
+
+            setClasses([...classes, data.newClass])
+
+            return true
 
         } catch (error) {
 
-        }finally{
+        } finally {
             setLoading(false)
         }
         return false
@@ -53,13 +53,13 @@ const inputValidation = (classData: ClassTypeFormData) => {
 
     if (
         [
-            classData.className,
+            classData.name,
             classData.roomNo,
             classData.subject,
-            classData.time,
-            classData.totalClass
+            classData.timeTable
+
         ].some(item => item?.trim() === "")
-    ) {
+        || !classData.totalClass) {
         Toast.show({
             type: "error",
             text1: " Fields Can't be Emplty !!!!!",
