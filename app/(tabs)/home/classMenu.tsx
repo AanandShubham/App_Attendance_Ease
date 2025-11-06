@@ -1,10 +1,23 @@
+import useAuthContext from '@/app/context/AuthContext'
+import useClassContext from '@/app/context/ClassContext'
+import useGetClassDetails from '@/app/hooks/useGetClassDetails'
 import { useRouter } from 'expo-router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 const classMenu = () => {
     const router = useRouter()
+
+    const { selectedClass } = useClassContext()
+    const {loading,getClassDetails} = useGetClassDetails()
+
+
+    useEffect(() => {
+        getClassDetails(selectedClass._id)
+    },[])
+
     return (
         <SafeAreaProvider>
             <SafeAreaView
@@ -24,7 +37,7 @@ const classMenu = () => {
                             className='w-[70%] h-fit p-1  text-2xl text-white text-center font-bold rounded-md 
                           absolute  top-[-19px] dark:bg-[#183448] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-[#3A87BD]'
                         >
-                            {"MCA 2024 - 26"}
+                            {selectedClass.name}
                         </Text>
                         <View className='w-full flex-row justify-between items-center'>
                             <Pressable
