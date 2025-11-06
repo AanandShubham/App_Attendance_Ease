@@ -45,13 +45,17 @@ const HomeContainer: React.FC<baseContainerProps> = (
           {headerLabel}
         </Text>
 
-        <ScrollView
+        {/* <ScrollView
           className='w-full flex-1 pb-6'
           contentContainerClassName='flex flex-col gap-4 p-1  justify-start items-center'
           showsVerticalScrollIndicator={false}
         >
           {children}
-        </ScrollView>
+        </ScrollView> */}
+
+        <View className='pt-3 w-full'>
+          {children}
+        </View>
 
         {/* w-[80px] h-[70px]  -rotate-[186.90deg] right-[-6px] bottom-[3px] */}
 
