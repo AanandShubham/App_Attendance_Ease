@@ -10,6 +10,10 @@ type ClassContextType = {
     setClasses: (classes: any) => void,
     students: any,
     setStudents: (students: any) => void,
+    selectedStudent: any,
+    setSelectedStudent: (student: any) => void,
+    selectedAttendance: any,
+    setSelectedAttendance: any,
     selectedClass: any,
     setSelectedClass: (selectedClasse: any) => void,
     attendanceList: any,
@@ -18,24 +22,46 @@ type ClassContextType = {
 
 export const ClassContext = React.createContext<ClassContextType>({
     classes: [],
-    setClasses: (classes: any) => {},
+    setClasses: (classes: any) => { },
     students: [],
-    setStudents: (students: any) => {},
+    setStudents: (students: any) => { },
+    selectedStudent: {},
+    setSelectedStudent: (student: any) => { },
+    selectedAttendance: {},
+    setSelectedAttendance: (attendance: any) => { },
     selectedClass: {},
     setSelectedClass: (selectedClass: any) => { },
     attendanceList: [],
-    setAttendanceList: (attendanceList: any) => { }
+    setAttendanceList: (attendanceList: any) => { },
 })
+
 
 export const ClassContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const [classes, setClasses] = useState<any>(null)
     const [selectedClass, setSelectedClass] = useState<any>(null)
+    const [selectedStudent, setSelectedStudent] = useState<any>(null)
+    const [selectedAttendance, setSelectedAttendance] = useState<any>(null)
     const [students, setStudents] = useState<any>(null)
     const [attendanceList, setAttendanceList] = useState<any>(null)
 
     return (
-        <ClassContext.Provider value={{ classes, setClasses, selectedClass, setSelectedClass, students, setStudents,attendanceList,setAttendanceList }}>
+        <ClassContext.Provider value={
+            {
+                classes,
+                setClasses,
+                selectedClass,
+                setSelectedClass,
+                students,
+                setStudents,
+                attendanceList,
+                setAttendanceList,
+                selectedStudent,
+                setSelectedStudent,
+                selectedAttendance,
+                setSelectedAttendance
+            }
+        }>
             {children}
         </ClassContext.Provider>
     )
