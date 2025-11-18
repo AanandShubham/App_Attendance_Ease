@@ -1,29 +1,62 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import HomeContainer from '@/app/components/HomeContainer'
 import StudentDataCard from '@/app/components/StudentDataCard'
 import Fontisto from '@expo/vector-icons/Fontisto'
-import { Pressable } from 'react-native'
+import { FlatList, Pressable } from 'react-native'
 import { View } from 'react-native'
 import { Text } from 'react-native'
 import saveData from '../../../assets/images/saveData.png'
 import { useColorScheme } from 'nativewind'
+import useClassContext from '@/app/context/ClassContext'
+import { StudentTypeFormData } from '@/app/FromTypes'
+import { router } from 'expo-router'
 
 
 
 const takeAttandence = () => {
 
     const { colorScheme } = useColorScheme()
+    const { students, selectedClass } = useClassContext()
 
-    const [allChecked, setAllChecked] = useState(false)
+    // student attendance list state
+    const [attendance, setAttendance] = useState<boolean[]>([])
 
+
+    const [allChecked, setAllChecked] = useState(true)
+
+    const date = new Date().toLocaleDateString()
+
+
+    // toggle studentes attendance
     const toggleAllChecked = () => {
-        setAllChecked(!allChecked);
-    };
+        setAllChecked(prev => !prev)
+        setAttendance(attendance.map(() => !allChecked))
+    }
 
-    // useEffect(()=>{
+    // const handleClick = (studentData: any, index: any) => {
+    //     // router.push("/(tabs)/home/classMenu")
+    //     // setAllChecked((prev)=>!prev)
+    //     // console.log("Ref Data : ",studentRef.current)
+    //     console.log("Selected Student : ", studentData, " index : ", index)
+    // }
 
-    // },[allChecked,setAllChecked])
+    const handleClick = (item: any, index: number) => {
+        setAttendance(prev => {
+            const updated = [...prev]
+            updated[index] = !updated[index]
+            return updated
+        })
+    }
+
+
+    useEffect(() => {
+        if (students.length > 0) {
+            setAttendance(students.map(() => true))
+            setAllChecked(true)
+        }
+    }, [students])
+
 
     return (
         <SafeAreaProvider>
@@ -32,8 +65,7 @@ const takeAttandence = () => {
                 className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
             >
                 <HomeContainer
-                    headerLabel={"18/11/2025"}
-                    btnLabel={"Save"}
+                    headerLabel={date + " Attendance"}
                     btnAction={() => console.log("Generate PDF")}
                     showButton={true}
                     btnImageSource={saveData}
@@ -41,21 +73,55 @@ const takeAttandence = () => {
                 >
 
                     <Pressable
-                        onPress={() => setAllChecked((prev) => !prev)}
-                        className='w-full flex items-end justify-start pr-2 dark:bg-[#061526] bg-[#e9eff6e2]'>
+                        onPress={toggleAllChecked}
+                        className='w-full flex items-end justify-start pr-2 mb-3 dark:bg-[#020b148a] bg-[#e9eff6e2]'>
                         <View className='flex flex-row justify-center items-center gap-3 px-4 py-1 dark:bg-[#0b202e] bg-[#90C4EE] shadow-black elevation-4 shadow-[#3A87BD] border-1 border-[#1B64A8] rounded-tl-[5px] rounded-tr-[15px] rounded-bl-[15px] rounded-br-[5px]'
                         >
-                            <Text className='font-extrabold dark:text-white'>Present All </Text>
+                            <Text className='font-extrabold dark:text-white'>Present All</Text>
                             {
                                 allChecked ? <Fontisto name="checkbox-active" size={25} color={colorScheme === "dark" ? "white" : "black"} />
                                     : <Fontisto name="checkbox-passive" size={25} color={colorScheme === "dark" ? "white" : "black"} />
                             }
 
-
                         </View>
                     </Pressable>
 
-                    <StudentDataCard
+                    <FlatList
+                        data={students}
+                        keyExtractor={(item) => item._id}
+                        extraData={students}
+                        ListEmptyComponent={
+                            <View className='w-full h-fit p-1 flex justify-center items-start'>
+                                <Text className='dark:text-white'>There is not any Student</Text>
+                            </View>
+                        }
+                        renderItem={
+                            ({ item, index }) =>
+                                <StudentDataCard
+
+                                    isPresent={attendance[index]}
+                                    showCheckbox={true}
+                                    onPressAction={
+                                        () => handleClick(item, index)
+                                    }
+                                    tcaNumber={item.tca}
+                                    name={item.name}
+                                    totalAttendance={
+                                        item.classList.find(
+                                            (details: any) => details.classId === selectedClass._id
+                                        )?.totalAttendance | 0
+                                    }
+
+                                />
+
+                        }
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                        ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
+
+                    />
+
+                    {/* <StudentDataCard
                         isPresent={allChecked}
                         showCheckbox={true}
                         tcaNumber='tca2463...'
@@ -84,7 +150,7 @@ const takeAttandence = () => {
                         tcaNumber='tca2463...'
                         name="Ankit Kumar Dubey"
                         totalAttendance={42}
-                    />
+                    /> */}
 
                 </HomeContainer>
             </SafeAreaView>

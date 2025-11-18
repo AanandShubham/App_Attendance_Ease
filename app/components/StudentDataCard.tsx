@@ -10,7 +10,8 @@ type StudentDataCardProps = {
   name?: string,
   totalAttendance?: number,
   showCheckbox?: boolean,
-  isPresent?: boolean
+  isPresent?: boolean,
+
 }
 
 const StudentDataCard: React.FC<StudentDataCardProps> = (
@@ -24,7 +25,6 @@ const StudentDataCard: React.FC<StudentDataCardProps> = (
   }
 ) => {
 
-  const [checked, setChecked] = useState(isPresent)
   const { colorScheme } = useColorScheme()
 
   return (
@@ -37,12 +37,14 @@ const StudentDataCard: React.FC<StudentDataCardProps> = (
         <Text className='w-full text-black dark:text-white text-lg font-semibold'>Total Attendance : {totalAttendance || "0"}</Text>
         {
           showCheckbox && <Pressable
-            onPress={() => setChecked((prev) => !prev)}
+            onPress={onPressAction}
             className='absolute right-8 top-[35%] '>
             {
-              checked ? <Fontisto name="checkbox-active" size={25} color={colorScheme === "dark" ? "white" : "black"} />
-                : <Fontisto name="checkbox-passive" size={25} color={colorScheme === "dark" ? "white" : "black"} />
-            }
+              isPresent ? (
+                <Fontisto name="checkbox-active" size={25} color={colorScheme === "dark" ? "white" : "black"} />
+              ) : (
+                <Fontisto name="checkbox-passive" size={25} color={colorScheme === "dark" ? "white" : "black"} />
+              )}
           </Pressable>
         }
       </View>
