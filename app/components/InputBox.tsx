@@ -8,7 +8,8 @@ type inputBoxProps<T> = {
   inputValue?: string,
   dataValue: T,
   setDataValue: React.Dispatch<React.SetStateAction<T>>,
-  passwordMode?: boolean
+  passwordMode?: boolean,
+  disable?: boolean
 }
 
 const InputBox = <T,>(
@@ -17,7 +18,8 @@ const InputBox = <T,>(
     inputValue = "",
     dataValue,
     setDataValue,
-    passwordMode = false
+    passwordMode = false,
+    disable = true
   }: inputBoxProps<T>
 
 ) => {
@@ -31,7 +33,7 @@ const InputBox = <T,>(
 
   const [labelTextData, setLabelTextData] = useState(inputValue || labelData)
 
-  const labelBackgroundColorFinal = colorScheme === "dark" ? '#061526' : '#e9eff6e8'
+  const labelBackgroundColorFinal = colorScheme === "dark" ? '#020b14e5' : '#e9eff6e8'
 
   const labelBackgrondColorInitial = colorScheme === "dark" ? '#17242D' : '#90C4EE'
 
@@ -41,11 +43,19 @@ const InputBox = <T,>(
 
 
   React.useEffect(() => {
+    // if (!disable) {
+    //   Animated.timing(labelAnim, {
+    //     toValue: isFocused || dataValue ? 1 : 0,
+    //     duration: 200,
+    //     useNativeDriver: false,
+    //   }).start()
+    // }
     Animated.timing(labelAnim, {
       toValue: isFocused || dataValue ? 1 : 0,
       duration: 200,
       useNativeDriver: false,
     }).start()
+
   }, [isFocused, dataValue])
 
   const labelStyle = {
@@ -85,6 +95,7 @@ const InputBox = <T,>(
 
       <View>
         <TextInput
+          editable={disable}
           secureTextEntry={passwordMode ? !showPassword : false}
           value={dataValue}
           onChangeText={setDataValue}

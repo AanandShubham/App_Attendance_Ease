@@ -42,7 +42,7 @@ const BaseContainer: React.FC<baseContainerProps> = (
 
             {/* <View className='w-full h-full  relative bg-white flex  justify-center items-center'> */}
            
-            <View className='w-[90vw] -mt-[40px] h-fit dark:bg-[#061526]  bg-[#e9eff6e8] relative flex justify-evenly items-center rounded-tl-[20px] rounded-tr-[80px] rounded-bl-[80px] rounded-br-[20px]  border-2 dark:border-[#17242d] border-[#0C5AA2] p-4 '>
+            <View className='w-[90vw] -mt-[40px] h-fit dark:bg-[#020b148a]  bg-[#e9eff6e8] relative flex justify-evenly items-center rounded-tl-[20px] rounded-tr-[80px] rounded-bl-[80px] rounded-br-[20px]  border-2 dark:border-[#17242d] border-[#0C5AA2] p-4 '>
                 <Text
                     style={{
                         textShadowColor: '#000',

@@ -36,7 +36,7 @@ const useRegister = () => {
                 } as any)
             }
 
-            const response = await fetch("http://10.141.201.162:3000/api/auth/signup", {
+            const response = await fetch("http://10.239.230.162:3000/api/auth/signup", {
                 method: "POST",
                 body: formData,
                 headers: {

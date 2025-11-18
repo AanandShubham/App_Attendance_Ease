@@ -35,7 +35,7 @@ const settings = () => {
       <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center' >
 
         <View className='w-full h-full dark:bg-[#061526] bg-white p-2 py-6 relative flex  justify-start items-center'>
-          <View className='w-[95vw] h-[84.8vh] dark:bg-[#061526] bg-[#e9eff6e8]   flex justify-start items-center gap-4  rounded-tl-[10px] rounded-tr-[50px] 
+          <View className='w-[95vw] h-[84.8vh] dark:bg-[#020b148a] bg-[#e9eff6e8]   flex justify-start items-center gap-4  rounded-tl-[10px] rounded-tr-[50px] 
       rounded-br-[10px] rounded-bl-[50px]  border dark:border-2 dark:border-[#17242D]  border-[#0C5AA2] p-4 py-8 '>
             <Text
               style={{
@@ -89,10 +89,11 @@ const settings = () => {
             </Pressable>
 
             <Pressable
-              onPress={() => {
-                logout()
-                router.replace("/Login")
-              }
+              onPress={
+                () => {
+                  logout()
+                  router.replace("/Login")
+                }
               }
               className='w-full h-[55px] dark:bg-[#17242D] bg-[#90C4EE] flex flex-row justify-between items-center rounded-tr-[20px] rounded-bl-[20px] rounded-tl-[5px] rounded-br-[5px] p-2 px-4'>
               <Text

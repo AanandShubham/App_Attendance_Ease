@@ -6,7 +6,7 @@ import useClassContext from "../context/ClassContext"
 
 const useUpdateClass = () => {
     const { token } = useAuthContext()
-    const { classes, setClasses, setSelectedClass } = useClassContext()
+    const { classes, setClasses, setSelectedClass,selectedClass } = useClassContext()
     const [loading, setLoading] = useState(false)
 
     const updateClass = async (classData: ClassTypeFormData) => {
@@ -17,7 +17,11 @@ const useUpdateClass = () => {
         setLoading(true)
 
         try {
-            const response = await fetch("http://192.168.137.130:3000/api/class/update", {
+                if(!classData.id){
+                    classData.id = selectedClass._id
+                }
+
+            const response = await fetch("http://10.239.230.162:3000/api/class/update", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

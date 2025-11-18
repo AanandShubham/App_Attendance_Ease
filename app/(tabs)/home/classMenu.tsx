@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router'
 import React, { useEffect } from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
-import Toast from 'react-native-toast-message'
+
 
 const classMenu = () => {
     const router = useRouter()

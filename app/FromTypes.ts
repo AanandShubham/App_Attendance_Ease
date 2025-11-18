@@ -35,3 +35,11 @@ export type StudentTypeFormData = {
     classId: string
 }
 
+export type StudentUpdateTypeFormData = {
+    id: string
+    tca: string,
+    name: string,
+    newAttendance: Number,
+    classId: string
+}
+

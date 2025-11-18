@@ -6,34 +6,37 @@ import { StudentTypeFormData } from '@/app/FromTypes'
 import useAddStudent from '@/app/hooks/useAddStudent'
 import Toast from 'react-native-toast-message'
 import { router } from 'expo-router'
+import useClassContext from '@/app/context/ClassContext'
 
 const addStudent = () => {
 
-    const {loading,addStudent} = useAddStudent()
+    const { loading, addStudent } = useAddStudent()
+    const { selectedClass } = useClassContext()
 
     const [formData, setFormData] = useState<StudentTypeFormData>({
         tca: '',
         name: '',
         totalAttendance: 0,
-        classId:''
+        classId: selectedClass?._id 
     })
 
-    const handleInputChange = (key: keyof StudentTypeFormData, value:SetStateAction<string>) => {
+    const handleInputChange = (key: keyof StudentTypeFormData, value: SetStateAction<string>) => {
         setFormData(prev => ({ ...prev, [key]: value }))
     }
 
-    const handleClick = async ()=>{
+    const handleClick = async () => {
+        console.log("add student clicked")
         const flag = await addStudent(formData)
 
-        if(flag){
+        if (flag) {
             Toast.show({
-                type:'success',
-                text1:"Student details Added "
+                type: 'success',
+                text1: "Student details Added "
             })
             router.back()
-        }else{
+        } else {
             console.log("Error to add student data !!!")
-            console.log("Student Data : ",formData)
+            console.log("Student Data : ", formData)
 
         }
     }
@@ -47,6 +50,7 @@ const addStudent = () => {
                 <BaseContainer
                     headerLabel={"Add Student"}
                     btnLabel={"Add"}
+                    btnAction={handleClick}
                 >
                     <InputBox
                         labelData={"TCA Number"}

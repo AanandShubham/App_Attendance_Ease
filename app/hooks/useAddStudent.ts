@@ -6,21 +6,25 @@ import useClassContext from "../context/ClassContext"
 
 const useAddStudent = () => {
 
-    const { token } = useAuthContext()
+    const { token, user } = useAuthContext()
     const { classes, setClasses, selectedClass, setSelectedClass, students, setStudents } = useClassContext()
 
     const [loading, setLoading] = useState(false)
 
     const addStudent = async (studentData: StudentTypeFormData) => {
+
         const flag = inputValidation(studentData)
 
         if (!flag) return false
 
         setLoading(true)
         try {
-            studentData.classId = selectedClass._id
+            if (!studentData.classId) {
+                studentData.classId = selectedClass._id
+            }
+            console.log("User : ", user)
 
-            const response = await fetch("http://10.222.211.162:3000/api/student/add", {
+            const response = await fetch("http://10.239.230.162:3000/api/student/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

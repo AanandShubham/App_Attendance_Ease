@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { StudentTypeFormData } from "../FromTypes"
+import { StudentUpdateTypeFormData } from "../FromTypes"
 import Toast from "react-native-toast-message"
 import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
@@ -7,10 +7,10 @@ import useClassContext from "../context/ClassContext"
 const useUpdateStudent = () => {
 
     const { token } = useAuthContext()
-    const { students, setStudents } = useClassContext()
+    const { students, setStudents, selectedStudent } = useClassContext()
     const [loading, setLoading] = useState(false)
 
-    const updateStudent = async (studentData: StudentTypeFormData) => {
+    const updateStudent = async (studentData: StudentUpdateTypeFormData) => {
 
         const flag = inputValidation(studentData)
 
@@ -20,11 +20,15 @@ const useUpdateStudent = () => {
 
         try {
 
-            const response = await fetch("http://10.140.202.160:3000/api/student/update", {
+            if (!studentData.id) {
+                studentData.id = selectedStudent?._id
+            }
+
+            const response = await fetch("http://10.239.230.162:3000/api/student/update", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authentication": `Token ${token}`
+                    "Authorization": `Token ${token}`
                 },
                 body: JSON.stringify(studentData)
             })
@@ -58,15 +62,9 @@ const useUpdateStudent = () => {
 export default useUpdateStudent
 
 
-const inputValidation = (studentData: StudentTypeFormData) => {
+const inputValidation = (studentData: StudentUpdateTypeFormData) => {
 
-    if (
-        [
-            studentData.tca,
-            studentData.name,
-
-        ].some(item => item?.trim() === "")
-        || !studentData.totalAttendance) {
+    if (!studentData.newAttendance) {
         Toast.show({
             type: "error",
             text1: " Fields Can't be Emplty !!!!!",

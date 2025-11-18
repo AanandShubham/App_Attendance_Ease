@@ -24,7 +24,7 @@ const updateClass = () => {
     const { selectedClass } = useClassContext()
 
     const [formData, setFormData] = useState<ClassTypeFormData>({
-        id: '',
+        id: selectedClass?._id,
         name:'',
         roomNo:'',
         totalClass: 0,

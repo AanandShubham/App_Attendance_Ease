@@ -5,18 +5,17 @@ import HomeContainer from '@/app/components/HomeContainer'
 import StudentDataCard from '@/app/components/StudentDataCard'
 import addStudent from '@/assets/images/AddStudent.png'
 import useClassContext from '@/app/context/ClassContext'
-import { FlatList, View } from 'react-native'
-import { setParams } from 'expo-router/build/global-state/routing'
+import { FlatList, Text, View } from 'react-native'
 
 const studentList = () => {
     const router = useRouter()
-    const { students, selectedClass,setSelectedStudent } = useClassContext()
+    const { students, selectedClass, setSelectedStudent } = useClassContext()
 
 
     const handlePress = (student: any) => {
         setSelectedStudent(student)
         router.push("/(tabs)/home/updateStudent")
-        
+
         // console.log('------------------------------')
         // console.log("Student Card Data : ", JSON.stringify(student, null, 2))
         // console.log('------------------------------')
@@ -38,6 +37,11 @@ const studentList = () => {
                         data={students}
                         keyExtractor={(item) => item._id}
                         extraData={students}
+                        ListEmptyComponent={
+                            <View className='w-full h-fit p-2 flex justify-center items-start'>
+                                <Text className='dark:text-white'>list is empty add Student via add button in the bottom  right corner</Text>
+                            </View>
+                        }
                         renderItem={({ item }) =>
                             <StudentDataCard
                                 onPressAction={() => handlePress(item)}
@@ -45,8 +49,8 @@ const studentList = () => {
                                 name={item.name}
                                 totalAttendance={
                                     item.classList.find(
-                                        (details: any) => details.classId.toString() === selectedClass._id.toString()
-                                    ).totalAttendance | 0
+                                        (details: any) => details.classId === selectedClass._id
+                                    )?.totalAttendance | 0
                                 }
                             />
 

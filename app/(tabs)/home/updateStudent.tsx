@@ -2,7 +2,7 @@ import React, { SetStateAction, useState } from 'react'
 import BaseContainer from '@/app/components/BaseContainer'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import InputBox from '@/app/components/InputBox'
-import { StudentTypeFormData } from '@/app/FromTypes'
+import { StudentTypeFormData, StudentUpdateTypeFormData } from '@/app/FromTypes'
 import useClassContext from '@/app/context/ClassContext'
 import useUpdateStudent from '@/app/hooks/useUpdateStudent'
 import Toast from 'react-native-toast-message'
@@ -16,15 +16,17 @@ const updateStudent = () => {
 
   const totalAttendance = selectedStudent.classList.find(
     (item: any) => item.classId.toString() === selectedClass._id.toString()
-  ).totalAttendance | 0
-  const [formData, setFormData] = useState<StudentTypeFormData>({
+  ).totalAttendance
+
+  const [formData, setFormData] = useState<StudentUpdateTypeFormData>({
+    id: selectedStudent?._id,
     tca: '',
     name: '',
-    totalAttendance: 0,
-    classId: selectedClass._id
+    newAttendance: 0,
+    classId: selectedClass?._id
   })
 
-  const handleInputChange = (key: keyof StudentTypeFormData, value: SetStateAction<string>) => {
+  const handleInputChange = (key: keyof StudentUpdateTypeFormData, value: SetStateAction<string>) => {
     setFormData(prev => ({ ...prev, [key]: value }))
   }
 
@@ -36,7 +38,7 @@ const updateStudent = () => {
         text1: "Student details updated Successfully"
       })
       router.back()
-    }else{
+    } else {
       console.log("Student data of form : ", formData)
     }
     // console.log("------------------------------------------------")
@@ -54,22 +56,25 @@ const updateStudent = () => {
           headerLabel={"Edit Student"}
           btnLabel={"Update"} >
           <InputBox
+            disable={false}
             labelData={"TCA Number"}
             inputValue={selectedStudent.tca}
             dataValue={formData.tca}
             setDataValue={text => handleInputChange("tca", text)}
+
           />
           <InputBox
+            disable={false}
             labelData={"Name"}
             inputValue={selectedStudent.name}
             dataValue={formData.name}
             setDataValue={text => handleInputChange("name", text)}
           />
           <InputBox
-            labelData={"Total Attendance"}
+            labelData={"New Attendance"}
             inputValue={totalAttendance.toString()}
-            dataValue={formData.totalAttendance}
-            setDataValue={text => handleInputChange("totalAttendance", text.toString())}
+            dataValue={formData.newAttendance}
+            setDataValue={text => handleInputChange("newAttendance", text.toString())}
           />
         </BaseContainer>
       </SafeAreaView>

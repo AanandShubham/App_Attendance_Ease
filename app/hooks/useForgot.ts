@@ -12,7 +12,7 @@ const useForgot = () => {
         setLoading(true)
 
         try {
-            const response = await fetch("http://10.131.202.162:3000/api/auth/forgot",{
+            const response = await fetch("http://10.239.230.162:3000/api/auth/forgot",{
                 method:'POST',
                 headers: {
                     "Content-Type": "application/json",
