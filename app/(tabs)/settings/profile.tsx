@@ -6,6 +6,7 @@ import { useRef } from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { RegisterTypeFormData } from '@/app/FromTypes'
 import ImageSelector from '@/app/components/ImageSelector'
+import useAuthContext from '@/app/context/AuthContext'
 
 type formData = {
     profile: string,
@@ -17,8 +18,14 @@ type formData = {
 }
 
 const Profile = () => {
+
+    const { user } = useAuthContext()
+    console.log("---------------------------------------------")
+    console.log("User Data : ", user)
+    console.log("---------------------------------------------")
+
     const shakeAnim = useRef(new Animated.Value(0)).current
-    const [imageUrl,setImageUrl] = useState<string | null>(null)
+    const [imageUrl, setImageUrl] = useState<string | null>(user?.profile.secure_url)
     const [fromData, setFormData] = React.useState<RegisterTypeFormData>({
         fullname: '',
         username: '',
@@ -27,7 +34,7 @@ const Profile = () => {
         securityKey: ''
     })
 
-    const handleInputChange = (key: keyof formData, value:SetStateAction<string>
+    const handleInputChange = (key: keyof formData, value: SetStateAction<string>
     ) => {
         setFormData(prev => ({ ...prev, [key]: value }));
     }
@@ -86,27 +93,32 @@ const Profile = () => {
                         imgUrl={imageUrl}
                         setImage={setImageUrl}
                     />
+                    {/*  labelData={"Class Name"}
+                        inputValue={selectedClass.name}
+                        dataValue={formData.name}
+                        setDataValue={text => handleInputChange("name", text)} */}
 
                     <InputBox
-                        // inputValue={"Ankit Kumar Dubey"}
                         labelData={"fullname"}
+                        inputValue={user?.fullname}
                         dataValue={fromData.fullname}
                         setDataValue={text => handleInputChange('fullname', text)}
                     />
                     <InputBox
-                        // inputValue={"AnkitDubey"}
                         labelData={"username"}
+                        inputValue={user?.username}
                         dataValue={fromData.username}
                         setDataValue={text => handleInputChange('username', text)}
                     />
                     <InputBox
-                        // inputValue={"*************"}
+                        inputValue={user?.securityKey}
                         labelData={"security key"}
                         dataValue={fromData.securityKey}
                         setDataValue={text => handleInputChange('securityKey', text)}
+                        passwordMode={true}
                     />
                     <InputBox
-                        // inputValue={"*********"}
+                        inputValue={"**********"}
                         labelData={"password"}
                         dataValue={fromData.password}
                         setDataValue={text => handleInputChange('password', text)}
@@ -114,13 +126,13 @@ const Profile = () => {
                     />
 
                     <InputBox
-                        // inputValue={"**********"}
+                        inputValue={"**********"}
                         labelData={"confirm password"}
                         dataValue={fromData.confirmPassword}
                         setDataValue={text => handleInputChange('confirmPassword', text)}
                         passwordMode={true}
                     />
-                  
+
                 </BaseContainer>
             </SafeAreaView>
         </SafeAreaProvider>

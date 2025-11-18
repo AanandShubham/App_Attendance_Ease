@@ -37,13 +37,13 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({ setImage, imgUrl }) => {
     }
 
     return (
-        <View className="w-[70vw] h-[18vh] bg-neutral-600 rounded-3xl relative flex justify-center items-center overflow-hidden">
+        <View className="w-[50vw] h-[19vh] bg-neutral-600 rounded-[70px] relative flex justify-center items-center overflow-hidden">
             {/* Image or placeholder */}
             {imageUrl ? (
                 <Image
                     source={{ uri: imageUrl }}
                     className="w-full h-full rounded-3xl"
-                    resizeMode="cover"
+                    resizeMode="center"
                 />
             ) : (
                 // <Text className="text-white text-lg">Add {imgId}</Text>
