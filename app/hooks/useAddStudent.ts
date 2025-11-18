@@ -24,7 +24,7 @@ const useAddStudent = () => {
             }
             console.log("User : ", user)
 
-            const response = await fetch("http://10.239.230.162:3000/api/student/add", {
+            const response = await fetch("http://10.118.247.162:3000/api/student/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

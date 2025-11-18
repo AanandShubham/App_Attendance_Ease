@@ -24,7 +24,7 @@ const useUpdateStudent = () => {
                 studentData.id = selectedStudent?._id
             }
 
-            const response = await fetch("http://10.239.230.162:3000/api/student/update", {
+            const response = await fetch("http://10.118.247.162:3000/api/student/update", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

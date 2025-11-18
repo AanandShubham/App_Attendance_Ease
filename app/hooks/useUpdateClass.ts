@@ -21,7 +21,7 @@ const useUpdateClass = () => {
                     classData.id = selectedClass._id
                 }
 
-            const response = await fetch("http://10.239.230.162:3000/api/class/update", {
+            const response = await fetch("http://10.118.247.162:3000/api/class/update", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

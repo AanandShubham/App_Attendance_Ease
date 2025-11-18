@@ -20,7 +20,7 @@ const useLogin = () => {
     setLoading(true)
 
     try {
-      const response = await fetch("http://10.239.230.162:3000/api/auth/login", {
+      const response = await fetch("http://10.118.247.162:3000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
