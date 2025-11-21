@@ -3,13 +3,16 @@ import { StudentTypeFormData } from "../FromTypes"
 import Toast from "react-native-toast-message"
 import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
+import Constants from 'expo-constants'
+
 
 const useAddStudent = () => {
-
+    
     const { token, user } = useAuthContext()
     const { classes, setClasses, selectedClass, setSelectedClass, students, setStudents } = useClassContext()
-
+    
     const [loading, setLoading] = useState(false)
+    const {apiUrl} = Constants.expoConfig?.extra || {}
 
     const addStudent = async (studentData: StudentTypeFormData) => {
 
@@ -18,13 +21,15 @@ const useAddStudent = () => {
         if (!flag) return false
 
         setLoading(true)
+
         try {
             if (!studentData.classId) {
                 studentData.classId = selectedClass._id
             }
-            console.log("User : ", user)
+            
+            // console.log("User : ", user)
 
-            const response = await fetch("http://10.118.247.162:3000/api/student/add", {
+            const response = await fetch(`${apiUrl}/student/add`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

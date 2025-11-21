@@ -3,13 +3,16 @@ import { StudentUpdateTypeFormData } from "../FromTypes"
 import Toast from "react-native-toast-message"
 import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
+import Constants from 'expo-constants'
+
 
 const useUpdateStudent = () => {
-
+    
     const { token } = useAuthContext()
     const { students, setStudents, selectedStudent } = useClassContext()
     const [loading, setLoading] = useState(false)
-
+    const {apiUrl} = Constants.expoConfig?.extra || {}
+    
     const updateStudent = async (studentData: StudentUpdateTypeFormData) => {
 
         const flag = inputValidation(studentData)
@@ -24,7 +27,7 @@ const useUpdateStudent = () => {
                 studentData.id = selectedStudent?._id
             }
 
-            const response = await fetch("http://10.118.247.162:3000/api/student/update", {
+            const response = await fetch(`${apiUrl}/student/update`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

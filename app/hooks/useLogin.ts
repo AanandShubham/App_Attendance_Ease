@@ -5,22 +5,28 @@ import useAuthContext from "../context/AuthContext"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import useClassContext from "../context/ClassContext"
 
+import Constants from 'expo-constants'
+
 const useLogin = () => {
 
   const [loading, setLoading] = useState(false)
   const { setUser, setToken } = useAuthContext()
   const { setClasses } = useClassContext()
+  const { apiUrl } = Constants.expoConfig?.extra || {}
 
   const login = async (loginForm: LoginTypeFormData) => {
-   
+
     const flag = InputValidation(loginForm)
 
     if (!flag) return false
 
     setLoading(true)
+    console.log("************************************")
+    console.log("api Url : ", apiUrl)
+    console.log("************************************")
 
     try {
-      const response = await fetch("http://10.118.247.162:3000/api/auth/login", {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -38,7 +44,7 @@ const useLogin = () => {
       // setting and storing token to the context and and the async storage 
       setToken(data.token)
       await AsyncStorage.setItem("AuthToken", JSON.stringify(data.token))
-      
+
       // setting and storing user  to the context and the async storage 
       setUser(data.user)
       await AsyncStorage.setItem("AuthUser", JSON.stringify(data.user))
@@ -58,7 +64,7 @@ const useLogin = () => {
       setLoading(false)
     }
 
-    return false 
+    return false
   }
 
   return { loading, login };
@@ -82,7 +88,7 @@ const InputValidation = (formData: LoginTypeFormData): Boolean => {
       },
       text2: ""
     })
-    return false 
+    return false
   }
 
   if (formData.password.length < 6) {

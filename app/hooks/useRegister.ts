@@ -4,11 +4,13 @@ import useClassContext from "../context/ClassContext"
 import { RegisterTypeFormData } from "../FromTypes"
 import Toast from "react-native-toast-message"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import Constants from 'expo-constants'
 
 const useRegister = () => {
     const [loading, setLoading] = useState(false)
     const { setUser, setToken } = useAuthContext()
     const { setClasses } = useClassContext()
+    const {apiUrl} = Constants.expoConfig?.extra || {}
 
     const register = async (registerForm: RegisterTypeFormData, imageUrl: string | null) => {
 
@@ -36,7 +38,7 @@ const useRegister = () => {
                 } as any)
             }
 
-            const response = await fetch("http://10.118.247.162:3000/api/auth/signup", {
+            const response = await fetch(`${apiUrl}/auth/signup`, {
                 method: "POST",
                 body: formData,
                 headers: {

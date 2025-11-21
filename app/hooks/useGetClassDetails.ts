@@ -2,13 +2,17 @@ import { useState } from "react"
 import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
 import Toast from "react-native-toast-message"
+import Constants from 'expo-constants'
+
 
 const useGetClassDetails = () => {
     const [loading, setLoading] = useState(false)
-
+    
     const { token } = useAuthContext()
-
+    
     const { setStudents, setAttendanceList } = useClassContext()
+    
+    const {apiUrl} = Constants.expoConfig?.extra || {}
 
     const getClassDetails = async (classId: string) => {
 
@@ -16,7 +20,7 @@ const useGetClassDetails = () => {
 
         try {
 
-            const response = await fetch(`http://10.118.247.162:3000/api/class/getDetails/${classId}`, {
+            const response = await fetch(`${apiUrl}/class/getDetails/${classId}`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Token ${token}`
@@ -44,7 +48,10 @@ const useGetClassDetails = () => {
             console.log("----------------------------------------")
             console.log("Students Details : ", JSON.stringify(data.students,null,2))
             console.log("----------------------------------------")
-
+            
+            console.log("----------------------------------------")
+            console.log("Attendance Details : ", JSON.stringify(data.attendances,null,2))
+            console.log("----------------------------------------")
             setAttendanceList(data.attendances)
 
         } catch (error: any) {

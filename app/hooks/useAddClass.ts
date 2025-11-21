@@ -3,11 +3,14 @@ import { ClassTypeFormData } from "../FromTypes"
 import Toast from "react-native-toast-message"
 import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
+import Constants from 'expo-constants'
+
 
 const useAddClass = () => {
     const { token } = useAuthContext()
     const { classes, setClasses } = useClassContext()
     const [loading, setLoading] = useState(false)
+    const {apiUrl} = Constants.expoConfig?.extra || {}
 
     const addClass = async (classData: ClassTypeFormData) => {
         const flag = inputValidation(classData)
@@ -17,7 +20,7 @@ const useAddClass = () => {
         setLoading(true)
 
         try {
-            const response = await fetch("http://10.118.247.162:3000/api/class/add", {
+            const response = await fetch(`${apiUrl}/class/add`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
