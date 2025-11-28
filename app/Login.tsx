@@ -1,4 +1,4 @@
-import { View, Text, Pressable, GestureResponderEvent } from 'react-native'
+import { View, Text, Pressable, GestureResponderEvent, ActivityIndicator } from 'react-native'
 import InputBox from './components/InputBox'
 import { Link, router } from 'expo-router'
 import BaseContainer from './components/BaseContainer'
@@ -8,6 +8,7 @@ import useLogin from './hooks/useLogin'
 
 import { LoginTypeFormData } from './FromTypes'
 import Toast from 'react-native-toast-message'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Login = () => {
   const shakeAnim = useRef(new Animated.Value(0)).current
@@ -21,7 +22,7 @@ const Login = () => {
   }
 
 
-  const { login } = useLogin()
+  const { loading, login } = useLogin()
 
   const startShake = () => {
     Animated.sequence([
@@ -55,7 +56,7 @@ const Login = () => {
 
   const btnControl = async () => {
     console.log("Button Pressed")
-    console.log("form Data : ",formData)
+    console.log("form Data : ", formData)
 
     if (! await login(formData)) {
       startShake()
@@ -77,37 +78,45 @@ const Login = () => {
   }
 
   return (
-    <BaseContainer
-      styleClass={"h-[35vh]"}
-      shakeAnim={shakeAnim}
-      btnAction={btnControl}
-      headerLabel={"Login"}
-      btnLabel={"Login"}
-    >
+    <SafeAreaView>
 
-      <InputBox
-        labelData={"username"}
-        dataValue={formData.username}
-        setDataValue={text => handleInputChange('username', text)}
-      />
-      <InputBox
-        labelData={"password"}
-        dataValue={formData.password}
-        setDataValue={text => handleInputChange('password', text)}
-        passwordMode = {true}
-      />
-      <View
-        className='w-full h-fit flex rounded-md flex-row justify-around items-center'>
+      <BaseContainer
+        styleClass={"h-[35vh]"}
+        shakeAnim={shakeAnim}
+        btnAction={btnControl}
+        headerLabel={"Login"}
+        btnLabel={"Login"}
+      >
 
-        <Link href={'./Register'}>
-          <Text className='text-blue-500 text-lg font-semibold underline'>Register</Text>
-        </Link>
+        <InputBox
+          labelData={"username"}
+          dataValue={formData.username}
+          setDataValue={text => handleInputChange('username', text)}
+        />
+        <InputBox
+          labelData={"password"}
+          dataValue={formData.password}
+          setDataValue={text => handleInputChange('password', text)}
+          passwordMode={true}
+        />
+        <View
+          className='w-full h-fit flex rounded-md flex-row justify-around items-center'>
 
-        <Link href={'./ForgetPassword'}>
-          <Text className='text-blue-500 text-lg font-semibold underline'>Forgot Password?</Text>
-        </Link>
-      </View>
-    </BaseContainer>
+          <Link href={'./Register'}>
+            <Text className='text-blue-500 text-lg font-semibold underline'>Register</Text>
+          </Link>
+
+          <Link href={'./ForgetPassword'}>
+            <Text className='text-blue-500 text-lg font-semibold underline'>Forgot Password?</Text>
+          </Link>
+        </View>
+      </BaseContainer>
+
+      {
+        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Login in Progress"</Text> <ActivityIndicator /></View> : ""
+      }
+
+    </SafeAreaView>
   )
 }
 

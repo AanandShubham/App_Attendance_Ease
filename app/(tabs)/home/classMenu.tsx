@@ -3,7 +3,7 @@ import useClassContext from '@/app/context/ClassContext'
 import useGetClassDetails from '@/app/hooks/useGetClassDetails'
 import { useRouter } from 'expo-router'
 import React, { useEffect } from 'react'
-import { View, Text, Image, Pressable } from 'react-native'
+import { View, Text, Image, Pressable, ActivityIndicator } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 
@@ -11,12 +11,12 @@ const classMenu = () => {
     const router = useRouter()
 
     const { selectedClass } = useClassContext()
-    const {loading,getClassDetails} = useGetClassDetails()
+    const { loading, getClassDetails } = useGetClassDetails()
 
 
     useEffect(() => {
         getClassDetails(selectedClass._id)
-    },[])
+    }, [])
 
     return (
         <SafeAreaProvider>
@@ -92,6 +92,10 @@ const classMenu = () => {
                     </View>
 
                 </View>
+
+                {
+                    loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator /></View> : ""
+                }
             </SafeAreaView>
         </SafeAreaProvider>
     )

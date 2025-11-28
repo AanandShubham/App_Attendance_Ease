@@ -7,6 +7,7 @@ import useClassContext from '@/app/context/ClassContext'
 import useUpdateStudent from '@/app/hooks/useUpdateStudent'
 import Toast from 'react-native-toast-message'
 import { router } from 'expo-router'
+import { ActivityIndicator, Text, View } from 'react-native'
 
 
 
@@ -57,7 +58,7 @@ const updateStudent = () => {
           btnLabel={"Update"} >
           <InputBox
             disable={false}
-            labelData={"TCA Number"}
+            labelData={"Student ID"}
             inputValue={selectedStudent.tca}
             dataValue={formData.tca}
             setDataValue={text => handleInputChange("tca", text)}
@@ -77,6 +78,9 @@ const updateStudent = () => {
             setDataValue={text => handleInputChange("newAttendance", text.toString())}
           />
         </BaseContainer>
+        {
+          loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator /></View> : ""
+        }
       </SafeAreaView>
     </SafeAreaProvider>
   )

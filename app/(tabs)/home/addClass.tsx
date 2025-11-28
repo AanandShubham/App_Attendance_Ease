@@ -8,13 +8,14 @@ import { ClassTypeFormData } from '@/app/FromTypes'
 import useAddClass from '@/app/hooks/useAddClass'
 import Toast from 'react-native-toast-message'
 import { router } from 'expo-router'
+import { ActivityIndicator, Text, View } from 'react-native'
 
 const addClass = () => {
 
   const { loading, addClass } = useAddClass()
 
   const [formData, setFormData] = useState<ClassTypeFormData>({
-    id:"id",
+    id: "id",
     name: '',
     subject: '',
     timeTable: '',
@@ -32,8 +33,8 @@ const addClass = () => {
     const flag = await addClass(formData)
     if (flag) {
       Toast.show({
-        type:"success",
-        text1:"Class Added Successfully "
+        type: "success",
+        text1: "Class Added Successfully "
       })
       router.back()
     }
@@ -74,6 +75,9 @@ const addClass = () => {
             setDataValue={text => handleInputChange('roomNo', text)}
           />
         </BaseContainer>
+        {
+          loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator /></View> : ""
+        }
       </SafeAreaView>
     </SafeAreaProvider>
 

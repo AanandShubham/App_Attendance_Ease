@@ -3,7 +3,7 @@ import BaseContainer from '@/app/components/BaseContainer'
 import InputBox from '@/app/components/InputBox'
 import { Link, router } from 'expo-router'
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { ClassTypeFormData } from '@/app/FromTypes'
 import useUpdateClass from '@/app/hooks/useUpdateClass'
@@ -25,10 +25,10 @@ const updateClass = () => {
 
     const [formData, setFormData] = useState<ClassTypeFormData>({
         id: selectedClass?._id,
-        name:'',
-        roomNo:'',
+        name: '',
+        roomNo: '',
         totalClass: 0,
-        timeTable:'',
+        timeTable: '',
         subject: ''
     })
 
@@ -88,6 +88,10 @@ const updateClass = () => {
                         setDataValue={text => handleInputChange("roomNo", text)}
                     />
                 </BaseContainer>
+
+                {
+                    loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator /></View> : ""
+                }
             </SafeAreaView>
         </SafeAreaProvider>
     )

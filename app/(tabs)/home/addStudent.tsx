@@ -7,6 +7,7 @@ import useAddStudent from '@/app/hooks/useAddStudent'
 import Toast from 'react-native-toast-message'
 import { router } from 'expo-router'
 import useClassContext from '@/app/context/ClassContext'
+import { ActivityIndicator, Text, View } from 'react-native'
 
 const addStudent = () => {
 
@@ -17,7 +18,7 @@ const addStudent = () => {
         tca: '',
         name: '',
         totalAttendance: 0,
-        classId: selectedClass?._id 
+        classId: selectedClass?._id
     })
 
     const handleInputChange = (key: keyof StudentTypeFormData, value: SetStateAction<string>) => {
@@ -53,7 +54,7 @@ const addStudent = () => {
                     btnAction={handleClick}
                 >
                     <InputBox
-                        labelData={"TCA Number"}
+                        labelData={"Student ID"}
                         dataValue={formData.tca}
                         setDataValue={text => handleInputChange('tca', text)}
                     />
@@ -68,6 +69,10 @@ const addStudent = () => {
                         setDataValue={text => handleInputChange("totalAttendance", text.toString())}
                     />
                 </BaseContainer>
+
+                {
+                    loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator /></View> : ""
+                }
             </SafeAreaView>
         </SafeAreaProvider>
     )
