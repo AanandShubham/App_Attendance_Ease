@@ -38,12 +38,18 @@ const useAddAttendance = () => {
         console.log("Students List : ", JSON.stringify(students, null, 2))
         console.log("################################################")
 
+
         // now we have updated sutudents with attendance count increased by 1 for selected class
+        
         const attendanceUpdatedStudents = updatedStudents?.filter((std: any) => idSet.has(std._id))
 
 
         const attendanceData = {
-            name: new Date().toLocaleDateString(),
+            name: new Date().toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }),
             time: new Date().toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
@@ -56,17 +62,10 @@ const useAddAttendance = () => {
             attendanceList: attendance
         }
 
-        // now write the logic to update the students in db with bulkWrite 
-        // then only run the app again 
-
-        // console.log("***************************************")
-        // console.log("Attendance Data : ", attendanceData)
-        // console.log("***************************************")
-
         setLoading(true)
 
         try {
-            const response = await fetch(`${apiUrl}/attendance/add`, {
+            const response = await fetch(apiUrl + "/attendance/add", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,14 +81,21 @@ const useAddAttendance = () => {
             console.log("**********************************************")
             console.log("After Adding attendance Response : ", JSON.stringify(data, null, 2))
             console.log("**********************************************")
-            
+
             //updating updated classes 
-            const updatedClasses = classes.map((item: any) => item._id == data.updatedClass._id ? data.updatedClass : item)
+            const updatedClasses = classes.map(
+                (item: any) => item._id == data.updatedClass._id ? data.updatedClass : item
+            )
 
             setSelectedClass(data.updatedClass)
             setClasses(updatedClasses)
             setStudents(updatedStudents)
             setAttendanceList([...attendanceList, data.attendance])
+
+            console.log("**********************************************")
+            console.log("After Adding attendance List : ", JSON.stringify(attendanceList, null, 2))
+            console.log("**********************************************")
+
 
             return true
 
@@ -114,7 +120,7 @@ export default useAddAttendance
 const updateAttendance = (std: any, classId: any) => {
     return {
         ...std,
-        classList: std?.classList?.map((cls: any) => cls.classId === classId ? { ...cls, totalAttendance: cls?.totalAttendance + 1 } : cls)
+        classList: std.classList?.map((cls: any) => cls.classId === classId ? { ...cls, totalAttendance: cls?.totalAttendance + 1 } : cls)
     }
 }
 

@@ -6,7 +6,7 @@ import ClassDataCard from '@/app/components/ClassDataCard'
 import addClass3d from '../../../assets/images/addClass3d.png'
 import useAuthContext from '@/app/context/AuthContext'
 import useClassContext from '@/app/context/ClassContext'
-import { FlatList, GestureResponderEvent, Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import { ClassTypeFormData } from '@/app/FromTypes'
 
 const index = () => {
@@ -23,8 +23,8 @@ const index = () => {
 
   const handleClick = (classData: ClassTypeFormData) => {
     setSelectedClass(classData)
+    // console.log(classData)
     router.push("/(tabs)/home/classMenu")
-    console.log(classData)
   }
 
   return (

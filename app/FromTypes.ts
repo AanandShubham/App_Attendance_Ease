@@ -43,3 +43,17 @@ export type StudentUpdateTypeFormData = {
     classId: string
 }
 
+export type Student = {
+    tca: string
+    name: string
+    TotalAttendance: number
+}
+
+export type AttendanceData = {
+    name: string
+    date: string
+    Time: string
+    roomNo: string
+    totalClassAttendance: number
+    students: Student[]
+}

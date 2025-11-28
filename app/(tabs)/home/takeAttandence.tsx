@@ -3,7 +3,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import HomeContainer from '@/app/components/HomeContainer'
 import StudentDataCard from '@/app/components/StudentDataCard'
 import Fontisto from '@expo/vector-icons/Fontisto'
-import { FlatList, Pressable } from 'react-native'
+import { ActivityIndicator, FlatList, Pressable } from 'react-native'
 import { View } from 'react-native'
 import { Text } from 'react-native'
 import saveData from '../../../assets/images/saveData.png'
@@ -11,7 +11,8 @@ import { useColorScheme } from 'nativewind'
 import useClassContext from '@/app/context/ClassContext'
 import { StudentTypeFormData } from '@/app/FromTypes'
 import { router } from 'expo-router'
-
+import useAddAttendance from '@/app/hooks/useAddAttendance'
+import Toast from 'react-native-toast-message'
 
 
 const takeAttandence = () => {
@@ -19,11 +20,18 @@ const takeAttandence = () => {
     const { colorScheme } = useColorScheme()
     const { students, selectedClass } = useClassContext()
 
+    const { loading, addAttendance } = useAddAttendance()
+
     // student attendance list state
     const [attendance, setAttendance] = useState<boolean[]>([])
 
 
-    const [allChecked, setAllChecked] = useState(true)
+    // attencdance list for saving list of present students
+
+    const [attendanceList, setAttendanceList] = useState<string[]>([])
+
+
+    const [allChecked, setAllChecked] = useState(false)
 
     const date = new Date().toLocaleDateString()
 
@@ -34,19 +42,51 @@ const takeAttandence = () => {
         setAttendance(attendance.map(() => !allChecked))
     }
 
-    // const handleClick = (studentData: any, index: any) => {
-    //     // router.push("/(tabs)/home/classMenu")
-    //     // setAllChecked((prev)=>!prev)
-    //     // console.log("Ref Data : ",studentRef.current)
-    //     console.log("Selected Student : ", studentData, " index : ", index)
-    // }
-
     const handleClick = (item: any, index: number) => {
         setAttendance(prev => {
             const updated = [...prev]
             updated[index] = !updated[index]
             return updated
         })
+
+        // setAttendanceList(prev => {
+        //     const updated = [...prev]
+        //     // write the main logic for attendance
+        //     // updated[index] = !updated[index].id 
+        //     return updated 
+        // })
+    }
+
+    const saveBtnLogic = async () => {
+        // const presentStudentsIds = students
+        //     .filter((_, index) => attendance[index])
+        //     .map(student => student._id)
+
+        // console.log("Present Students IDs: ", presentStudentsIds)
+        // Here, you can add logic to save the attendance data to your backend or state management
+
+        attendance.some((item: any, index: number) => {
+            // console.log(index, " : ", item, " : ", students[index]._id)
+            if (item)
+                attendanceList.push(students[index]._id)
+        })
+        console.log("Attendance List : ", attendanceList)
+
+        if (attendance.length === 0) {
+            Toast.show({
+                type: 'error',
+                text1: "No attendance to add"
+            })
+        } else {
+
+            await addAttendance(attendanceList)
+            Toast.show({
+                type: 'success',
+                text1: "Attendance added successfully"
+            })
+            router.back()
+        }
+
     }
 
 
@@ -66,7 +106,7 @@ const takeAttandence = () => {
             >
                 <HomeContainer
                     headerLabel={date + " Attendance"}
-                    btnAction={() => console.log("Generate PDF")}
+                    btnAction={saveBtnLogic}
                     showButton={true}
                     btnImageSource={saveData}
 
@@ -121,38 +161,12 @@ const takeAttandence = () => {
 
                     />
 
-                    {/* <StudentDataCard
-                        isPresent={allChecked}
-                        showCheckbox={true}
-                        tcaNumber='tca2463...'
-                        name="Ankit Kumar Dubey"
-                        totalAttendance={42}
-                    // onPressAction={() => router.push("/home/updateStudent")}
-                    />
-                    <StudentDataCard
-                        isPresent={allChecked}
-                        showCheckbox={true}
-                        tcaNumber='tca2463...'
-                        name="Ankit Kumar Dubey"
-                        totalAttendance={42}
-                    />
-                    <StudentDataCard
-                        isPresent={allChecked}
-                        showCheckbox={true}
-                        tcaNumber='tca2463...'
-                        name="Ankit Kumar Dubey"
-                        totalAttendance={42}
-                    />
-                    <StudentDataCard
-                        isPresent={allChecked}
-
-                        showCheckbox={true}
-                        tcaNumber='tca2463...'
-                        name="Ankit Kumar Dubey"
-                        totalAttendance={42}
-                    /> */}
-
                 </HomeContainer>
+
+                {
+                    loading && <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator /></View>
+                }
+
             </SafeAreaView>
         </SafeAreaProvider>
     )
