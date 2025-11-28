@@ -53,7 +53,7 @@ const HomeContainer: React.FC<baseContainerProps> = (
           {children}
         </ScrollView> */}
 
-        <View className='pt-3 w-full'>
+        <View className='pt-3 w-full h-full'>
           {children}
         </View>
 
