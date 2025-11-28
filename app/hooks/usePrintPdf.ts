@@ -2,15 +2,16 @@ import * as Print from "expo-print"
 import * as Sharing from "expo-sharing"
 import { useState } from "react"
 import useClassContext from "../context/ClassContext"
+import Toast from "react-native-toast-message"
 
 const usePrintPdf = () => {
-    const [loading, setLoading] = useState(false)
-    const { selectedClass } = useClassContext()
+  const [loading, setLoading] = useState(false)
+  const { selectedClass } = useClassContext()
 
-    const generateAttendancePdf = async (data: any) => {
-        setLoading(true)
-        try {
-          const html = `
+  const generateAttendancePdf = async (data: any) => {
+    setLoading(true)
+    try {
+      const html = `
                        <html>
                            <body style="font-family: Arial; padding:20px;">
     
@@ -62,26 +63,28 @@ const usePrintPdf = () => {
             <div style="border-top:0px solid #0C5AA2;"> 
               <table style="width:100%; border-collapse: collapse; font-size:16px; ">
               <tr >
-                <th style="border-top:2px solid #0c5aa2; border-bottom:2px solid #0c5aa2;">TCA</th>
+                <th style="border-top:2px solid #0c5aa2; border-bottom:2px solid #0c5aa2;">Ser. No </th>
+                <th style="border-top:2px solid #0c5aa2; border-bottom:2px solid #0c5aa2; border-right:2px solid #0c5aa2;">Student ID</th>
                 <th style="border-top:2px solid #0c5aa2; border-bottom:2px solid #0c5aa2; border-right:2px solid #0c5aa2;">Name</th>
                 <th style="border-top:2px solid #0c5aa2; border-bottom:2px solid #0c5aa2;">Attendance</th>
               </tr>
 
               ${data.students
-                .map((s: any) => {
-                  const percent = ((data.classHeld / s.totalAttendance) * 100).toFixed(1)
-                  return `
+          .map((s: any, index: Number) => {
+            const percent = ((data.classHeld / s.totalAttendance) * 100).toFixed(1)
+            return `
                   <tr>
-                    <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.tca.toUpperCase()}</td>
+                    <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${index}</td>
+                    <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.tca.toUpperCase()}</td>
                     <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.name.toUpperCase()}</td>
-                    <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; text-align:center;">${s.classList.find(
-                                                (details: any) => details.classId === selectedClass._id
-                                            )?.totalAttendance | 0}
+
+                    <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; text-align:center;">${selectedClass.attendance.length} / ${s.classList.find(
+                      (details: any) => details.classId === selectedClass._id)?.totalAttendance | 0} (${percent}%)
                     </td>
                   </tr>
                   `;
-                })
-                .join("")}
+          })
+          .join("")}
             </table>
             </div>
 
@@ -91,20 +94,25 @@ const usePrintPdf = () => {
       </html>
     `;
 
-            const { uri } = await Print.printToFileAsync({ html })
-            console.log("PDF created:", uri)
+      const { uri } = await Print.printToFileAsync({ html })
+      console.log("PDF created:", uri)
 
-            if (await Sharing.isAvailableAsync()) {
-                await Sharing.shareAsync(uri)
-            }
-        } catch (error) {
-            console.log("PDF Error =>", error)
-        } finally {
-            setLoading(false)
-        }
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync(uri)
+      }
+    } catch (error) {
+      console.log("PDF Error =>", error)
+      Toast.show({
+        type: "error",
+        text1: "Error generating PDF",
+        text2: "Please try again later.",
+      })
+    } finally {
+      setLoading(false)
     }
+  }
 
-    return { loading, generateAttendancePdf }
+  return { loading, generateAttendancePdf }
 }
 
 export default usePrintPdf
