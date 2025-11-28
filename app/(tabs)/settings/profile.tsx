@@ -93,7 +93,7 @@ const Profile = () => {
                         imgUrl={imageUrl}
                         setImage={setImageUrl}
                     />
-                    {/*  labelData={"Class Name"}
+                    {/* labelData={"Class Name"}
                         inputValue={selectedClass.name}
                         dataValue={formData.name}
                         setDataValue={text => handleInputChange("name", text)} */}
