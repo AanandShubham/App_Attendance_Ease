@@ -112,9 +112,13 @@ const Login = () => {
         </View>
       </BaseContainer>
 
-      {
-        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Login in Progress"<ActivityIndicator /> </Text> </View> : <Text></Text>
-      }
+      {loading && (
+        <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'>
+          <Text>Loging in progress ...</Text>
+          <ActivityIndicator />
+        </View>
+      )}
+
 
     </SafeAreaView>
   )

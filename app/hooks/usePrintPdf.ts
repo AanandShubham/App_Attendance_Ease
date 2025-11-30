@@ -70,21 +70,23 @@ const usePrintPdf = () => {
                               </tr>
 
                                 ${data.students
-                                .map((s: any, index: Number) => {
-                                  const percent = ((selectedClass.attendance.length / s.totalAttendance) * 100).toFixed(1)
-                                  return `
+          .map((s: any, index: Number) => {
+            let totalAttendance = s.classList.find(
+              (details: any) => details.classId === selectedClass._id)?.totalAttendance | 0
+            const percent = ((totalAttendance / selectedClass.attendance.length) * 100).toFixed(1)
+            console.log("Percent : ", percent)
+            return `
                                         <tr>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${index}</td>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.tca.toUpperCase()}</td>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.name.toUpperCase()}</td>
 
-                                          <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; text-align:center;">${selectedClass.attendance.length} / ${s.classList.find(
-                                            (details: any) => details.classId === selectedClass._id)?.totalAttendance | 0} (${percent}%)
+                                          <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; text-align:center;">${selectedClass.attendance.length} / ${totalAttendance} (${percent}%)
                                           </td>
                                         </tr>
                                         `;
-                                })
-                                .join("")}
+          })
+          .join("")}
                                   </table>
                                   </div>
                               </div>

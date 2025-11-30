@@ -95,10 +95,14 @@ const ForgetPassword = () => {
         </Link>
 
       </BaseContainer>
-      {/* {
-        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Forger in Progress ...."</Text> <ActivityIndicator /></View> : <Text></Text>
-      } */}
-      
+      {/* {loading && (
+        <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'>
+          <Text>Loading Class Details</Text>
+          <ActivityIndicator />
+        </View>
+      )} */}
+
+
     </SafeAreaView>
   )
 }

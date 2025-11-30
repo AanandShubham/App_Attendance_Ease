@@ -13,7 +13,7 @@ const showAttandence = () => {
 
     const { selectedAttendance, selectedClass, students } = useClassContext()
     const router = useRouter()
-    const {loading,generateAttendancePdf} = usePrintPdf()
+    const { loading, generateAttendancePdf } = usePrintPdf()
 
 
     console.log("**********************************************")
@@ -29,7 +29,7 @@ const showAttandence = () => {
         console.log("Student : ", student)
     }
 
-    const printPdf =async () => {
+    const printPdf = async () => {
         if (!selectedClass || !selectedAttendance) return;
 
         const attendanceData = {
@@ -39,14 +39,14 @@ const showAttandence = () => {
             subject: selectedClass.subject,
             roomNo: selectedAttendance.roomNo,
             totalClassAttendance: selectedAttendance.students.length,
-            students:studentsList,
-            classHeld:selectedClass.totalClass - selectedClass.attendance.length 
+            students: studentsList,
+            classHeld: selectedClass.totalClass - selectedClass.attendance.length
         }
 
         await generateAttendancePdf(attendanceData)
         Toast.show({
-            type:"success",
-            text1:"Pdf Generated Successfully !"
+            type: "success",
+            text1: "Pdf Generated Successfully !"
         })
         router.back()
     }
@@ -95,9 +95,12 @@ const showAttandence = () => {
 
                 </HomeContainer>
 
-                {
-                    loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator/></View> :<Text></Text>
-                }
+                {loading && (
+                    <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'>
+                        <Text>Prosessing ...</Text>
+                        <ActivityIndicator />
+                    </View>
+                )}
             </SafeAreaView>
         </SafeAreaProvider>
     )
