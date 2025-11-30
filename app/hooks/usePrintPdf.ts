@@ -71,7 +71,7 @@ const usePrintPdf = () => {
 
                                 ${data.students
                                 .map((s: any, index: Number) => {
-                                  const percent = ((data.classHeld / s.totalAttendance) * 100).toFixed(1)
+                                  const percent = ((selectedClass.attendance.length / s.totalAttendance) * 100).toFixed(1)
                                   return `
                                         <tr>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${index}</td>

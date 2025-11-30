@@ -60,7 +60,7 @@ const ForgetPassword = () => {
 
   return (
 
-    <SafeAreaView>
+    <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526]  bg-[#3A87BD] '>
 
 
       <BaseContainer
@@ -96,7 +96,7 @@ const ForgetPassword = () => {
 
       </BaseContainer>
       {/* {
-        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Forger in Progress ...."</Text> <ActivityIndicator /></View> : ""
+        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Forger in Progress ...."</Text> <ActivityIndicator /></View> : <Text></Text>
       } */}
       
     </SafeAreaView>

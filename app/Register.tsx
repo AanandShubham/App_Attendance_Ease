@@ -83,7 +83,7 @@ const Register = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526]  bg-[#3A87BD] '>
 
       <BaseContainer
         shakeAnim={shakeAnim}
@@ -129,7 +129,7 @@ const Register = () => {
         </Link>
       </BaseContainer>
       {
-        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"SignUp in Progress"</Text> <ActivityIndicator /></View> : ""
+        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"SignUp in Progress"</Text> <ActivityIndicator /></View> : <Text></Text>
       }
     </SafeAreaView>
   )

@@ -78,7 +78,7 @@ const Login = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526]  bg-[#3A87BD] '>
 
       <BaseContainer
         styleClass={"h-[35vh]"}
@@ -113,7 +113,7 @@ const Login = () => {
       </BaseContainer>
 
       {
-        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Login in Progress"</Text> <ActivityIndicator /></View> : ""
+        loading ? <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Login in Progress"<ActivityIndicator /> </Text> </View> : <Text></Text>
       }
 
     </SafeAreaView>

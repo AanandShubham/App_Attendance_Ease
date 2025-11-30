@@ -164,7 +164,7 @@ const takeAttandence = () => {
                 </HomeContainer>
 
                 {
-                    loading && <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Generating PDF..."</Text> <ActivityIndicator /></View>
+                    loading && <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'><Text>"Saving  Attendance ..."</Text> <ActivityIndicator /></View>
                 }
 
             </SafeAreaView>
