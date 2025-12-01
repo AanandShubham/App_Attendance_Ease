@@ -70,14 +70,14 @@ const usePrintPdf = () => {
                               </tr>
 
                                 ${data.students
-          .map((s: any, index: Number) => {
+          .map((s: any, index: any) => {
             let totalAttendance = s.classList.find(
               (details: any) => details.classId === selectedClass._id)?.totalAttendance | 0
             const percent = ((totalAttendance / selectedClass.attendance.length) * 100).toFixed(1)
             console.log("Percent : ", percent)
             return `
                                         <tr>
-                                          <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${index}</td>
+                                          <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${index+1}</td>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.tca.toUpperCase()}</td>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.name.toUpperCase()}</td>
 
