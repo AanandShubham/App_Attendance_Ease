@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'expo-router'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import HomeContainer from '@/app/components/HomeContainer'
@@ -11,6 +11,12 @@ const studentList = () => {
     const router = useRouter()
     const { students, selectedClass, setSelectedStudent } = useClassContext()
 
+
+    useEffect(() => {
+        // console.log('------------------------------')
+        // console.log("Students List : ", JSON.stringify(students, null, 2))
+        // console.log('------------------------------')
+    }, [students, selectedClass])
 
     const handlePress = (student: any) => {
         setSelectedStudent(student)
@@ -36,10 +42,10 @@ const studentList = () => {
                     <FlatList
                         data={students}
                         keyExtractor={(item) => item._id}
-                        extraData={students}
+                        extraData={{ students, selectedClass }}
                         ListEmptyComponent={
                             <View className='w-full h-fit p-2 flex justify-center items-start'>
-                                <Text className='dark:text-white'>list is empty add Student via add button in the bottom  right corner</Text>
+                                <Text className='font-bold dark:text-white text-black text-lg'>No Student data available.</Text>
                             </View>
                         }
                         renderItem={({ item }) =>
@@ -53,13 +59,11 @@ const studentList = () => {
                                     )?.totalAttendance | 0
                                 }
                             />
-
                         }
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}
                         ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
                     />
-
                 </HomeContainer>
             </SafeAreaView>
         </SafeAreaProvider>

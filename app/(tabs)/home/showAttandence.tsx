@@ -70,7 +70,7 @@ const showAttandence = () => {
                         extraData={studentsList}
                         ListEmptyComponent={
                             <View className='w-full h-fit p-1 flex justify-center items-start'>
-                                <Text className='dark:text-white'>There is not any Student</Text>
+                                <Text className='font-bold dark:text-white text-black text-lg'>No Student data available.</Text>
                             </View>
                         }
                         renderItem={

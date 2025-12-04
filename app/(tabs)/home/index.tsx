@@ -41,14 +41,13 @@ const index = () => {
           showButton={true}
           btnImageSource={addClass3d}
         >
-
           <FlatList
             data={classes}
             keyExtractor={(item) => item._id}
             extraData={classes}
             ListEmptyComponent={
               <View className='w-full h-fit p-1 flex justify-center items-start'>
-                <Text className='dark:text-white'>list is empty add Class via add button in the bottom right corner</Text>
+                <Text className='font-bold dark:text-white text-black text-lg'>No class data available.</Text>
               </View>
             }
             renderItem={
@@ -64,7 +63,6 @@ const index = () => {
                   totalClass={item.totalClass}
                   attendanceSize={item.attendance.length}
                 />
-
             }
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
