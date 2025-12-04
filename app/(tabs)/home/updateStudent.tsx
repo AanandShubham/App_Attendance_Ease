@@ -21,9 +21,9 @@ const updateStudent = () => {
 
   const [formData, setFormData] = useState<StudentUpdateTypeFormData>({
     id: selectedStudent?._id,
-    tca: '',
-    name: '',
-    newAttendance: 0,
+    tca: selectedStudent.tca,
+    name: selectedStudent.name,
+    newAttendance: totalAttendance.toString(),
     classId: selectedClass?._id
   })
 

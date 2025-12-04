@@ -25,11 +25,11 @@ const updateClass = () => {
 
     const [formData, setFormData] = useState<ClassTypeFormData>({
         id: selectedClass?._id,
-        name: '',
-        roomNo: '',
-        totalClass: 0,
-        timeTable: '',
-        subject: ''
+        name: selectedClass.name,
+        roomNo:selectedClass.roomNo,
+        totalClass:selectedClass.totalClass.toString(),
+        timeTable:selectedClass.timeTable,
+        subject: selectedClass.subject
     })
 
     const handleInputChange = (key: keyof ClassTypeFormData, value: SetStateAction<string>) => {
