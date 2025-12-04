@@ -77,7 +77,7 @@ const usePrintPdf = () => {
             console.log("Percent : ", percent)
             return `
                                         <tr>
-                                          <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${index+1}</td>
+                                          <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${index + 1}</td>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.tca.toUpperCase()}</td>
                                           <td style="border-top:2px solid #0c5aa2; border-bottom:0px solid #0c5aa2; border-left:2px solid #0c5aa2; border-right:2px solid #0c5aa2; text-align:center;">${s.name.toUpperCase()}</td>
 
@@ -94,9 +94,13 @@ const usePrintPdf = () => {
                             </html>
                           `;
 
-      const { uri } = await Print.printToFileAsync({ html })
+      let { uri } = await Print.printToFileAsync({ html })
       console.log("PDF created:", uri)
+      
+      //file:///data/user/0/host.exp.exponent/cache/Print/32b03ad9-24f2-4db8-890a-c1e5937568c6.pdf
+      // uri = uri.replace("file://", "") // Remove file:// for Sharing
 
+        
       if (await Sharing.isAvailableAsync()) {
         await Sharing.shareAsync(uri)
       }
