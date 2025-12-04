@@ -12,8 +12,8 @@ type baseContainerProps = {
   showButton?: Boolean,
   shakeAnim?: Animated.Value,
   btnImageSource?: any,
-
 }
+
 const HomeContainer: React.FC<baseContainerProps> = (
   {
     children,
@@ -24,8 +24,8 @@ const HomeContainer: React.FC<baseContainerProps> = (
     showButton = false,
     shakeAnim = new Animated.Value(0),
     btnImageSource = "",
-
   }
+
 ) => {
 
   return (
@@ -45,19 +45,9 @@ const HomeContainer: React.FC<baseContainerProps> = (
           {headerLabel}
         </Text>
 
-        {/* <ScrollView
-          className='w-full flex-1 pb-6'
-          contentContainerClassName='flex flex-col gap-4 p-1  justify-start items-center'
-          showsVerticalScrollIndicator={false}
-        >
-          {children}
-        </ScrollView> */}
-
         <View className='pt-3 w-full h-full'>
           {children}
         </View>
-
-        {/* w-[80px] h-[70px]  -rotate-[186.90deg] right-[-6px] bottom-[3px] */}
 
         {showButton && <UniqueButton
           btnImageSource={btnImageSource}
