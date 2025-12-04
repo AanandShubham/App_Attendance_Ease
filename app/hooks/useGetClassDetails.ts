@@ -77,7 +77,7 @@ export default useGetClassDetails
 //   name: 'Mohin Kumar',
 //   classList: [
 //     {
-//       totalAttendance: 0,
+//       totalAttendance: 9,
 //       classId: new ObjectId('68c8f25d866105cc4ebf4b9b'),
 //       _id: new ObjectId('68c9b9f2c2a113b821994c2a')
 //     },

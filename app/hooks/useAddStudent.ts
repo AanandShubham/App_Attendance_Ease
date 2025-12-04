@@ -7,12 +7,12 @@ import Constants from 'expo-constants'
 
 
 const useAddStudent = () => {
-    
-    const { token, user } = useAuthContext()
+
+    const { token } = useAuthContext()
     const { classes, setClasses, selectedClass, setSelectedClass, students, setStudents } = useClassContext()
-    
+
     const [loading, setLoading] = useState(false)
-    const {apiUrl} = Constants.expoConfig?.extra || {}
+    const { apiUrl } = Constants.expoConfig?.extra || {}
 
     const addStudent = async (studentData: StudentTypeFormData) => {
 
@@ -26,7 +26,7 @@ const useAddStudent = () => {
             if (!studentData.classId) {
                 studentData.classId = selectedClass._id
             }
-            
+
             // console.log("User : ", user)
 
             const response = await fetch(`${apiUrl}/student/add`, {
@@ -46,12 +46,13 @@ const useAddStudent = () => {
 
             setClasses(updatedClasss)
 
-            setSelectedClass(updatedClasss)
+            setSelectedClass(data.classes || selectedClass)
 
-            setStudents([...students, data.student])
+            const newStudent = [...students, data.student]
+            newStudent.sort((a, b) => a.tca.localeCompare(b.tca))
+            setStudents(newStudent)
 
             return true
-
 
         } catch (error: any) {
             Toast.show({
@@ -67,7 +68,6 @@ const useAddStudent = () => {
     }
 
     return { loading, addStudent }
-
 }
 
 export default useAddStudent
