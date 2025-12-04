@@ -68,6 +68,7 @@ const attendanceList = () => {
                     <View className='w-full h-full px-4 mb-4 flex items-center justify-between'>
                         {
                             activateSearch ? (
+                                
                                 <View className='w-full h-fit border-2 mb-3 border-gray-400 flex flex-row items-center justify-between rounded-tl-[5px] rounded-tr-[15px] rounded-bl-[15px] rounded-br-[5px]'>
                                     <TextInput
                                         className='px-2 text-2xl py-4 w-[80%] rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[40px] rounded-br-[80px] dark:text-white text-black'
