@@ -90,7 +90,7 @@ const useAddAttendance = () => {
             setSelectedClass(data.updatedClass)
             setClasses(updatedClasses)
             setStudents(updatedStudents)
-            setAttendanceList([...attendanceList, data.attendance])
+            setAttendanceList([data.attendance,...attendanceList])
 
             console.log("**********************************************")
             console.log("After Adding attendance List : ", JSON.stringify(attendanceList, null, 2))
