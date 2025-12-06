@@ -74,9 +74,7 @@ const TabsLayout = () => {
   return (
 
     <>
-      {/* <ClassContextProvider>
-        <AuthContextProvider> */}
-
+     
       <SafeAreaProvider
         className="w-full h-full flex-1 relative justify-center items-center bg-white">
         <Tabs
@@ -130,8 +128,7 @@ const TabsLayout = () => {
        {/* // write menu code */}
 
       </SafeAreaProvider>
-      {/* </AuthContextProvider>
-      </ClassContextProvider> */}
+      
     </>
   );
 }
