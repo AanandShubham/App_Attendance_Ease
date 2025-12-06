@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'expo-router'
 import HomeContainer from '@/app/components/HomeContainer'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
@@ -6,14 +6,18 @@ import ClassDataCard from '@/app/components/ClassDataCard'
 import addClass3d from '../../../assets/images/addClass3d.png'
 import useAuthContext from '@/app/context/AuthContext'
 import useClassContext from '@/app/context/ClassContext'
-import { FlatList, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native'
 import { ClassTypeFormData } from '@/app/FromTypes'
+import useGetUserData from '@/app/hooks/useGetUserData'
+import { Ionicons } from '@expo/vector-icons'
 
 const index = () => {
   const router = useRouter()
-
-  const { user, token } = useAuthContext()
+  const { loading, loadUserData } = useGetUserData()
+  const { user, token } = useAuthContext() // for test only  
   const { classes, setSelectedClass } = useClassContext()
+  const [loader, setLoader] = useState(loading || false)
+  const [reloadCode, setReloadCode] = useState(200)
 
   console.log("-------------------------------------------")
   console.log("HOME User : ", user)
@@ -26,6 +30,25 @@ const index = () => {
     // console.log(classData)
     router.push("/(tabs)/home/classMenu")
   }
+
+  useEffect(() => {
+    (async () => {
+      const code = await loadUserData()
+      console.log("Status Code  in Index : ", code)
+      if (code === 200) {
+        setLoader(false)
+      }
+      else if (code === 404) {
+        setLoader(true)
+        setReloadCode(404)
+      }
+      else if (code === 401) {
+        setLoader(false)
+        router.replace("/Login")
+      }
+    })()
+
+  }, [reloadCode])
 
   return (
     <SafeAreaProvider>
@@ -70,6 +93,26 @@ const index = () => {
           />
 
         </HomeContainer>
+
+        {
+          loader && (
+            <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'>
+              {
+                reloadCode === 404 ? <View className='w-full h-full flex flex-col gap-6 justify-center items-center'>
+                  <Text>Something Wrong</Text>
+                  <Pressable onPress={() => setReloadCode(200)}>
+                    <Text className='w-fit h-fit bg-gray-500 px-5 py-2 rounded-[25px]'>
+                      <Ionicons name='reload' color={"black"} size={24} />
+                    </Text>
+                  </Pressable>
+                </View> : <View>
+                  <Text>Loading Your Data ....</Text>
+                  <ActivityIndicator />
+                </View>
+              }
+            </View>
+          )
+        }
       </SafeAreaView>
     </SafeAreaProvider>
   )
