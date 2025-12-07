@@ -18,6 +18,9 @@ const index = () => {
   const { classes, setSelectedClass } = useClassContext()
   const [loader, setLoader] = useState(loading || false)
   const [reloadCode, setReloadCode] = useState(200)
+  const [showMenu, setShowMenu] = useState(false)
+  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 })
+  const [classToDelete, setClassToDelete] = useState<any>({})
 
   console.log("-------------------------------------------")
   console.log("HOME User : ", user)
@@ -29,6 +32,23 @@ const index = () => {
     setSelectedClass(classData)
     // console.log(classData)
     router.push("/(tabs)/home/classMenu")
+  }
+
+  const handlePopUp = () => {
+    console.log("Delete Pressed")
+    console.log("-------------------------------------------")
+    classToDelete && console.log("Class to delete : ", classToDelete?._id,)
+    console.log("-------------------------------------------")
+    setShowMenu(false)
+  }
+
+  const handleLongPress = (event: any, classData: any) => {
+    setClassToDelete(classData)
+    setMenuPosition({ x: event.nativeEvent.pageX, y: event.nativeEvent.pageY - 50 })
+    setShowMenu(true)
+    console.log("------------------------------")
+    console.log("--- btn pressed at : ", event.nativeEvent.pageX, event.nativeEvent.pageY)
+    console.log("------------------------------")
   }
 
   useEffect(() => {
@@ -74,10 +94,17 @@ const index = () => {
               </View>
             }
             renderItem={
+
               (
+
                 { item }
               ) =>
                 <ClassDataCard
+                  popUpAction={handlePopUp}
+                  onCloseMenu={() => setShowMenu(false)}
+                  onLongPressAction={(e) => handleLongPress(e, item)}
+                  showMenu={showMenu}
+                  showMenuAt={menuPosition}
                   onPressAction={() => handleClick(item)}
                   className={item.name}
                   subject={item.subject}
