@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'expo-router'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import HomeContainer from '@/app/components/HomeContainer'
@@ -6,26 +6,53 @@ import StudentDataCard from '@/app/components/StudentDataCard'
 import addStudent from '@/assets/images/AddStudent.png'
 import useClassContext from '@/app/context/ClassContext'
 import { FlatList, Text, View } from 'react-native'
+import useDeleteStudent from '@/app/hooks/useDeleteStudent'
 
 const studentList = () => {
     const router = useRouter()
     const { students, selectedClass, setSelectedStudent } = useClassContext()
+    const [studentToDelete, setStudentToDelete] = useState<any>({})
+    const [showMenu, setShowMenu] = useState(false)
+    const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 })
+    const { loading, deleteStudentById } = useDeleteStudent()
 
+    const handlePopUp = async () => {
+        console.log("Delete Pressed")
+        console.log("-------------------------------------------")
+        studentToDelete && console.log("Class to delete : ", studentToDelete?._id,)
+        console.log("-------------------------------------------")
+        if (await deleteStudentById(selectedClass._id, studentToDelete?._id)) {
+            console.log("Class Deleted Successfully !!!")
+        }
+        else {
+            console.log("Problem in class delete")
+        }
 
-    useEffect(() => {
-        // console.log('------------------------------')
-        // console.log("Students List : ", JSON.stringify(students, null, 2))
-        // console.log('------------------------------')
-    }, [students, selectedClass])
+        setShowMenu(false)
+    }
+
+    const handleLongPress = (event: any, StudentData: any) => {
+        setStudentToDelete(StudentData)
+        setMenuPosition({ x: event.nativeEvent.pageX, y: event.nativeEvent.pageY - 50 })
+        setShowMenu(true)
+        // console.log("------------------------------")
+        // console.log("--- btn pressed at : ", event.nativeEvent.pageX, event.nativeEvent.pageY)
+        // console.log("------------------------------")
+
+        // console.log("----------------------------------------")
+        // console.log("class Data : ", JSON.stringify(classes, null, 2))
+        // console.log("----------------------------------------")
+        // console.log("Students Data : ", JSON.stringify(students, null, 2))
+        // console.log("----------------------------------------")
+        // console.log("Selected Clas Data : ", JSON.stringify(selectedClass, null, 2))
+        // console.log("----------------------------------------")
+    }
 
     const handlePress = (student: any) => {
         setSelectedStudent(student)
         router.push("/(tabs)/home/updateStudent")
-
-        // console.log('------------------------------')
-        // console.log("Student Card Data : ", JSON.stringify(student, null, 2))
-        // console.log('------------------------------')
     }
+
     return (
         <SafeAreaProvider>
             <SafeAreaView
@@ -41,24 +68,35 @@ const studentList = () => {
 
                     <FlatList
                         data={students}
-                        keyExtractor={(item) => item._id}
+                        keyExtractor={(item, index) => item?._id ?? index.toString()}
                         extraData={{ students, selectedClass }}
                         ListEmptyComponent={
                             <View className='w-full h-fit p-2 flex justify-center items-start'>
                                 <Text className='font-bold dark:text-white text-black text-lg'>No Student data available.</Text>
                             </View>
                         }
-                        renderItem={({ item }) =>
-                            <StudentDataCard
-                                onPressAction={() => handlePress(item)}
-                                tcaNumber={item.tca}
-                                name={item.name}
-                                totalAttendance={
-                                    item.classList.find(
-                                        (details: any) => details.classId === selectedClass._id
-                                    )?.totalAttendance | 0
-                                }
-                            />
+                        renderItem={({ item }) => {
+
+                            if (!item) return null
+
+                            return (
+                                <StudentDataCard
+                                    showMenu={showMenu}
+                                    showMenuAt={menuPosition}
+                                    popUpAction={handlePopUp}
+                                    onLongPressAction={(e) => handleLongPress(e, item)}
+                                    onCloseMenu={() => setShowMenu(false)}
+                                    onPressAction={() => handlePress(item)}
+                                    tcaNumber={item.tca}
+                                    name={item.name}
+                                    totalAttendance={
+                                        item.classList.find(
+                                            (details: any) => details.classId === selectedClass._id
+                                        )?.totalAttendance ?? 0
+                                    }
+                                />
+                            )
+                        }
                         }
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}

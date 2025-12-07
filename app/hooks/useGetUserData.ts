@@ -28,12 +28,12 @@ const useGetUserData = () => {
 
             const data = await response.json()
 
-            console.log("User Data : ", JSON.stringify(data, null, 2))
-            console.log("User Data : ", JSON.stringify(data.user, null, 2))
+            // console.log("User Data : ", JSON.stringify(data, null, 2))
+            // console.log("User Data : ", JSON.stringify(data.user, null, 2))
 
-            console.log("Status code in Hook : ", data.status)
+            // console.log("Status code in Hook : ", data.status)
 
-            if (data.status === 401) {
+            if (response.status === 401) {
                 // handle unauthorized access, logout the user if token expired
                 Toast.show({
                     type: 'info',

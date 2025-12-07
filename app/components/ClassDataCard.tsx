@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { View, Text, Pressable, GestureResponderEvent, Modal } from 'react-native'
 
 type DataCardProps = {
+  showMenu?: boolean,
+  showMenuAt?: { x: number, y: number }
   popUpAction?: () => void,
   onCloseMenu?: () => void
-  onLongPressAction?: (event:any) => void,
+  onLongPressAction?: (event: any) => void,
   onPressAction?: () => void,
   className: string,
   subject: string,
@@ -12,8 +14,7 @@ type DataCardProps = {
   time: string,
   totalClass: Number,
   attendanceSize: Number
-  showMenu?: boolean,
-  showMenuAt?: { x: number, y: number }
+
 }
 const ClassDataCard: React.FC<DataCardProps> = (
   {
@@ -27,13 +28,11 @@ const ClassDataCard: React.FC<DataCardProps> = (
     showMenuAt = { x: 0, y: 0 },
     popUpAction = () => { },
     onCloseMenu = () => { },
-    onLongPressAction = (event:any) => { console.log("Card Long Pressed") },
+    onLongPressAction = (event: any) => { console.log("Card Long Pressed") },
     onPressAction = () => { console.log("Card Pressed") }
   }) => {
 
   const remaining = Number(totalClass) - Number(attendanceSize)
-  const [menuVisible, setMenuVisible] = useState(showMenu || false)
-  // const [menuPosition, setMenuPosition] = useState(showMenuAt || { x: 0, y: 0 })
 
   return (
     <View>

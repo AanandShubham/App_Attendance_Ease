@@ -10,6 +10,7 @@ import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native
 import { ClassTypeFormData } from '@/app/FromTypes'
 import useGetUserData from '@/app/hooks/useGetUserData'
 import { Ionicons } from '@expo/vector-icons'
+import useDeleteClass from '@/app/hooks/useDeleteClass'
 
 const index = () => {
   const router = useRouter()
@@ -21,6 +22,7 @@ const index = () => {
   const [showMenu, setShowMenu] = useState(false)
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 })
   const [classToDelete, setClassToDelete] = useState<any>({})
+  const { loading2, deleteClassById } = useDeleteClass()
 
   console.log("-------------------------------------------")
   console.log("HOME User : ", user)
@@ -34,12 +36,18 @@ const index = () => {
     router.push("/(tabs)/home/classMenu")
   }
 
-  const handlePopUp = () => {
+  const handlePopUp = async () => {
     console.log("Delete Pressed")
     console.log("-------------------------------------------")
     classToDelete && console.log("Class to delete : ", classToDelete?._id,)
     console.log("-------------------------------------------")
-    setShowMenu(false)
+    if (await deleteClassById(classToDelete?._id)){
+      console.log("Class Deleted Successfully !!!")
+    }
+    else{
+      console.log("Problem in class delete")
+    }
+      setShowMenu(false)
   }
 
   const handleLongPress = (event: any, classData: any) => {
