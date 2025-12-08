@@ -50,7 +50,10 @@ const useDeleteStudent = () => {
                     : std
             )
 
-            setStudents(updatedStudents)
+            const filteredStudents = updatedStudents.filter((std:any)=>std.classList.length != 0)
+
+
+            setStudents(filteredStudents)
 
             Toast.show({
                 type: "success",
