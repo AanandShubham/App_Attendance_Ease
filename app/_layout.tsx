@@ -1,16 +1,16 @@
-import { Redirect, Stack } from "expo-router"
+import { Stack } from "expo-router"
 import { useEffect } from "react"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useColorScheme } from "nativewind"
 import Toast from 'react-native-toast-message'
-import useAuthContext, { AuthContextProvider } from "./context/AuthContext"
+import { AuthContextProvider } from "./context/AuthContext"
 import { ClassContextProvider } from "./context/ClassContext"
 
 export default function RootLayout() {
 
-  const { colorScheme, setColorScheme } = useColorScheme()
- 
-  // setColorScheme("dark")
+  const { setColorScheme } = useColorScheme()
+
+
 
   // npm i @react-native-async-storage/async-storage
 
