@@ -9,7 +9,7 @@ import { ClassContextProvider } from "./context/ClassContext"
 export default function RootLayout() {
 
   const { colorScheme, setColorScheme } = useColorScheme()
-  const { user } = useAuthContext()
+ 
   // setColorScheme("dark")
 
   // npm i @react-native-async-storage/async-storage
@@ -22,15 +22,6 @@ export default function RootLayout() {
       }
     })()
   }, [setColorScheme])
-
-  // if (user) {
-  //   return <Redirect href="/(tabs)/home" />
-  // }
-
-  // // 3️⃣ User NOT logged in → redirect to Login
-  // if (!user) {
-  //   return <Redirect href="/Login" />
-  // }
 
   return (
     <>
