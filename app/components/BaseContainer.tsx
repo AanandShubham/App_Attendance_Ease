@@ -25,7 +25,6 @@ const BaseContainer: React.FC<baseContainerProps> = (
 ) => {
     return (
         <KeyboardAwareScrollView
-
             className='w-full h-[60vh] dark:bg-[#061526] bg-white'
             contentContainerStyle={{
                 flexGrow: 1,

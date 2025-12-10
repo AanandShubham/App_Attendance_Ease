@@ -5,7 +5,6 @@ import useAuthContext from "../context/AuthContext"
 import useClassContext from "../context/ClassContext"
 import Constants from 'expo-constants'
 
-
 const useAddClass = () => {
     const { token } = useAuthContext()
     const { classes, setClasses } = useClassContext()
