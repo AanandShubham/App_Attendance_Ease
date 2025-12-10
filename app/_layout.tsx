@@ -1,14 +1,15 @@
-import { Stack } from "expo-router"
+import { Redirect, Stack } from "expo-router"
 import { useEffect } from "react"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useColorScheme } from "nativewind"
 import Toast from 'react-native-toast-message'
-import { AuthContextProvider } from "./context/AuthContext"
+import useAuthContext, { AuthContextProvider } from "./context/AuthContext"
 import { ClassContextProvider } from "./context/ClassContext"
 
 export default function RootLayout() {
 
   const { colorScheme, setColorScheme } = useColorScheme()
+  const { user } = useAuthContext()
   // setColorScheme("dark")
 
   // npm i @react-native-async-storage/async-storage
@@ -21,6 +22,15 @@ export default function RootLayout() {
       }
     })()
   }, [setColorScheme])
+
+  // if (user) {
+  //   return <Redirect href="/(tabs)/home" />
+  // }
+
+  // // 3️⃣ User NOT logged in → redirect to Login
+  // if (!user) {
+  //   return <Redirect href="/Login" />
+  // }
 
   return (
     <>

@@ -7,6 +7,7 @@ import Toast from "react-native-toast-message"
 type AuthContextType = {
     user: any,
     token: string | null,
+    loading:boolean,
     setUser: (user: any) => void,
     setToken: (token: string) => void,
     logout: () => void
@@ -15,6 +16,7 @@ type AuthContextType = {
 export const AuthContext = React.createContext<AuthContextType>({
     user: [],
     token: '',
+    loading:true,
     setUser: (user: any) =>[],
     setToken: (token: string) => '',
     logout: () => {}
@@ -23,7 +25,7 @@ export const AuthContext = React.createContext<AuthContextType>({
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [token, setToken] = useState<string | null>(null)
     const [user, setUser] = useState<any>(null)
-
+    const [loading,setLoading] = useState(true)
     const { setClasses } = useClassContext()
 
 
@@ -61,6 +63,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
                 }
             } catch (error) {
                 console.log("Error in loading auth Data !!")
+            }finally{
+                setLoading(false)
             }
         }
 
@@ -68,7 +72,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     }, [])
 
     return (
-        <AuthContext.Provider value={{ token, setToken, user, setUser, logout }}>
+        <AuthContext.Provider value={{ token, setToken, user, setUser, logout,loading }}>
             {children}
         </AuthContext.Provider>
     )
