@@ -57,3 +57,7 @@ export type AttendanceData = {
     totalClassAttendance: number
     students: Student[]
 }
+const lol = ()=>{
+
+}
+export default lol
