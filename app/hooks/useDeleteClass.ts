@@ -23,7 +23,7 @@ const useDeleteClass = () => {
 
             const data = await response.json()
             // console.log("REsponse Data of Class !!!", JSON.stringify(data, null, 2))
-            console.log("REsponse Data of Class !!!", JSON.stringify(response, null, 2))
+            // console.log("REsponse Data of Class !!!", JSON.stringify(response, null, 2))
 
             if (response.status !== 200) throw new Error(data.error)
 

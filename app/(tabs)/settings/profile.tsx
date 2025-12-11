@@ -20,9 +20,9 @@ type formData = {
 const Profile = () => {
 
     const { user } = useAuthContext()
-    console.log("---------------------------------------------")
-    console.log("User Data : ", user)
-    console.log("---------------------------------------------")
+    // console.log("---------------------------------------------")
+    // console.log("User Data : ", user)
+    // console.log("---------------------------------------------")
 
     const shakeAnim = useRef(new Animated.Value(0)).current
     const [imageUrl, setImageUrl] = useState<string | null>(user?.profile.secure_url)
@@ -70,8 +70,8 @@ const Profile = () => {
     }
 
     const btnControl = () => {
-        console.log("Button Pressed")
-        console.log(fromData)
+        // console.log("Button Pressed")
+        // console.log(fromData)
         startShake()
     }
 

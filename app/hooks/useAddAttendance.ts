@@ -30,13 +30,13 @@ const useAddAttendance = () => {
             (std: any) => idSet.has(std._id) ? updateAttendance(std, selectedClass._id) : std
         )
 
-        console.log("################################################")
-        console.log("attendance UPdated Students : ", JSON.stringify(updatedStudents, null, 2))
-        console.log("################################################")
+        // console.log("################################################")
+        // console.log("attendance UPdated Students : ", JSON.stringify(updatedStudents, null, 2))
+        // console.log("################################################")
 
-        console.log("################################################")
-        console.log("Students List : ", JSON.stringify(students, null, 2))
-        console.log("################################################")
+        // console.log("################################################")
+        // console.log("Students List : ", JSON.stringify(students, null, 2))
+        // console.log("################################################")
 
 
         // now we have updated sutudents with attendance count increased by 1 for selected class
@@ -78,9 +78,9 @@ const useAddAttendance = () => {
 
             if (data.error) throw new Error(data.error)
 
-            console.log("**********************************************")
-            console.log("After Adding attendance Response : ", JSON.stringify(data, null, 2))
-            console.log("**********************************************")
+            // console.log("**********************************************")
+            // console.log("After Adding attendance Response : ", JSON.stringify(data, null, 2))
+            // console.log("**********************************************")
 
             //updating updated classes 
             const updatedClasses = classes.map(
@@ -92,9 +92,9 @@ const useAddAttendance = () => {
             setStudents(updatedStudents)
             setAttendanceList([data.attendance,...attendanceList])
 
-            console.log("**********************************************")
-            console.log("After Adding attendance List : ", JSON.stringify(attendanceList, null, 2))
-            console.log("**********************************************")
+            // console.log("**********************************************")
+            // console.log("After Adding attendance List : ", JSON.stringify(attendanceList, null, 2))
+            // console.log("**********************************************")
 
 
             return true

@@ -16,9 +16,9 @@ const showAttandence = () => {
     const { loading, generateAttendancePdf } = usePrintPdf()
 
 
-    console.log("**********************************************")
-    console.log("Show Selected Attendance : ", JSON.stringify(selectedAttendance, null, 2))
-    console.log("**********************************************")
+    // console.log("**********************************************")
+    // console.log("Show Selected Attendance : ", JSON.stringify(selectedAttendance, null, 2))
+    // console.log("**********************************************")
 
 
     const idSet = new Set(selectedAttendance.students)

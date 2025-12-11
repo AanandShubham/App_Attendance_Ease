@@ -62,7 +62,7 @@ const Register = () => {
   }
 
   const btnControl = async () => {
-    console.log("Button Pressed")
+    // console.log("Button Pressed")
 
     if (!await register(formData, imageUrl)) {
       startShake()
@@ -74,11 +74,8 @@ const Register = () => {
       router.replace("/(tabs)/home")
 
     }
-    console.log(formData)
-
-
-
-
+    // console.log(formData)
+    
     // console.log("Image Url : ",imageUrl)
   }
 

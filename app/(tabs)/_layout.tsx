@@ -2,11 +2,10 @@ import { Tabs } from "expo-router"
 import { Ionicons } from '@expo/vector-icons'
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import React, { useRef, useEffect } from "react"
-import { Animated, Pressable } from "react-native"
+import { Animated } from "react-native"
 import { useColorScheme } from "nativewind"
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ClassContextProvider } from "../context/ClassContext"
-import { AuthContextProvider } from "../context/AuthContext"
+
 
 
 const TabsLayout = () => {

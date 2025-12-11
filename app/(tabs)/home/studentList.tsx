@@ -21,12 +21,13 @@ const studentList = () => {
         console.log("-------------------------------------------")
         studentToDelete && console.log("Class to delete : ", studentToDelete?._id,)
         console.log("-------------------------------------------")
-        if (await deleteStudentById(selectedClass._id, studentToDelete?._id)) {
-            console.log("Class Deleted Successfully !!!")
-        }
-        else {
-            console.log("Problem in class delete")
-        }
+        await deleteStudentById(selectedClass._id,studentToDelete?._id)
+        // if (await deleteStudentById(selectedClass._id, studentToDelete?._id)) {
+        //     console.log("Class Deleted Successfully !!!")
+        // }
+        // else {
+        //     console.log("Problem in class delete")
+        // }
 
         setShowMenu(false)
     }

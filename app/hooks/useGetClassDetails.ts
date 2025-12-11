@@ -45,13 +45,13 @@ const useGetClassDetails = () => {
             if (data.error) throw new Error(data.error)
 
             setStudents(data.students)
-            console.log("----------------------------------------")
-            console.log("Students Details : ", JSON.stringify(data.students,null,2))
-            console.log("----------------------------------------")
+            // console.log("----------------------------------------")
+            // console.log("Students Details : ", JSON.stringify(data.students,null,2))
+            // console.log("----------------------------------------")
             
-            console.log("----------------------------------------")
-            console.log("Attendance Details : ", JSON.stringify(data.attendances,null,2))
-            console.log("----------------------------------------")
+            // console.log("----------------------------------------")
+            // console.log("Attendance Details : ", JSON.stringify(data.attendances,null,2))
+            // console.log("----------------------------------------")
             setAttendanceList(data.attendances)
 
         } catch (error: any) {

@@ -50,10 +50,10 @@ const useRegister = () => {
 
             if (data.error) throw new Error(data.error)
 
-            console.log("----------------------------------------")
-            console.log("Register Data : ", data)
-            console.log("Register Classes : ", data["user"]["classes"])
-            console.log("----------------------------------------")
+            // console.log("----------------------------------------")
+            // console.log("Register Data : ", data)
+            // console.log("Register Classes : ", data["user"]["classes"])
+            // console.log("----------------------------------------")
 
             // setting and storing token to the context and and the async storage 
             setToken(data.token)

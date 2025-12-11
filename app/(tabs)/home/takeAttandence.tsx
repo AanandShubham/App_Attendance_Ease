@@ -88,8 +88,7 @@ const takeAttandence = () => {
         }
 
     }
-
-
+    
     useEffect(() => {
         if (students.length > 0) {
             setAttendance(students.map(() => true))

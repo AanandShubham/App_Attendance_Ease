@@ -37,7 +37,7 @@ const updateClass = () => {
     }
 
     const btnControl = async () => {
-        console.log("Class Data : ", formData)
+        // console.log("Class Data : ", formData)
         const flag = await updateClass(formData)
 
         if (flag) {

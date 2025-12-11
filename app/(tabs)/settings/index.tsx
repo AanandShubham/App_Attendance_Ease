@@ -33,11 +33,11 @@ const settings = () => {
     setColorScheme(next)
     await AsyncStorage.setItem("theme", next)
     setIsEnabled(previousState => !previousState)
-    console.log("---------------------------------------------")
-    console.log("Height : ", JSON.stringify(height, null, 2))
-    console.log("---------------------------------------------")
-    console.log("Width : ", JSON.stringify(width, null, 2))
-    console.log("---------------------------------------------")
+    // console.log("---------------------------------------------")
+    // console.log("Height : ", JSON.stringify(height, null, 2))
+    // console.log("---------------------------------------------")
+    // console.log("Width : ", JSON.stringify(width, null, 2))
+    // console.log("---------------------------------------------")
   }
 
   const [isEnabled, setIsEnabled] = useState(colorScheme === "dark" ? true : false)

@@ -40,7 +40,11 @@ const updateStudent = () => {
       })
       router.back()
     } else {
-      console.log("Student data of form : ", formData)
+      Toast.show({
+        type:"info",
+        text1:"There is something Wrong"
+      })
+      // console.log("Student data of form : ", formData)
     }
     // console.log("------------------------------------------------")
     // console.log("student data of context : ", selectedStudent)

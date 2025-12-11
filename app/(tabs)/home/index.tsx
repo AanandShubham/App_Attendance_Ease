@@ -37,10 +37,10 @@ const index = () => {
   }
 
   const handlePopUp = async () => {
-    console.log("Delete Pressed")
-    console.log("-------------------------------------------")
-    classToDelete && console.log("Class to delete : ", classToDelete?._id,)
-    console.log("-------------------------------------------")
+    // console.log("Delete Pressed")
+    // console.log("-------------------------------------------")
+    // classToDelete && console.log("Class to delete : ", classToDelete?._id,)
+    // console.log("-------------------------------------------")
     if (await deleteClassById(classToDelete?._id)){
       console.log("Class Deleted Successfully !!!")
     }
@@ -54,9 +54,9 @@ const index = () => {
     setClassToDelete(classData)
     setMenuPosition({ x: event.nativeEvent.pageX, y: event.nativeEvent.pageY - 50 })
     setShowMenu(true)
-    console.log("------------------------------")
-    console.log("--- btn pressed at : ", event.nativeEvent.pageX, event.nativeEvent.pageY)
-    console.log("------------------------------")
+    // console.log("------------------------------")
+    // console.log("--- btn pressed at : ", event.nativeEvent.pageX, event.nativeEvent.pageY)
+    // console.log("------------------------------")
   }
 
   useEffect(() => {

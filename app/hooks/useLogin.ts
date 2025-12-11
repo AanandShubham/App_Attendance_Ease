@@ -21,9 +21,9 @@ const useLogin = () => {
     if (!flag) return false
 
     setLoading(true)
-    console.log("************************************")
-    console.log("api Url : ", apiUrl)
-    console.log("************************************")
+    // console.log("************************************")
+    // console.log("api Url : ", apiUrl)
+    // console.log("************************************")
 
     try {
       const response = await fetch(`${apiUrl}/auth/login`, {
@@ -38,8 +38,8 @@ const useLogin = () => {
 
       if (data.error) throw new Error(data.error)
 
-      console.log("Data : ", data)
-      console.log("Classes : ", data["user"]["classes"])
+      // console.log("Data : ", data)
+      // console.log("Classes : ", data["user"]["classes"])
 
       // setting and storing token to the context and and the async storage 
       setToken(data.token)
