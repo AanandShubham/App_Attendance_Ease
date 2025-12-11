@@ -128,10 +128,11 @@ const Register = () => {
           <Text className='text-blue-500 text-lg font-semibold underline'>already have an account , Login</Text>
         </Link>
       </BaseContainer>
-      
+
       {loading && (
         <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'>
-          <Text>Register in Progress</Text>
+          <Text>Register in Progress ....</Text>
+          <Text>It may take time</Text>
           <ActivityIndicator />
         </View>
       )}
