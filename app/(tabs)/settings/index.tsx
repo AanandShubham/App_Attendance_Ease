@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Switch, Pressable, useWindowDimensions, Linking } from 'react-native'
+import { View, Text, Switch, Pressable, useWindowDimensions, Linking, ScrollView } from 'react-native'
 import Modal from 'react-native-modal'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
@@ -9,16 +9,19 @@ import { router } from 'expo-router'
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import useAuthContext from '@/app/context/AuthContext'
+import useDeleteUser from '@/app/hooks/useDeleteUser'
+import Toast from 'react-native-toast-message'
 
 
 const settings = () => {
   const { logout } = useAuthContext()
+  const { loading, deleteUser } = useDeleteUser()
 
   const { height, width } = useWindowDimensions()
 
   const { colorScheme, setColorScheme } = useColorScheme()
 
-  const [showMenu, setShowMenu] = useState(false)
+  const [showMenu, setShowMenu] = useState(0)
 
   const sendEmail = () => {
     Linking.openURL("mailTo:www.subham.anand@gmail.com")
@@ -97,7 +100,7 @@ const settings = () => {
               onPress={(e) => {
                 // const { pageX, pageY } = e.nativeEvent;
                 // setShowMenuAt({ x: pageX, y: pageY })
-                setShowMenu(true)
+                setShowMenu(1)
               }}
               className='w-full h-[55px] dark:bg-[#17242D] bg-[#90C4EE] flex flex-row justify-between items-center rounded-tr-[20px] rounded-bl-[20px] rounded-tl-[5px] rounded-br-[5px] p-2 px-4  ' >
               <Text
@@ -126,9 +129,97 @@ const settings = () => {
 
             </Pressable>
 
+            <Pressable
+              onPress={
+                async () => {
+                  setShowMenu(2)
+                  // console.log("Delete User Clicked")
+                }
+              }
+              className='w-full h-[55px] dark:bg-[#17242D] bg-[#90C4EE] flex flex-row justify-between items-center rounded-tr-[20px] rounded-bl-[20px] rounded-tl-[5px] rounded-br-[5px] p-2 px-4'>
+              <Text
+                className='text-[22px] font-bold dark:text-white text-black'
+              >
+                Delete Account
+              </Text>
+              <MaterialCommunityIcons name="logout" size={32} color={colorScheme === "dark" ? "white" : "black"} />
+            </Pressable>
+
+              {/* modal for user confirmation about delete user Details  */}
             <Modal
-              isVisible={showMenu}
-              onBackdropPress={() => setShowMenu(false)}
+              isVisible={showMenu === 2}
+              onBackdropPress={() => setShowMenu(0)}
+              animationIn="slideInUp"
+              animationOut="slideOutDown"
+              backdropOpacity={0.15}
+              animationInTiming={300}
+              animationOutTiming={250}
+              style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
+            >
+              <View className="w-[95%] h-[50%] flex gap-3 justify-center items-center pb-10">
+
+                {/* Header */}
+                <Text className=" bg-[#c91919] text-white text-2xl px-6 py-4 rounded-tl-[35px] rounded-tr-[35px] font-bold">
+                  !! Warning !!
+                </Text>
+
+                {/* Content */}
+                <View className="mt-2 flex-1 items-center bg-[#c91919]  rounded-s-[35px] rounded-e-[30px] shadow-lg p-4 px-2 py-4">
+                  <ScrollView showsVerticalScrollIndicator={false}>
+                    <View className="px-2 pb-6 justify-center items-center">
+
+                      <Text className="text-lg text-white font-semibold">Data to be deleted</Text>
+                      <Text className="text-md text-white/80">
+                        All your Classes ,students and attendance records, settings, attachments and backups associated with this account will be permanently removed and cannot be recovered.
+                      </Text>
+
+                      <Text className="text-white font-bold text-lg mb-3">This action is irreversible.</Text>
+                      <Text className="text-white/90 mb-6">
+                        If you proceed, your account and all associated data will be permanently deleted. You will be logged out and redirected to the login screen.
+                      </Text>
+
+                    </View>
+                  </ScrollView>
+
+                </View>
+                <View className="flex-row justify-between gap-4">
+                  <Pressable
+                    onPress={() => setShowMenu(0)}
+                    className="flex-1 py-3 rounded-full bg-[#94b8d6] items-center"
+                  >
+                    <Text className="text-white font-bold">Cancel</Text>
+                  </Pressable>
+
+                  <Pressable
+                    onPress={async () => {
+                      try {
+                        await deleteUser()
+                        setShowMenu(0)
+                        router.replace("/Login")
+                      } catch (err) {
+                        Toast.show({
+                          type: "error",
+                          text1: "There is something wrong !!"
+                        })
+                        setShowMenu(0)
+                      }
+                    }}
+                    disabled={loading}
+                    className={`flex-1 py-3 rounded-full items-center ${loading ? 'bg-[#9e2a2a]/60' : 'bg-[#c91919]'}`}
+                  >
+                    <Text className="text-white font-bold">{loading ? 'Deleting...' : 'Delete Account'}</Text>
+                  </Pressable>
+                </View>
+                {/* Next Button */}
+
+
+              </View>
+
+            </Modal>
+                    {/* modal to display help dialog to the user */}
+            <Modal
+              isVisible={showMenu === 1}
+              onBackdropPress={() => setShowMenu(0)}
               animationIn="slideInUp"
               animationOut="slideOutDown"
               backdropOpacity={0.15}
@@ -161,7 +252,7 @@ const settings = () => {
                   {/* Close button */}
                   <Pressable
                     className='absolute -bottom-20 px-6 py-2 rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[45px] rounded-br-[45px] font-bold bg-[#4686bb]'// bg-[#778899]'
-                    onPress={() => setShowMenu(false)}>
+                    onPress={() => setShowMenu(0)}>
                     <MaterialCommunityIcons
                       name="logout"
                       className='mt-2'
@@ -178,7 +269,7 @@ const settings = () => {
           </View>
         </View>
 
-      </SafeAreaView>
+      </SafeAreaView >
     </SafeAreaProvider >
   )
 }
