@@ -26,7 +26,7 @@ const addStudent = () => {
     }
 
     const handleClick = async () => {
-        console.log("add student clicked")
+        // console.log("add student clicked") 
         const flag = await addStudent(formData)
 
         if (flag) {

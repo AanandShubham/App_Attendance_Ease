@@ -17,10 +17,10 @@ const studentList = () => {
     const { loading, deleteStudentById } = useDeleteStudent()
 
     const handlePopUp = async () => {
-        console.log("Delete Pressed")
-        console.log("-------------------------------------------")
-        studentToDelete && console.log("Class to delete : ", studentToDelete?._id,)
-        console.log("-------------------------------------------")
+        // console.log("Delete Pressed")
+        // console.log("-------------------------------------------")
+        // studentToDelete && console.log("Class to delete : ", studentToDelete?._id,)
+        // console.log("-------------------------------------------")
         await deleteStudentById(selectedClass._id,studentToDelete?._id)
         // if (await deleteStudentById(selectedClass._id, studentToDelete?._id)) {
         //     console.log("Class Deleted Successfully !!!")

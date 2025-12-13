@@ -12,7 +12,7 @@ const onboarding = () => {
   const router = useRouter()
 
   const { user, loading } = useAuthContext()
-  const [accepted, setAccepted] = useState(false);
+  const [accepted, setAccepted] = useState(false)
 
 
   const [onboardingDone, setOnboardingDone] = useState<boolean | null>(null)
@@ -44,7 +44,6 @@ const onboarding = () => {
   return (
     <View className="flex-1 bg-white justify-center items-center">
 
-
       {/* ---------------- MODAL 1 ---------------- */}
       <Modal
         isVisible={step === 1}
@@ -56,21 +55,20 @@ const onboarding = () => {
         animationOutTiming={250}
         style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
       >
-        <View className="w-[95%] h-[60%] flex justify-center items-center  bg-[#4686bb] rounded-s-[35px] rounded-e-[30px] shadow-lg p-4 pb-10">
+        <View className="w-[95%] h-[70%] flex gap-3 justify-center items-center pb-10">
 
           {/* Header */}
-          <Text className="absolute -top-20 bg-[#4686bb] text-white text-2xl px-6 py-4 rounded-tl-[35px] rounded-tr-[35px] font-bold">
+          <Text className=" bg-[#4686bb] text-white text-2xl px-6 py-4 rounded-tl-[35px] rounded-tr-[35px] font-bold">
             Welcome to Attendance Ease
           </Text>
 
           {/* Content */}
-          <View className="mt-10 flex-1 items-center px-2">
+          <View className="mt-6 flex-1 items-center bg-[#4686bb]  rounded-s-[35px] rounded-e-[30px] shadow-lg p-4 px-2 py-4">
             <ScrollView showsVerticalScrollIndicator={false}>
 
-
-              <Text className="text-white text-lg mt-4 text-center leading-7">
-                Thank you for choosing <Text className="font-semibold">Attendance Ease</Text> —
-                your smart and simple companion for managing attendance effortlessly.
+              <Text className="text-white text-lg mt-4 text-center leading-7">Thank you for choosing
+                <Text className="font-bold"> Attendance Ease </Text>
+                — your smart and simple companion for managing attendance effortlessly.
               </Text>
 
               <Text className="text-white text-lg mt-4 leading-7 text-center">
@@ -94,7 +92,7 @@ const onboarding = () => {
           {/* Next Button */}
           <Pressable
             onPress={() => setStep(2)}
-            className="absolute -bottom-20 px-8 py-2 rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[45px] rounded-br-[45px] bg-[#4686bb]"
+            className="mt-6 px-8 py-2 rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[45px] rounded-br-[45px] bg-[#4686bb]"
           >
             <MaterialCommunityIcons
               name="arrow-right"
@@ -104,9 +102,8 @@ const onboarding = () => {
           </Pressable>
 
         </View>
+
       </Modal>
-
-
 
       {/* ---------------- MODAL 2 ---------------- */}
 
@@ -120,15 +117,15 @@ const onboarding = () => {
         animationOutTiming={250}
         style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
       >
-        <View className="w-[90%] h-[60%] flex justify-center items-center bg-[#4686bb] rounded-s-[35px] rounded-e-[30px] shadow-lg p-4">
+        <View className="w-[95%] h-[80%] flex  gap-3 justify-center items-center">
 
           {/* Header */}
-          <Text className="absolute -top-16 bg-[#4686bb] text-white text-3xl px-6 py-3 rounded-tl-[35px] rounded-tr-[35px] font-bold">
+          <Text className=" bg-[#4686bb] text-white text-3xl px-6 py-3 rounded-tl-[35px] rounded-tr-[35px] font-bold">
             Terms & Conditions
           </Text>
 
           {/* Content */}
-          <View className="mt-6 flex-1">
+          <View className=" mt-6 flex-1 bg-[#4686bb] rounded-s-[35px] rounded-e-[30px] shadow-lg p-4 px-5 py-4">
             <ScrollView showsVerticalScrollIndicator={false}>
 
               <Text className="text-white text-xl font-bold leading-7">
@@ -154,7 +151,6 @@ const onboarding = () => {
               </Text>
 
 
-
               <Text className="mt-6 text-xl text-white font-bold">
                 4. Limitations
               </Text>
@@ -169,6 +165,7 @@ const onboarding = () => {
               </Text>
 
               <Text className="mt-6 text-xl text-white font-bold">6. Assumption of Risk</Text>
+
               <Text className="text-white text-lg leading-7 mt-1">
                 By continuing to use this application, you acknowledge and agree that you are using the app at your own risk. You further accept that Attendance Ease, its developers, and associated parties shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use or misuse of the application or any data-related issues.
               </Text>
@@ -208,7 +205,7 @@ const onboarding = () => {
           </View>
 
           {/* Buttons */}
-          <View className="absolute -bottom-20 w-full flex-row justify-between px-4">
+          <View className="w-full mt-6 flex-row justify-between px-4">
 
             {/* Back Button */}
             <Pressable
@@ -239,3 +236,209 @@ const onboarding = () => {
 }
 
 export default onboarding
+
+
+// import { View, Text, Pressable, ScrollView, useWindowDimensions } from 'react-native'
+// import React, { useEffect, useState } from 'react'
+// import { Redirect, useRouter } from 'expo-router'
+// import '../global.css'
+// import useAuthContext from './context/AuthContext'
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+// import Modal from 'react-native-modal'
+// import { MaterialCommunityIcons } from '@expo/vector-icons'
+
+// const onboarding = () => {
+//   const [step, setStep] = useState(1)
+//   const [accepted, setAccepted] = useState(false)
+//   const router = useRouter()
+//   const { height, width } = useWindowDimensions()
+
+//   const modalBox = {
+//     width: width * 0.92,
+//     maxHeight: height * 0.80,
+//     borderRadius: 35,
+//   }
+
+//   const { user, loading } = useAuthContext()
+//   const [onboardingDone, setOnboardingDone] = useState<boolean | null>(null)
+
+//   const goToLogin = async () => {
+//     setStep(3)
+//     await AsyncStorage.setItem("onboarding", "completed")
+//     router.replace("/Login")
+//   }
+
+//   useEffect(() => {
+//     (async () => {
+//       const flag = await AsyncStorage.getItem("onboarding")
+//       setOnboardingDone(flag === "completed")
+//     })()
+//   }, [])
+
+//   if (loading || onboardingDone === null) return null
+//   if (user) return <Redirect href="/(tabs)/home" />
+//   if (!user && onboardingDone) return <Redirect href="/Login" />
+
+//   return (
+//     <View className="flex-1 bg-white justify-center items-center">
+
+//       {/* ---------------- MODAL 1 ---------------- */}
+//       <Modal
+//         isVisible={step === 1}
+//         onBackdropPress={() => setStep(2)}
+//         animationIn="slideInUp"
+//         animationOut="slideOutDown"
+//         backdropOpacity={0.15}
+//         animationInTiming={300}
+//         animationOutTiming={250}
+//         style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
+//       >
+//         <View style={modalBox} className="bg-[#4686bb] p-5">
+
+//           {/* Header */}
+//           <Text className="text-white flex justify-center items-center text-2xl px-4 py-3 text-center font-bold mb-4 bg-[#4686bb] rounded-2xl">
+//             Welcome to Attendance Ease
+//           </Text>
+
+//           {/* Content */}
+//           <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
+//             <Text className="text-white text-lg mt-2 text-center leading-7">
+//               Thank you for choosing <Text className="font-semibold">Attendance Ease</Text> —
+//               your smart and simple companion for managing attendance effortlessly.
+//             </Text>
+
+//             <Text className="text-white text-lg mt-4 leading-7 text-center">
+//               This app is designed to help you stay organized, track class attendance,
+//               monitor daily progress, and maintain records without any hassle.
+//             </Text>
+
+//             <Text className="text-white text-lg mt-4 mb-10 leading-7 text-center">
+//               Let’s walk you through a quick introduction to help you understand
+//               how things work and how the app can benefit you in the best possible way.
+//             </Text>
+//           </ScrollView>
+
+//           {/* Next Button */}
+//           <Pressable
+//             onPress={() => setStep(2)}
+//             className="mt-3 self-center bg-[#3c7ab0] px-8 py-3 rounded-full"
+//           >
+//             <MaterialCommunityIcons name="arrow-right" size={32} color="white" />
+//           </Pressable>
+
+//         </View>
+//       </Modal>
+
+//       {/* ---------------- MODAL 2 ---------------- */}
+//       <Modal
+//         isVisible={step === 2}
+//         onBackdropPress={() => setStep(1)}
+//         animationIn="slideInRight"
+//         animationOut="slideOutRight"
+//         backdropOpacity={0.15}
+//         animationInTiming={300}
+//         animationOutTiming={250}
+//         style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
+//       >
+//         <View style={modalBox} className="bg-[#4686bb] p-5">
+
+//           {/* Header */}
+//           <Text className="text-white flex justify-center items-center text-3xl px-4 py-3 text-center font-bold mb-3 bg-[#4686bb] rounded-2xl">
+//             Terms & Conditions
+//           </Text>
+
+//           {/* Content */}
+//           <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
+
+//             <Text className="text-white text-xl font-bold leading-7">
+//               Welcome to Attendance Ease. By using this app, you agree to the
+//               following terms and conditions. Please read them carefully.
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">1. Usage Policy</Text>
+//             <Text className="text-white text-lg leading-7 mt-1">
+//               This app is created for attendance management. Any misuse or unauthorized
+//               manipulation is strictly prohibited.
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">2. User Responsibility</Text>
+//             <Text className="text-white text-lg leading-7 mt-1">
+//               You are responsible for maintaining the confidentiality of your account information...
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">3. Data & Privacy</Text>
+//             <Text className="text-white text-lg leading-7 mt-1">
+//               Attendance Ease collects and stores user information solely for attendance services...
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">4. Limitations</Text>
+//             <Text className="text-white text-lg leading-7 mt-1">
+//               Attendance Ease shall not be held responsible or liable for any data loss...
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">5. No Guarantee of Error-Free Operation</Text>
+//             <Text className="text-white text-lg leading-7 mt-1">
+//               Attendance Ease does not guarantee uninterrupted service...
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">6. Assumption of Risk</Text>
+//             <Text className="text-white text-lg leading-7 mt-1">
+//               By continuing to use this application, you acknowledge...
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">7. App Updates</Text>
+//             <Text className="text-white text-lg leading-7 mt-1">
+//               App updates may introduce new features or changes...
+//             </Text>
+
+//             <Text className="mt-6 text-xl text-white font-bold">8. Acceptance</Text>
+//             <Text className="text-white text-lg leading-7 mt-1 mb-6">
+//               To continue, please accept the Terms & Conditions below.
+//             </Text>
+
+//             {/* Checkbox */}
+//             <Pressable
+//               onPress={() => setAccepted(!accepted)}
+//               className="flex flex-row items-center gap-3 mt-2 mb-6"
+//             >
+//               <View
+//                 className={`w-6 h-6 rounded-md flex justify-center items-center ${accepted ? "bg-green-500" : "bg-white"}`}
+//               >
+//                 {accepted && <MaterialCommunityIcons name="check" size={20} color="white" />}
+//               </View>
+//               <Text className="text-xl px-2 py-1 rounded-md bg-[#296ab5] text-[#d5e5e9] border-b-2 border-[#1d67bb]">
+//                 I agree to the terms & conditions
+//               </Text>
+//             </Pressable>
+
+//           </ScrollView>
+
+//           {/* Buttons */}
+//           <View className="flex-row justify-between mt-3">
+
+//             <Pressable
+//               onPress={() => setStep(1)}
+//               className="px-6 py-3 rounded-2xl bg-[#3c7ab0] flex-row items-center"
+//             >
+//               <MaterialCommunityIcons name="arrow-left" size={26} color="white" />
+//               <Text className="text-white ml-2 text-lg">Back</Text>
+//             </Pressable>
+
+//             <Pressable
+//               disabled={!accepted}
+//               onPress={goToLogin}
+//               className={`px-6 py-3 rounded-2xl flex-row items-center ${accepted ? "bg-green-600" : "bg-gray-400"}`}
+//             >
+//               <MaterialCommunityIcons name="check-decagram" size={26} color="white" />
+//               <Text className="text-white ml-2 text-lg">Agree & Continue</Text>
+//             </Pressable>
+
+//           </View>
+
+//         </View>
+//       </Modal>
+//     </View>
+//   )
+// }
+
+// export default onboarding

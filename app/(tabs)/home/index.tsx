@@ -15,7 +15,7 @@ import useDeleteClass from '@/app/hooks/useDeleteClass'
 const index = () => {
   const router = useRouter()
   const { loading, loadUserData } = useGetUserData()
-  const { user, token } = useAuthContext() // for test only  
+  // const { user, token } = useAuthContext() // for test only  
   const { classes, setSelectedClass } = useClassContext()
   const [loader, setLoader] = useState(loading || false)
   const [reloadCode, setReloadCode] = useState(200)
@@ -24,11 +24,11 @@ const index = () => {
   const [classToDelete, setClassToDelete] = useState<any>({})
   const { loading2, deleteClassById } = useDeleteClass()
 
-  console.log("-------------------------------------------")
-  console.log("HOME User : ", user)
-  console.log("HOME Token : ", token)
-  console.log("HOME Classes : ", classes)
-  console.log("-------------------------------------------")
+  // console.log("-------------------------------------------")
+  // console.log("HOME User : ", user)
+  // console.log("HOME Token : ", token)
+  // console.log("HOME Classes : ", classes)
+  // console.log("-------------------------------------------")
 
   const handleClick = (classData: ClassTypeFormData) => {
     setSelectedClass(classData)
@@ -41,13 +41,15 @@ const index = () => {
     // console.log("-------------------------------------------")
     // classToDelete && console.log("Class to delete : ", classToDelete?._id,)
     // console.log("-------------------------------------------")
-    if (await deleteClassById(classToDelete?._id)){
-      console.log("Class Deleted Successfully !!!")
-    }
-    else{
-      console.log("Problem in class delete")
-    }
-      setShowMenu(false)
+    // if (await deleteClassById(classToDelete?._id)){
+    //   console.log("Class Deleted Successfully !!!")
+    // }
+    // else{
+    //   console.log("Problem in class delete")
+    // }
+
+    await deleteClassById(classToDelete?.id)
+    setShowMenu(false)
   }
 
   const handleLongPress = (event: any, classData: any) => {
@@ -62,7 +64,7 @@ const index = () => {
   useEffect(() => {
     (async () => {
       const code = await loadUserData()
-      console.log("Status Code  in Index : ", code)
+      // console.log("Status Code  in Index : ", code) 
       if (code === 200) {
         setLoader(false)
       }

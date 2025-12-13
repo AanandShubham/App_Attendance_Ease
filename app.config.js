@@ -7,7 +7,7 @@ export default
       "slug": "App",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./assets/images/icon.png",
+      "icon": "./assets/images/icon.jpg",
       "scheme": "app",
       "userInterfaceStyle": "automatic",
       "newArchEnabled": true,
