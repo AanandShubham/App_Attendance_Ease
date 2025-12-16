@@ -26,7 +26,7 @@ const showAttandence = () => {
     const studentsList = students?.filter((std: any) => idSet.has(std._id))
 
     const handleClick = (student: any, index: Number) => {
-        console.log("Student : ", student)
+        // console.log("Student : ", student)
     }
 
     const printPdf = async () => {

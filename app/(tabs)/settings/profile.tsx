@@ -1,7 +1,7 @@
 import React, { SetStateAction, useState } from 'react'
 import BaseContainer from '@/app/components/BaseContainer'
 import InputBox from '@/app/components/InputBox'
-import { Animated } from 'react-native'
+import { Animated, View } from 'react-native'
 import { useRef } from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { RegisterTypeFormData } from '@/app/FromTypes'
@@ -27,8 +27,8 @@ const Profile = () => {
     const shakeAnim = useRef(new Animated.Value(0)).current
     const [imageUrl, setImageUrl] = useState<string | null>(user?.profile.secure_url)
     const [fromData, setFormData] = React.useState<RegisterTypeFormData>({
-        fullname: '',
-        username: '',
+        fullname: user?.fullname,
+        username: user?.username,
         password: '',
         confirmPassword: '',
         securityKey: ''
@@ -89,49 +89,53 @@ const Profile = () => {
 
                     {/* <Image className='w-[100px] h-[100px] bg-neutral-800 mb-2 mt-2' /> */}
 
-                    <ImageSelector
-                        imgUrl={imageUrl}
-                        setImage={setImageUrl}
-                    />
-                    {/* labelData={"Class Name"}
+              
+
+                        <ImageSelector
+                            imgUrl={imageUrl}
+                            setImage={setImageUrl}
+                        />
+                        {/* labelData={"Class Name"}
                         inputValue={selectedClass.name}
                         dataValue={formData.name}
                         setDataValue={text => handleInputChange("name", text)} */}
 
-                    <InputBox
-                        labelData={"fullname"}
-                        inputValue={user?.fullname}
-                        dataValue={fromData.fullname}
-                        setDataValue={text => handleInputChange('fullname', text)}
-                    />
-                    <InputBox
-                        labelData={"username"}
-                        inputValue={user?.username}
-                        dataValue={fromData.username}
-                        setDataValue={text => handleInputChange('username', text)}
-                    />
-                    <InputBox
-                        inputValue={user?.securityKey}
-                        labelData={"security key"}
-                        dataValue={fromData.securityKey}
-                        setDataValue={text => handleInputChange('securityKey', text)}
-                        passwordMode={true}
-                    />
-                    <InputBox
-                        inputValue={"**********"}
-                        labelData={"password"}
-                        dataValue={fromData.password}
-                        setDataValue={text => handleInputChange('password', text)}
-                        passwordMode={true}
-                    />
+                        <InputBox
+                            labelData={"fullname"}
+                            // inputValue={user?.fullname}
+                            dataValue={fromData.fullname}
+                            setDataValue={text => handleInputChange('fullname', text)}
+                        />
+                        <InputBox
+                            labelData={"username"}
+                            // inputValue={user?.username}
+                            dataValue={fromData.username}
+                            setDataValue={text => handleInputChange('username', text)}
+                        />
+                        <InputBox
+                            labelData={"security key"}
+                            // inputValue={user?.securityKey}
+                            dataValue={fromData.securityKey}
+                            setDataValue={text => handleInputChange('securityKey', text)}
+                            passwordMode={true}
+                        />
+                        <InputBox
+                            labelData={"password"}
+                            inputValue={"**********"}
+                            dataValue={fromData.password}
+                            setDataValue={text => handleInputChange('password', text)}
+                            passwordMode={true}
+                        />
 
-                    <InputBox
-                        inputValue={"**********"}
-                        labelData={"confirm password"}
-                        dataValue={fromData.confirmPassword}
-                        setDataValue={text => handleInputChange('confirmPassword', text)}
-                        passwordMode={true}
-                    />
+                        <InputBox
+                            inputValue={"**********"}
+                            labelData={"confirm password"}
+                            dataValue={fromData.confirmPassword}
+                            setDataValue={text => handleInputChange('confirmPassword', text)}
+                            passwordMode={true}
+                        />
+                   
+
 
                 </BaseContainer>
             </SafeAreaView>

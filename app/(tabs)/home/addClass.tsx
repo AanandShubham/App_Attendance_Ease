@@ -29,17 +29,17 @@ const addClass = () => {
 
   const btnControl = async () => {
 
-    console.log(formData)
+    // console.log(formData)
     const flag = await addClass(formData)
     if (flag) {
       Toast.show({
         type: "success",
-        text1: "Class Added Successfully "
+        text1: "Class Added Successfully"
       })
       router.back()
     }
 
-    console.log("request done ")
+    // console.log("request done ")
 
   }
 

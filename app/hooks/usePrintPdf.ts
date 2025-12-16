@@ -95,7 +95,7 @@ const usePrintPdf = () => {
                           `;
 
       let { uri } = await Print.printToFileAsync({ html })
-      console.log("PDF created:", uri)
+      // console.log("PDF created:", uri)
       
       //file:///data/user/0/host.exp.exponent/cache/Print/32b03ad9-24f2-4db8-890a-c1e5937568c6.pdf
       // uri = uri.replace("file://", "") // Remove file:// for Sharing
@@ -105,7 +105,7 @@ const usePrintPdf = () => {
         await Sharing.shareAsync(uri)
       }
     } catch (error) {
-      console.log("PDF Error =>", error)
+      // console.log("PDF Error =>", error)
       Toast.show({
         type: "error",
         text1: "Error generating PDF",
