@@ -46,6 +46,8 @@ const useForgot = () => {
 
         return false
     }
+
+    return { loading, forgot }
 }
 export default useForgot
 

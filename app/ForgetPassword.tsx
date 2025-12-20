@@ -1,14 +1,18 @@
 import { View, Text, Image, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
-import { Link } from 'expo-router'
+import React, { SetStateAction, useState } from 'react'
+import { Link, router } from 'expo-router'
 import BaseContainer from './components/BaseContainer'
 import InputBox from './components/InputBox'
 import { Animated } from 'react-native'
 import { useRef } from 'react'
 import { ForgetTypeFormData } from './FromTypes'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import useForgot from './hooks/useForgot'
 
 const ForgetPassword = () => {
+
+  const { loading, forgot } = useForgot()
+
   const [formData, setFormData] = useState<ForgetTypeFormData>({
     username: '',
     securityKey: '',
@@ -16,7 +20,7 @@ const ForgetPassword = () => {
     confirmPassword: ''
   })
 
-  const handleInputChange = (key: keyof ForgetTypeFormData, value: string) => {
+  const handleInputChange = (key: keyof ForgetTypeFormData, value: SetStateAction<string>) => {
     setFormData(prev => ({ ...prev, [key]: value }))
   }
 
@@ -52,9 +56,16 @@ const ForgetPassword = () => {
     ]).start();
   }
 
-  const btnControl = () => {
-    console.log("Button Pressed")
-    startShake()
+  const btnControl = async () => {
+
+    const flag = await forgot(formData)
+
+    if (!flag)
+      startShake()
+    else
+      router.replace('./Login')
+
+
   }
 
 
@@ -95,12 +106,13 @@ const ForgetPassword = () => {
         </Link>
 
       </BaseContainer>
-      {/* {loading && (
+
+      {loading && (
         <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'>
-          <Text>Loading Class Details</Text>
+          <Text>Work in Progress!!</Text>
           <ActivityIndicator />
         </View>
-      )} */}
+      )}
 
 
     </SafeAreaView>
