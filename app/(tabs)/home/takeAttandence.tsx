@@ -104,7 +104,7 @@ const takeAttandence = () => {
                 className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
             >
                 <HomeContainer
-                    headerLabel={date + " Attendance"}
+                    headerLabel={date+" Attendance"}
                     btnAction={saveBtnLogic}
                     showButton={true}
                     btnImageSource={saveData}
