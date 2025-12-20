@@ -5,7 +5,7 @@ import Toast from "react-native-toast-message"
 const useDeleteUser = () => {
     const [loading, setLoading] = useState(false)
     const { apiUrl } = Constants.expoConfig?.extra || {}
-    const { token } = useAuthContext()
+    const { token, logout } = useAuthContext()
     const deleteUser = async () => {
 
         setLoading(true)
@@ -20,20 +20,24 @@ const useDeleteUser = () => {
 
             const data = await response.json()
 
-            if(response.status !== 200) {
+            if (response.status !== 200) {
                 throw new Error(data.error)
             }
 
             Toast.show({
-                type:"success",
-                text1:"Your Data Deleted Successfully"
+                type: "success",
+                text1: "Your Data Deleted Successfully"
             })
 
+            // deleteing the user details 
+            logout()
+
+
         } catch (error: any) {
-            console.log("Error in delete user Data : ",error.message)
+            console.log("Error in delete user Data : ", error.message)
             Toast.show({
-                type:"error",
-                text1:`Error : ${error.message}`
+                type: "error",
+                text1: `Error : ${error.message}`
             })
         } finally {
             setLoading(false)
