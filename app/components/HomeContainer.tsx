@@ -39,7 +39,7 @@ const HomeContainer: React.FC<baseContainerProps> = (
             textShadowRadius: 3,
           }}
 
-          className='w-[70%] h-fit p-1  text-2xl text-white text-center font-bold rounded-md 
+          className='w-[70%] h-fit p-1  text-xl text-white text-center font-bold rounded-md 
           absolute top-[-19px] dark:bg-[#183448] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px] dark:outline-red-900   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-&lsqb;#1B64A8&rsqb;'
         >
           {headerLabel}

@@ -28,6 +28,7 @@ const BaseContainer: React.FC<baseContainerProps> = (
             className='w-full h-[60vh] dark:bg-[#061526] bg-white'
             contentContainerStyle={{
                 flexGrow: 1,
+                flex:1,
                 justifyContent: "center",
                 alignItems: "center",
                 paddingHorizontal: 20,
@@ -35,13 +36,13 @@ const BaseContainer: React.FC<baseContainerProps> = (
             }}
 
             enableOnAndroid={true}
-            extraScrollHeight={40}
+            extraScrollHeight={80}
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}>
 
             {/* <View className='w-full h-full  relative bg-white flex  justify-center items-center'> */}
            
-            <View className='w-[90vw] -mt-[40px] h-fit dark:bg-[#020b148a]  bg-[#e9eff6e8] relative flex justify-evenly items-center rounded-tl-[20px] rounded-tr-[80px] rounded-bl-[80px] rounded-br-[20px]  border-2 dark:border-[#17242d] border-[#0C5AA2] p-4 '>
+            <View className='w-[90vw] -mt-[80px] h-fit dark:bg-[#020b148a]  bg-[#e9eff6e8] relative flex justify-evenly items-center rounded-tl-[20px] rounded-tr-[80px] rounded-bl-[80px] rounded-br-[20px]  border-2 dark:border-[#17242d] border-[#0C5AA2] p-4 '>
                 <Text
                     style={{
                         textShadowColor: '#000',
@@ -54,7 +55,7 @@ const BaseContainer: React.FC<baseContainerProps> = (
                     {headerLabel}
                 </Text>
 
-                <View className={`w-full ${styleClass} flex flex-col gap-9  p-8 py-10 justify-evenly items-center`}>
+                <View className={`w-full ${styleClass} flex flex-col gap-6  p-8 py-10 justify-evenly items-center`}>
                     {children}
                 </View>
 
