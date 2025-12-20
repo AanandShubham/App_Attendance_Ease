@@ -16,7 +16,7 @@ const useAddStudent = () => {
 
     const addStudent = async (studentData: StudentTypeFormData) => {
 
-        const flag = inputValidation(studentData)
+        const flag = inputValidation(studentData, selectedClass)
 
         if (!flag) return false
 
@@ -72,7 +72,7 @@ const useAddStudent = () => {
 
 export default useAddStudent
 
-const inputValidation = (studentData: StudentTypeFormData) => {
+const inputValidation = (studentData: StudentTypeFormData, selectedClass: any) => {
 
     if (
         [
@@ -84,6 +84,25 @@ const inputValidation = (studentData: StudentTypeFormData) => {
             type: "error",
             text1: " Fields Can't be Emplty !!!!!",
             text1Style: {
+                backgroundColor: 'red',
+                padding: 4,
+                fontSize: 15,
+                color: "white"
+            },
+            text2: ""
+        })
+        return false
+    }
+
+    // checking student attendance when adding
+    if (studentData.totalAttendance >= selectedClass.attendance.length+1) {
+        Toast.show({
+            type: "error",
+            text1: "attendance can't be more than total class attendance",
+            text1Style: {
+                width: '100%',
+                display: 'flex',
+                flexWrap: 'wrap',
                 backgroundColor: 'red',
                 padding: 4,
                 fontSize: 15,
