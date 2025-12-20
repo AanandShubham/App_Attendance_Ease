@@ -3,30 +3,37 @@ import 'dotenv/config';
 export default
   {
     "expo": {
-      "name": "App",
-      "slug": "App",
+      "name": "Attendance - Ease",
+      "slug": "attendance-ease",
       "version": "1.0.0",
       "orientation": "portrait",
       "icon": "./assets/images/icon.jpg",
-      "scheme": "app",
+      "scheme": "attendanceease",
       "userInterfaceStyle": "automatic",
       "newArchEnabled": true,
       "ios": {
         "supportsTablet": true
       },
       "android": {
+        package: "com.sivi.attendanceease",
+        "label": "Attendance - Ease",
         "adaptiveIcon": {
           "backgroundColor": "#E6F4FE",
-          "foregroundImage": "./assets/images/android-icon-foreground.png",
+          "foregroundImage": "./assets/images/icon.jpg",
           "backgroundImage": "./assets/images/android-icon-background.png",
-          "monochromeImage": "./assets/images/android-icon-monochrome.png"
+          "monochromeImage": "./assets/images/android-icon-monochrome.png",
         },
+        "permissions": [
+          "INTERNET",
+          "READ_MEDIA_IMAGES",
+          "WRITE_EXTERNAL_STORAGE"
+        ],
         "edgeToEdgeEnabled": true,
         "predictiveBackGestureEnabled": false
       },
       "web": {
         "output": "static",
-        "favicon": "./assets/images/favicon.png",
+        "favicon": "./assets/images/icon.jpg",
         "bundler": "metro"
       },
       "plugins": [
@@ -34,8 +41,8 @@ export default
         [
           "expo-splash-screen",
           {
-            "image": "./assets/images/splash-icon.png",
-            "imageWidth": 200,
+            "image": "./assets/images/icon.jpg",
+            "imageWidth": 128,
             "resizeMode": "contain",
             "backgroundColor": "#ffffff",
             "dark": {
@@ -49,7 +56,10 @@ export default
         "reactCompiler": true
       },
       extra: {
-        apiUrl: process.env.API_URL 
+        eas: {
+          projectId: "9c3d31df-4799-4be0-b1be-b2b486259754",
+        },
+        apiUrl: process.env.API_URL
       }
     }
   }

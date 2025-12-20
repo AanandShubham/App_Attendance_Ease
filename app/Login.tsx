@@ -55,8 +55,8 @@ const Login = () => {
   }
 
   const btnControl = async () => {
-    console.log("Button Pressed")
-    console.log("form Data : ", formData)
+    // console.log("Button Pressed")
+    // console.log("form Data : ", formData)
 
     if (! await login(formData)) {
       startShake()
@@ -66,9 +66,6 @@ const Login = () => {
         type: "success",
         text1: "Login Successfull"
       })
-
-
-
       router.replace("/(tabs)/home")
     }
 

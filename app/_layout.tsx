@@ -5,6 +5,7 @@ import { useColorScheme } from "nativewind"
 import Toast from 'react-native-toast-message'
 import { AuthContextProvider } from "./context/AuthContext"
 import { ClassContextProvider } from "./context/ClassContext"
+import * as SplashScreen from 'expo-splash-screen'
 
 export default function RootLayout() {
 
@@ -15,7 +16,9 @@ export default function RootLayout() {
   // npm i @react-native-async-storage/async-storage
 
   useEffect(() => {
+
     (async () => {
+      // SplashScreen.hideAsync();
       const saved = await AsyncStorage.getItem("theme")
       if (saved === "light" || saved === "dark") {
         setColorScheme(saved as "light" | "dark")
@@ -31,6 +34,7 @@ export default function RootLayout() {
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="Login" options={{ headerShown: false }} />
             <Stack.Screen name="Register" options={{ headerShown: false }} />
+            <Stack.Screen name="OnBoarding" options={{ headerShown: false }} />
             <Stack.Screen name="ForgetPassword" options={{ headerShown: false }} />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>
