@@ -29,7 +29,7 @@ const Profile = () => {
     // console.log("---------------------------------------------")
 
     const shakeAnim = useRef(new Animated.Value(0)).current
-    const [imageUrl, setImageUrl] = useState<string | null>(user?.profile.secure_url)
+    const [imageUrl, setImageUrl] = useState<string | null>(user?.profile?.secure_url || null)
     const [fromData, setFormData] = React.useState<RegisterTypeFormData>({
         fullname: user?.fullname,
         username: user?.username,

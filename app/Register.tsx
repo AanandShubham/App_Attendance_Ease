@@ -75,7 +75,6 @@ const Register = () => {
 
     }
     // console.log(formData)
-    
     // console.log("Image Url : ",imageUrl)
   }
 

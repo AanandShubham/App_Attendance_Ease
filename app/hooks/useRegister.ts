@@ -10,7 +10,7 @@ const useRegister = () => {
     const [loading, setLoading] = useState(false)
     const { setUser, setToken } = useAuthContext()
     const { setClasses } = useClassContext()
-    const {apiUrl} = Constants.expoConfig?.extra || {}
+    const { apiUrl } = Constants.expoConfig?.extra || {}
 
     const register = async (registerForm: RegisterTypeFormData, imageUrl: string | null) => {
 
@@ -30,13 +30,15 @@ const useRegister = () => {
             formData.append('securityKey', registerForm.securityKey)
             // formData.append('profile',registerForm.profile as string)
 
-            if (imageUrl) {
+            if (imageUrl != null) {
                 formData.append('profile', {
                     uri: imageUrl,
                     type: "image/jpeg",
                     name: "profile.jpg"
                 } as any)
             }
+            else
+                formData.append('profile', "")
 
             const response = await fetch(`${apiUrl}/auth/signup`, {
                 method: "POST",
@@ -111,18 +113,18 @@ const inputValidation = (formData: RegisterTypeFormData, imageUrl: string | null
         return false
     }
 
-    if (imageUrl == null) {
-        Toast.show({
-            type: "info",
-            text1: "Please Add Profile Photo ",
-            text1Style: {
-                backgroundColor: "yellow",
-                padding: 4,
-                color: "black"
-            },
-        })
-        return false
-    }
+    // if (imageUrl == null) {
+    //     Toast.show({
+    //         type: "info",
+    //         text1: "Please Add Profile Photo ",
+    //         text1Style: {
+    //             backgroundColor: "yellow",
+    //             padding: 4,
+    //             color: "black"
+    //         },
+    //     })
+    //     return false
+    // }
 
     if (formData.password.length < 6) {
         Toast.show({
