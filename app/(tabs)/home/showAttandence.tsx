@@ -2,14 +2,17 @@ import React from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import HomeContainer from '@/app/components/HomeContainer'
 import StudentDataCard from '@/app/components/StudentDataCard'
-import DownloadPdf from '../../../assets/images/DownloadPDF.png'
 import useClassContext from '@/app/context/ClassContext'
 import { ActivityIndicator, FlatList, Text, View } from 'react-native'
 import { useRouter } from 'expo-router'
 import usePrintPdf from '@/app/hooks/usePrintPdf'
 import Toast from 'react-native-toast-message'
 
+// import DownloadPdf from '../../../assets/images/DownloadPDF.png'
+
 const showAttandence = () => {
+
+    const DownloadPdf: any = require('../../../assets/images/DownloadPDF.png')
 
     const { selectedAttendance, selectedClass, students } = useClassContext()
     const router = useRouter()

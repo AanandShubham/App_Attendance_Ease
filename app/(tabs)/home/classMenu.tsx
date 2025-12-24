@@ -24,9 +24,9 @@ const classMenu = () => {
                 edges={['top', 'bottom']}
                 className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-center items-center'
             >
-                <View className='w-full h-full p-2 dark:bg-[#061526]  bg-white flex justify-center items-center'>
+                <View className='w-full h-full p-2 py-4 dark:bg-[#061526]  bg-white flex justify-center items-center'>
                     <View
-                        className=' w-[90vw] h-[60vh] flex justify-center items-center gap-5 border-2 border-[#0C5AA2] dark:border-[#17242D] rounded-tr-[70px] rounded-tl-[10px] rounded-bl-[70px] rounded-br-[10px] dark:bg-[#061526] bg-[#e9eff6e8] p-4'>
+                        className=' w-[90vw] h-[60vh] flex justify-center items-center gap-2 border-2 border-[#0C5AA2] dark:border-[#17242D] rounded-tr-[70px] rounded-tl-[10px] rounded-bl-[70px] rounded-br-[10px] dark:bg-[#061526] bg-[#e9eff6e8] '>
                         <Text
                             style={{
                                 textShadowColor: '#000',
@@ -39,7 +39,7 @@ const classMenu = () => {
                         >
                             {selectedClass.name}
                         </Text>
-                        <View className='w-full flex-row justify-between items-center'>
+                        <View className='w-full pt-4 p-2 flex-row justify-between items-center'>
                             <Pressable
                                 onPress={() => { router.push("/home/updateClass") }}
                                 className=' dark:bg-[#17242D] bg-[#90C4EE] w-[45%] h-[202px] rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2'>
@@ -49,7 +49,7 @@ const classMenu = () => {
                                 </Text>
                                 <Image
                                     source={require("../../../assets/images/editClass.png")}
-                                    className='w-full h-[150px] mt-2'
+                                    className='w-full h-[145px] mt-2'
                                 />
                             </Pressable>
 
@@ -62,11 +62,12 @@ const classMenu = () => {
                                 </Text>
                                 <Image
                                     source={require("../../../assets/images/studentList.png")}
-                                    className='w-full h-[150px] mt-2'
+                                    className='w-full h-[145px] mt-2'
                                 />
                             </Pressable>
                         </View>
-                        <View className='w-full  flex-row justify-between items-center'>
+
+                        <View className='w-full pt-4 p-2 flex-row justify-between items-center'>
                             <Pressable
                                 onPress={() => { router.push("/home/attendanceList") }}
                                 className='dark:bg-[#17242D] bg-[#90C4EE] w-[45%] h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2 '>
@@ -74,7 +75,10 @@ const classMenu = () => {
                                     className='text-lg dark:text-white text-[#1B64A8] text-center font-medium'>
                                     Attendance List
                                 </Text>
-                                <Image source={require("../../../assets/images/attendanceList.png")} className='w-[90%] h-[145px] p-2 mt-2 ml-3' />
+                                <Image
+                                    source={require("../../../assets/images/attendanceList.png")}
+                                    className='w-[90%] h-[145px] p-2 mt-2 ml-3'
+                                />
                             </Pressable>
                             <Pressable
                                 onPress={() => { router.push("/home/takeAttandence") }}
@@ -85,7 +89,7 @@ const classMenu = () => {
                                 </Text>
                                 <Image
                                     source={require("../../../assets/images/takeAttendance.png")}
-                                    className='w-full p-2 h-[150px] mt-2'
+                                    className='w-full p-2 h-[145px] mt-2'
                                 />
                             </Pressable>
                         </View>

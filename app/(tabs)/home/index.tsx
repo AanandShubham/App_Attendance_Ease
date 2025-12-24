@@ -3,8 +3,6 @@ import { useRouter } from 'expo-router'
 import HomeContainer from '@/app/components/HomeContainer'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import ClassDataCard from '@/app/components/ClassDataCard'
-import addClass3d from '../../../assets/images/addClass3d.png'
-import useAuthContext from '@/app/context/AuthContext'
 import useClassContext from '@/app/context/ClassContext'
 import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native'
 import { ClassTypeFormData } from '@/app/FromTypes'
@@ -12,7 +10,16 @@ import useGetUserData from '@/app/hooks/useGetUserData'
 import { Ionicons } from '@expo/vector-icons'
 import useDeleteClass from '@/app/hooks/useDeleteClass'
 
+import { BackHandler } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
+import { useCallback } from 'react'
+
+// import useAuthContext from '@/app/context/AuthContext'
 const index = () => {
+
+  const addClass3d: any = require('../../../assets/images/addClass3d.png')
+
+
   const router = useRouter()
   const { loading, loadUserData } = useGetUserData()
   // const { user, token } = useAuthContext() // for test only  
@@ -80,12 +87,29 @@ const index = () => {
 
   }, [reloadCode])
 
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        BackHandler.exitApp()
+        return true
+      }
+
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress
+      )
+
+      return () => subscription.remove()
+    }, [])
+  )
+
+
   return (
     <SafeAreaProvider>
 
       <SafeAreaView
         edges={['top', 'bottom']}
-        className='w-full h-[100vh] dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
+        className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
       >
         <HomeContainer
           headerLabel={"Home"}

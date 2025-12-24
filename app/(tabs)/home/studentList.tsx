@@ -3,12 +3,16 @@ import { useRouter } from 'expo-router'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import HomeContainer from '@/app/components/HomeContainer'
 import StudentDataCard from '@/app/components/StudentDataCard'
-import addStudent from '@/assets/images/AddStudent.png'
 import useClassContext from '@/app/context/ClassContext'
 import { FlatList, Text, View } from 'react-native'
 import useDeleteStudent from '@/app/hooks/useDeleteStudent'
 
+// import addStudent from '@/assets/images/AddStudent.png'
+
 const studentList = () => {
+
+    const addStudent: any = require('../../../assets/images/AddStudent.png')
+
     const router = useRouter()
     const { students, selectedClass, setSelectedStudent } = useClassContext()
     const [studentToDelete, setStudentToDelete] = useState<any>({})
@@ -21,7 +25,7 @@ const studentList = () => {
         // console.log("-------------------------------------------")
         // studentToDelete && console.log("Class to delete : ", studentToDelete?._id,)
         // console.log("-------------------------------------------")
-        await deleteStudentById(selectedClass._id,studentToDelete?._id)
+        await deleteStudentById(selectedClass._id, studentToDelete?._id)
         // if (await deleteStudentById(selectedClass._id, studentToDelete?._id)) {
         //     console.log("Class Deleted Successfully !!!")
         // }

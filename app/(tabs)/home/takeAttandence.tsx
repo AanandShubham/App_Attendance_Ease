@@ -6,7 +6,6 @@ import Fontisto from '@expo/vector-icons/Fontisto'
 import { ActivityIndicator, FlatList, Pressable } from 'react-native'
 import { View } from 'react-native'
 import { Text } from 'react-native'
-import saveData from '../../../assets/images/saveData.png'
 import { useColorScheme } from 'nativewind'
 import useClassContext from '@/app/context/ClassContext'
 import { StudentTypeFormData } from '@/app/FromTypes'
@@ -14,8 +13,11 @@ import { router } from 'expo-router'
 import useAddAttendance from '@/app/hooks/useAddAttendance'
 import Toast from 'react-native-toast-message'
 
+// import saveData from '../../../assets/images/saveData.png'
 
 const takeAttandence = () => {
+
+    const saveData: any = require('../../../assets/images/saveData.png')
 
     const { colorScheme } = useColorScheme()
     const { students, selectedClass } = useClassContext()
@@ -88,7 +90,7 @@ const takeAttandence = () => {
         }
 
     }
-    
+
     useEffect(() => {
         if (students.length > 0) {
             setAttendance(students.map(() => true))
@@ -104,7 +106,7 @@ const takeAttandence = () => {
                 className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
             >
                 <HomeContainer
-                    headerLabel={date+" Attendance"}
+                    headerLabel={date + " Attendance"}
                     btnAction={saveBtnLogic}
                     showButton={true}
                     btnImageSource={saveData}
