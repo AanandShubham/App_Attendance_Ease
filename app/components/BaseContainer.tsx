@@ -51,7 +51,7 @@ const BaseContainer: React.FC<baseContainerProps> = (
                     }}
 
                     className='w-[70%] h-fit p-1  text-2xl text-white text-center font-bold rounded-md 
-                     absolute  top-[-19px] dark:bg-[#183448] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-[#3A87BD]'>
+                     absolute  top-[-19px] dark:bg-[#183448] bg-[#3A87BD] rounded-bl-[20px] rounded-tr-[20px]   outline-black rounded-tl-[5px] rounded-br-[5px]  shadow-xl elevation-sm shadow-&lsqb;#3A87BD&rsqb;'>
                     {headerLabel}
                 </Text>
 

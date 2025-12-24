@@ -16,7 +16,7 @@ const AttandanceDataCard: React.FC<DataCardProps> = (
   return (
     <Pressable
       onPress={onPressAction}
-      className='w-full h-[73px] dark:bg-[#17242D] bg-[#90C4EE] rounded-lg shadow-black elevation-4 shadow-[#3A87BD] border-1 dark:border-[#0B202E] border-[#1B64A8]  flex-1 flex-row justify-center items-center rounded-tl-[5px] rounded-tr-[25px] rounded-bl-[25px] rounded-br-[5px]'>
+      className='w-full h-[73px] dark:bg-[#17242D] bg-[#90C4EE] rounded-lg shadow-black elevation-4 shadow-&lsqb;#3A87BD&rsqb; border-1 dark:border-[#0B202E] border-[#1B64A8]  flex-1 flex-row justify-center items-center rounded-tl-[5px] rounded-tr-[25px] rounded-bl-[25px] rounded-br-[5px]'>
       <View className='w-[60%] h-full justify-center items-start gap-1 pl-6 '>
         <Text className='text-black dark:text-white text-lg font-semibold'>Date : {date}</Text>
         <Text className='text-black dark:text-white text-lg font-semibold'>Total Attendance : {totalAttendance}</Text>

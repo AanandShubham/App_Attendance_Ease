@@ -28,9 +28,7 @@ const UniqueButton: React.FC<UniqueButtonProps> = ({
     <Pressable
       onPress={btnAction}
       className={`rounded-tr-[2px] rounded-bl-[2px] rounded-tl-[48px] rounded-br-[48px] rounded-md 
-        flex justify-center items-center absolute ${btnStyleClass}
-        dark:bg-[#183448] bg-[#3A87BD] shadow-2xl elevation-xl 
-        shadow-[#1B64A8] border-2 dark:border-[#17242d] border-[#1B64A8]`}
+        flex justify-center items-center absolute ${btnStyleClass} dark:bg-[#183448] bg-[#3A87BD] shadow-2xl elevation-xl shadow-&lsqb;1B64A8&rsqb; border-2 dark:border-[#17242d] border-[#1B64A8]`}
     >
       {btnImageSource ? (
         <Animated.Image

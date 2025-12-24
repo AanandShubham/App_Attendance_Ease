@@ -47,7 +47,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({ setImage, imgUrl }) => {
                 />
             ) : (
                 // <Text className="text-white text-lg">Add {imgId}</Text>
-                <Text className="text-white text-lg">Add </Text>
+                <Text className="text-white text-lg">Add Profile</Text>
             )}
 
             {/* Image add button */}

@@ -76,7 +76,7 @@ const InputBox = <T,>(
 
   return (
     <View
-      className='w-full h-[55px] rounded-tr-[20px] rounded-tl-[5px] rounded-bl-[20px] rounded-br-[5px]   dark:bg-[#17242D] bg-[#90C4EE] border-2 dark:border-[#17242D]  border-[#3A87BD] elevation-md shadow-xl shadow-[#3A87BD] flex flex-col justify-center px-4'
+      className='w-full h-[55px] rounded-tr-[20px] rounded-tl-[5px] rounded-bl-[20px] rounded-br-[5px]   dark:bg-[#17242D] bg-[#90C4EE] border-2 dark:border-[#17242D]  border-[#3A87BD] elevation-md shadow-xl shadow-&lsqb;#3A87BD&rsqb; flex flex-col justify-center px-4'
     >
       <Animated.Text
         className={'rounded-b-[8px] pb-[2px] dark:text-white text-neutral-950 font-semibold '}
