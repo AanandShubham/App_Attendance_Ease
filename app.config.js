@@ -7,7 +7,7 @@ export default
       "slug": "attendance-ease",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./assets/images/icon.jpg",
+      "icon": "./assets/images/icon.png",
       "scheme": "attendanceease",
       "userInterfaceStyle": "automatic",
       "newArchEnabled": true,
@@ -19,7 +19,7 @@ export default
         "label": "Attendance - Ease",
         "adaptiveIcon": {
           "backgroundColor": "#E6F4FE",
-          "foregroundImage": "./assets/images/icon.jpg",
+          "foregroundImage": "./assets/images/icon.png",
           "backgroundImage": "./assets/images/android-icon-background.png",
           "monochromeImage": "./assets/images/android-icon-monochrome.png",
         },
@@ -41,7 +41,7 @@ export default
         [
           "expo-splash-screen",
           {
-            "image": "./assets/images/icon.jpg",
+            "image": "./assets/images/icon.png",
             "imageWidth": 128,
             "resizeMode": "contain",
             "backgroundColor": "#ffffff",

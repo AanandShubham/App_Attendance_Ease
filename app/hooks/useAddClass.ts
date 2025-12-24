@@ -32,7 +32,7 @@ const useAddClass = () => {
 
             if (data.error) throw new Error(data.error)
 
-            console.log("new Added Class ", data.newClass)
+            // console.log("new Added Class ", data.newClass)
 
             setClasses([...classes, data.newClass])
 
