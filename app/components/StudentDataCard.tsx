@@ -42,7 +42,7 @@ const StudentDataCard: React.FC<StudentDataCardProps> = (
   const percent:any = ((totalAttendance! / selectedClass.attendance.length) * 100).toFixed(1)
 
   const bgColor = percent >= 75 ? 'bg-green-300': percent >= 50? 'bg-yellow-300'
-        : 'bg-red-300'
+        : 'bg-red-500'
 
 
   return (
