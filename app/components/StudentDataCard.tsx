@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, Pressable, Modal } from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto'
 import { useColorScheme } from 'nativewind'
+import useClassContext from '../context/ClassContext'
 
 
 type StudentDataCardProps = {
@@ -37,6 +38,13 @@ const StudentDataCard: React.FC<StudentDataCardProps> = (
 
   const { colorScheme } = useColorScheme()
 
+  const { selectedClass } = useClassContext()
+  const percent:any = ((totalAttendance! / selectedClass.attendance.length) * 100).toFixed(1)
+
+  const bgColor = percent >= 75 ? 'bg-green-300': percent >= 50? 'bg-yellow-300'
+        : 'bg-red-300'
+
+
   return (
     <View>
 
@@ -47,7 +55,10 @@ const StudentDataCard: React.FC<StudentDataCardProps> = (
         <View className=' w-full h-full justify-center items-start gap-0 pl-6 '>
           <Text className='w-full text-black dark:text-white text-lg font-semibold'>{tcaNumber || "Student ID"}</Text>
           <Text className='w-full text-black dark:text-white text-lg font-semibold'>{name || "Name"}</Text>
-          <Text className='w-full text-black dark:text-white text-lg font-semibold'>Total Attendance : {totalAttendance || "0"}</Text>
+          <View className='w-full flex-row items-center'>
+            <Text className='text-black dark:text-white text-lg font-semibold'>Total Attendance: {totalAttendance || 0} / {selectedClass.attendance.length}  </Text>
+            <Text className={`px-2 py-1 text-black dark:text-white text-lg font-semibold ${bgColor} rounded-lg`}>[{percent}%]</Text>
+          </View>
           {
             showCheckbox && <Pressable
               onPress={onPressAction}
