@@ -76,10 +76,9 @@ const InputValidation = (formData: LoginTypeFormData): Boolean => {
 
 
   if (formData.username?.trim() === "" || formData.password?.trim() === "") {
-
     Toast.show({
       type: "error",
-      text1: " Fields Can't be Emplty !!!!!",
+      text1: " Fields Can't be Emplty !",
       text1Style: {
         backgroundColor: 'red',
         padding: 4,
@@ -89,6 +88,14 @@ const InputValidation = (formData: LoginTypeFormData): Boolean => {
       text2: ""
     })
     return false
+  }
+
+  if(formData.username.includes(' ')){
+    Toast.show({
+      type:"error",
+      text1:"Username can't contains",
+      text2:"White Spaces !!"
+    })
   }
 
   if (formData.password.length < 6) {
