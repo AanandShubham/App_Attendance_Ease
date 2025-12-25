@@ -142,7 +142,7 @@ const settings = () => {
               >
                 Delete Account
               </Text>
-              <MaterialCommunityIcons name="logout" size={32} color={colorScheme === "dark" ? "white" : "black"} />
+              <MaterialCommunityIcons name="delete" size={38} color={colorScheme === "dark" ? "white" : "black"} />
             </Pressable>
 
               {/* modal for user confirmation about delete user Details  */}
