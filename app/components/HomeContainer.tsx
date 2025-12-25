@@ -1,5 +1,5 @@
-import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import { View, Text, useWindowDimensions, Dimensions } from 'react-native'
+import React, { use } from 'react'
 import UniqueButton from './UniqueButton'
 import { Animated } from 'react-native'
 
@@ -28,9 +28,17 @@ const HomeContainer: React.FC<baseContainerProps> = (
 
 ) => {
 
+  const {width, height} =  useWindowDimensions()
+ 
+
+// w-[95vw] h-[84.8vh]
   return (
-    <View className='w-full h-full dark:bg-[#061526] bg-white p-2 py-6 relative flex  justify-start items-center'>
-      <View className={`w-[95vw] h-[84.8vh]  dark:bg-[#020b148a] bg-[#e9eff6e8]   flex justify-start items-center  rounded-tl-[10px] rounded-tr-[10px]
+    <View 
+      style={{width: width, height: height}}
+    className='w-full h-full dark:bg-[#061526] bg-white p-2 py-6 relative flex  justify-start items-center'>
+      <View 
+      style={{width: width*0.95, height: height*0.848}}
+      className={`  dark:bg-[#020b148a] bg-[#e9eff6e8]   flex justify-start items-center  rounded-tl-[10px] rounded-tr-[10px]
       ${showButton ? "rounded-br-[80px]" : "rounded-br-[10px]"}  rounded-bl-[10px]  border-2 dark:border-[#17242d] border-[#0C5AA2] p-4 py-6 `}>
         <Text
           style={{
