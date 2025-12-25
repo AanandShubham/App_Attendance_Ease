@@ -1,10 +1,12 @@
 import useAuthContext from '@/app/context/AuthContext'
 import useClassContext from '@/app/context/ClassContext'
 import useGetClassDetails from '@/app/hooks/useGetClassDetails'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, Pressable, ActivityIndicator } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import Modal from 'react-native-modal'
 
 
 const classMenu = () => {
@@ -12,7 +14,35 @@ const classMenu = () => {
 
     const { selectedClass } = useClassContext()
     const { loading, getClassDetails } = useGetClassDetails()
+    const [showMenu, setShowMenu] = useState(false)
 
+    const handleTakeAttendance = () => {
+        // const remaningClass = selectedClass.attendance.filter(att => {
+        //     const attDate = new Date(att.date)
+        //     const today = new Date()
+
+        //     return attDate.getDate() === today.getDate() &&
+        //         attDate.getMonth() === today.getMonth() &&
+        //         attDate.getFullYear() === today.getFullYear()
+        // })
+
+        // if (remaningClass.length > 0) {
+        //     alert("Attendance for today has already been taken.")
+        // } else {
+        //     router.push("/home/takeAttandence")
+        // }
+
+        const remainingClass = selectedClass.totalClass - selectedClass.attendance.length + 1
+
+        //    console.log("REmoa ningoaodj jClalsdhol : ",remainingClass)
+
+        if (remainingClass > 0) {
+            router.push("/home/takeAttandence")
+        } else {
+            setShowMenu(true)
+        }
+
+    }
 
     useEffect(() => {
         getClassDetails(selectedClass._id)
@@ -22,7 +52,7 @@ const classMenu = () => {
         <SafeAreaProvider>
             <SafeAreaView
                 edges={['top', 'bottom']}
-                className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-center items-center'
+                className={`w-full h-full dark:bg-[#061526]  bg-[#3A87BD] bg-[${showMenu ? "#3d4035" : "#3A87BD"}] flex justify-center items-center`}
             >
                 <View className='w-full h-full p-2 py-4 dark:bg-[#061526]  bg-white flex justify-center items-center'>
                     <View
@@ -81,7 +111,7 @@ const classMenu = () => {
                                 />
                             </Pressable>
                             <Pressable
-                                onPress={() => { router.push("/home/takeAttandence") }}
+                                onPress={handleTakeAttendance}
                                 className='dark:bg-[#17242D] bg-[#90C4EE] w-[45%] h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2 '>
                                 <Text
                                     className='text-lg dark:text-white text-[#1B64A8] text-center font-medium'>
@@ -103,6 +133,38 @@ const classMenu = () => {
                         <ActivityIndicator />
                     </View>
                 )}
+
+                <Modal
+                    isVisible={showMenu}
+                    onBackdropPress={() => setShowMenu(false)}
+                    animationIn="slideInUp"
+                    animationOut="slideOutDown"
+                    backdropOpacity={0.15}
+                    animationInTiming={300}
+                    animationOutTiming={250}
+                    style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
+                >
+                    <View className="w-[90%] h-[40%]  bg-[#4686bb] absolute rounded-s-[35px] rounded-e-[30px] shadow-lg p-3 border-0 border-[#4686bb]">
+
+                        {/* Header */}
+                        <View className="w-full h-full flex justify-between  items-center mb-4">
+                            <Text className="px-3 py-2  text-2xl rounded-tl-[35px] rounded-tr-[35px] rounded-bl-[0px] rounded-br-[0px] font-bold border-2 border-red-600 absolute -top-20 text-red-600 flex flex-row justify-center items-center ">
+                                <MaterialCommunityIcons name="alert" size={44} color="red" /></Text>
+
+                            <View className='w-full h-fit flex mt-14 justify-start items-center'>
+                                <Text className='text-2xl italic text-center align-text align-middle align text-white'>
+                                    You have already taken all the attendance for this class.
+                                    No remaining Classes left to take attendance.
+                                </Text>
+                                <Text className='text-2xl italic font-bold  text-center align-text align-middle align text-white '>" If you want to take attendance please update TotalClass from Edit class Details "</Text>
+
+                            </View>
+
+                        </View>
+
+                    </View>
+                </Modal>
+
 
             </SafeAreaView>
         </SafeAreaProvider>
