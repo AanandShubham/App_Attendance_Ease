@@ -14,22 +14,26 @@ import { BackHandler } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback } from 'react'
 
+import Modal from 'react-native-modal'
+import Toast from 'react-native-toast-message'
+
 // import useAuthContext from '@/app/context/AuthContext'
 const index = () => {
 
   const addClass3d: any = require('../../../assets/images/addClass3d.png')
 
-
+  const [showConfirm, setShowConfirm] = useState(false)
   const router = useRouter()
   const { loading, loadUserData } = useGetUserData()
   // const { user, token } = useAuthContext() // for test only  
   const { classes, setSelectedClass } = useClassContext()
   const [loader, setLoader] = useState(loading || false)
   const [reloadCode, setReloadCode] = useState(200)
-  const [showMenu, setShowMenu] = useState(false)
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 })
   const [classToDelete, setClassToDelete] = useState<any>({})
   const { loading2, deleteClassById } = useDeleteClass()
+
+  const [showMenu, setShowMenu] = useState(false)
 
   // console.log("-------------------------------------------")
   // console.log("HOME User : ", user)
@@ -55,8 +59,10 @@ const index = () => {
     //   console.log("Problem in class delete")
     // }
 
-    await deleteClassById(classToDelete?.id)
+    // console.log("classIdTo delete : ", classToDelete?._id)
+
     setShowMenu(false)
+    setShowConfirm(true)
   }
 
   const handleLongPress = (event: any, classData: any) => {
@@ -154,6 +160,79 @@ const index = () => {
           />
 
         </HomeContainer>
+
+
+        <Modal
+          isVisible={showConfirm}
+          onBackdropPress={() => setShowConfirm(false)}
+          animationIn="slideInUp"
+          animationOut="slideOutDown"
+          backdropOpacity={0.15}
+          animationInTiming={300}
+          animationOutTiming={250}
+          style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
+        >
+          <View className="w-[95%] h-[50%] flex gap-3 justify-center items-center pb-10">
+
+            {/* Header */}
+            <Text className=" bg-[#c91919] text-white text-2xl px-6 py-4 rounded-tl-[35px] rounded-tr-[35px] font-bold">
+              !! Warning !!
+            </Text>
+
+            {/* Content */}
+            <View className="mt-2 flex-1 items-center bg-[#c91919]  rounded-s-[35px] rounded-e-[30px] shadow-lg p-4 px-2 py-4">
+              <View className="px-2 pb-6 justify-center items-center">
+
+                <Text className="text-lg text-white font-semibold">Data to be deleted</Text>
+                <Text className="text-md text-white/80">
+                  All your Classes ,students and attendance records, settings, attachments and backups associated with this account will be permanently removed and cannot be recovered.
+                </Text>
+
+                <Text className="text-white font-bold text-lg mb-3">This action is irreversible.</Text>
+                <Text className="text-white/90 mb-6">
+                  If you proceed, your class data will be permanently deleted.
+                </Text>
+
+              </View>
+
+            </View>
+            <View className="flex-row justify-between gap-4">
+              <Pressable
+                onPress={() => setShowConfirm(false)}
+                className="flex-1 py-3 rounded-full bg-[#94b8d6] items-center"
+              >
+                <Text className="text-white font-bold">Cancel</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={async () => {
+                  try {
+                    // await deleteUser()
+                    // setLoader(true)
+                    await deleteClassById(classToDelete?._id)
+                    setShowConfirm(false)
+                    // setLoader(false)
+                    // router.replace("/Login")
+                  } catch (err) {
+                    Toast.show({
+                      type: "error",
+                      text1: "There is something wrong !!"
+                    })
+                    setShowConfirm(false)
+                  }
+                }}
+                disabled={loading}
+                className={`flex-1 py-3 rounded-full items-center ${loading ? 'bg-[#9e2a2a]/60' : 'bg-[#c91919]'}`}
+              >
+                <Text className="text-white font-bold">{loading ? 'Deleting...' : 'Delete Group'}</Text>
+              </Pressable>
+            </View>
+            {/* Next Button */}
+
+
+          </View>
+
+        </Modal>
 
         {
           loader && (
