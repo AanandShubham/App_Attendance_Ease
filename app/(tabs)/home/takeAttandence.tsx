@@ -8,10 +8,11 @@ import { View } from 'react-native'
 import { Text } from 'react-native'
 import { useColorScheme } from 'nativewind'
 import useClassContext from '@/app/context/ClassContext'
-import { StudentTypeFormData } from '@/app/FromTypes'
+// import { StudentTypeFormData } from '@/app/FromTypes'
 import { router } from 'expo-router'
 import useAddAttendance from '@/app/hooks/useAddAttendance'
 import Toast from 'react-native-toast-message'
+import Modal from 'react-native-modal'
 
 // import saveData from '../../../assets/images/saveData.png'
 
@@ -22,11 +23,15 @@ const takeAttandence = () => {
     const { colorScheme } = useColorScheme()
     const { students, selectedClass } = useClassContext()
 
+    // save attendance hook
     const { loading, addAttendance } = useAddAttendance()
 
     // student attendance list state
     const [attendance, setAttendance] = useState<boolean[]>([])
 
+    // modal state
+
+    const [showModal, setShowModal] = useState(false)
 
     // attencdance list for saving list of present students
 
@@ -59,7 +64,7 @@ const takeAttandence = () => {
         // })
     }
 
-    const saveBtnLogic = async () => {
+    const saveAttendanceBtnLogic = async () => {
         // const presentStudentsIds = students
         //     .filter((_, index) => attendance[index])
         //     .map(student => student._id)
@@ -72,7 +77,7 @@ const takeAttandence = () => {
             if (item)
                 attendanceList.push(students[index]._id)
         })
-        console.log("Attendance List : ", attendanceList)
+        // console.log("Attendance List : ", attendanceList)
 
         if (attendance.length === 0) {
             Toast.show({
@@ -86,11 +91,13 @@ const takeAttandence = () => {
                 type: 'success',
                 text1: "Attendance added successfully"
             })
+
             router.back()
         }
 
     }
 
+    // take attendance Confirmation
     useEffect(() => {
         if (students.length > 0) {
             setAttendance(students.map(() => true))
@@ -103,11 +110,11 @@ const takeAttandence = () => {
         <SafeAreaProvider>
             <SafeAreaView
                 edges={['top', 'bottom']}
-                className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center'
+                className={`w-full h-full dark:bg-[#061526] bg-[#3A87BD] flex justify-start items-center`}
             >
                 <HomeContainer
                     headerLabel={date + " Attendance"}
-                    btnAction={saveBtnLogic}
+                    btnAction={() => setShowModal(true)}
                     showButton={true}
                     btnImageSource={saveData}
 
@@ -163,6 +170,80 @@ const takeAttandence = () => {
                     />
 
                 </HomeContainer>
+
+
+                {/* modal for user confirmation about save Attendance Details  */}
+                <Modal
+                    isVisible={showModal}
+                    onBackdropPress={() => setShowModal(false)}
+                    animationIn="slideInUp"
+                    animationOut="slideOutDown"
+                    backdropOpacity={0.15}
+                    animationInTiming={300}
+                    animationOutTiming={250}
+                    style={{ margin: 0, justifyContent: "center", alignItems: "center" }}
+                >
+                    <View className="w-[95%] h-[50%] flex gap-3 justify-center items-center pb-10">
+
+                        {/* Header */}
+                        <Text className=" bg-[#aebd3a] text-black text-2xl px-6 py-4 rounded-tl-[35px] rounded-tr-[35px] font-bold">
+                            Confirm Save
+                        </Text>
+
+                        {/* Content */}
+                        <View className="mt-2 flex-1 items-center bg-[#aebd3a] rounded-s-[35px] rounded-e-[30px] shadow-lg p-4 px-2 py-4">
+
+                            <View className="px-2 pb-6 justify-center items-center">
+
+                                <Text className="text-xl text-black font-bold ">Attendance to be Saved</Text>
+                                <Text className="text-lg  text-black/80">
+                                    All these attendance data will be saved and cannot be reversed.
+                                </Text>
+
+                                <Text className="text-black font-bold text-lg mb-3">This action is irreversible.</Text>
+                                <Text className="text-black/90 mb-6">
+                                    If you proceed, these Attendance data will be saved to cloud
+                                    and can not be deleted.
+                                </Text>
+
+                            </View>
+
+
+                        </View>
+                        <View className="flex-row justify-between gap-4">
+                            <Pressable
+                                onPress={() => setShowModal(false)}
+                                className="flex-1 py-3 rounded-full bg-[#94b8d6] items-center"
+                            >
+                                <Text className="text-white font-bold">Cancel</Text>
+                            </Pressable>
+
+                            <Pressable
+                                onPress={async () => {
+                                    try {
+                                        // saving attendance
+                                        saveAttendanceBtnLogic()
+                                        // router.replace("/Login")
+                                    } catch (err) {
+                                        Toast.show({
+                                            type: "error",
+                                            text1: "There is something wrong !!"
+                                        })
+                                        setShowModal(false)
+                                    }
+                                }}
+                                disabled={loading}
+                                className={`flex-1 py-3 rounded-full items-center ${loading ? 'bg-[#aebd3a]/60' : 'bg-[#aebd3a]'}`}
+                            >
+                                <Text className="text-black font-bold">{loading ? 'Saving...' : 'Save Attendance'}</Text>
+                            </Pressable>
+                        </View>
+
+
+
+                    </View>
+
+                </Modal>
 
                 {loading && (
                     <View className='w-full h-full absolute bg-[#dae4e8e2] flex justify-center items-center gap-4'>
