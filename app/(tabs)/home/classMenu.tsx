@@ -1,4 +1,4 @@
-import useAuthContext from '@/app/context/AuthContext'
+// import useAuthContext from '@/app/context/AuthContext'
 import useClassContext from '@/app/context/ClassContext'
 import useGetClassDetails from '@/app/hooks/useGetClassDetails'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -11,7 +11,6 @@ import Modal from 'react-native-modal'
 
 const classMenu = () => {
     const router = useRouter()
-
     const { selectedClass } = useClassContext()
     const { loading, getClassDetails } = useGetClassDetails()
     const [showMenu, setShowMenu] = useState(false)
@@ -32,7 +31,7 @@ const classMenu = () => {
         //     router.push("/home/takeAttandence")
         // }
 
-        const remainingClass = selectedClass.totalClass - selectedClass.attendance.length + 1
+        const remainingClass = selectedClass.totalClass - selectedClass.attendance.length
 
         //    console.log("REmoa ningoaodj jClalsdhol : ",remainingClass)
 
@@ -75,7 +74,7 @@ const classMenu = () => {
                                 className=' dark:bg-[#17242D] bg-[#90C4EE] w-[45%] h-[202px] rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2'>
                                 <Text
                                     className='text-lg dark:text-white text-[#1B64A8] text-center font-bold'>
-                                    Edit Class
+                                    Edit Group
                                 </Text>
                                 <Image
                                     source={require("../../../assets/images/editClass.png")}
@@ -88,7 +87,7 @@ const classMenu = () => {
                                 className='dark:bg-[#17242D] bg-[#90C4EE] w-[45%]  h-[202px]  rounded-tr-[20px] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] p-2'>
                                 <Text
                                     className='text-lg dark:text-white text-[#1B64A8] text-center font-medium'>
-                                    Student List
+                                    Member List
                                 </Text>
                                 <Image
                                     source={require("../../../assets/images/studentList.png")}
@@ -153,10 +152,10 @@ const classMenu = () => {
 
                             <View className='w-full h-fit flex mt-14 justify-start items-center'>
                                 <Text className='text-2xl italic text-center align-text align-middle align text-white'>
-                                    You have already taken all the attendance for this class.
-                                    No remaining Classes left to take attendance.
+                                    Your assigned days are finished for this group Task.
+                                    No remaining No Days left to take attendance.
                                 </Text>
-                                <Text className='text-2xl italic font-bold  text-center align-text align-middle align text-white '>" If you want to take attendance please update TotalClass from Edit class Details "</Text>
+                                <Text className='text-2xl italic font-bold  text-center align-text align-middle align text-white '>" If you want to take attendance please update TotalDays from Edit Group Section "</Text>
 
                             </View>
 
