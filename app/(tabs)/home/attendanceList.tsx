@@ -32,8 +32,7 @@ const attendanceList = () => {
 
         const filteredAttendance = filteredData.filter((attendance: any) =>
             attendance.name.toLowerCase().includes(searchData.toLowerCase())
-        )
-        
+        )        
         // Update the attendance list with the filtered data
         setFilteredData(filteredAttendance)
     }

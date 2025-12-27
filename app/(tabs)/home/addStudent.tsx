@@ -49,12 +49,12 @@ const addStudent = () => {
                 className='w-full h-full dark:bg-[#061526]  bg-[#3A87BD] '
             >
                 <BaseContainer
-                    headerLabel={"Add Student"}
+                    headerLabel={"Add Member"}
                     btnLabel={"Add"}
                     btnAction={handleClick}
                 >
                     <InputBox
-                        labelData={"Student ID"}
+                        labelData={"ID"}
                         dataValue={formData.tca}
                         setDataValue={text => handleInputChange('tca', text)}
                     />

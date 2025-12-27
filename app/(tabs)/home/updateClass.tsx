@@ -54,36 +54,36 @@ const updateClass = () => {
             <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526] bg-[#3A87BD] '>
                 <BaseContainer
                     btnAction={btnControl}
-                    headerLabel={"Edit Class"}
+                    headerLabel={"Update Group"}
                     btnLabel={"Update"}
                 >
                     <InputBox
-                        labelData={"Class Name"}
-                        inputValue={selectedClass.name}
+                        labelData={"Group Name"}
+                        // inputValue={selectedClass.name}
                         dataValue={formData.name}
                         setDataValue={text => handleInputChange("name", text)}
                     />
                     <InputBox
-                        labelData={"Subject"}
-                        inputValue={selectedClass.subject}
+                        labelData={"Assigned For"}
+                        // inputValue={selectedClass.subject}
                         dataValue={formData.subject}
                         setDataValue={text => handleInputChange("subject", text)}
                     />
                     <InputBox
                         labelData={"Time"}
-                        inputValue={selectedClass.timeTable}
+                        // inputValue={selectedClass.timeTable}
                         dataValue={formData.timeTable}
                         setDataValue={text => handleInputChange("timeTable", text)}
                     />
                     <InputBox
-                        labelData={"Total Class"}
-                        inputValue={selectedClass.totalClass.toString()}
+                        labelData={"New Assigned Days"}
+                        // inputValue={selectedClass.totalClass.toString()}
                         dataValue={formData.totalClass}
                         setDataValue={text => handleInputChange("totalClass", text.toString())}
                     />
                     <InputBox
                         labelData={"Room"}
-                        inputValue={selectedClass.roomNo}
+                        // inputValue={selectedClass.roomNo}
                         dataValue={formData.roomNo}
                         setDataValue={text => handleInputChange("roomNo", text)}
                     />

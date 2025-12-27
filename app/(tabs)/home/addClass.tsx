@@ -48,15 +48,15 @@ const addClass = () => {
     <SafeAreaProvider>
       <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526]  bg-[#3A87BD] '>
         <BaseContainer
-          headerLabel={"Add Class"}
+          headerLabel={"Add Group"}
           btnAction={btnControl}
           btnLabel={"Add"} >
           <InputBox
-            labelData={"Class Name"}
+            labelData={"Group Name"}
             dataValue={formData.name}
             setDataValue={text => handleInputChange('name', text)} />
           <InputBox
-            labelData={"Subject"}
+            labelData={"Assigned For"}
             dataValue={formData.subject}
             setDataValue={text => handleInputChange('subject', text)} />
           <InputBox
@@ -65,7 +65,7 @@ const addClass = () => {
             setDataValue={text => handleInputChange('timeTable', text)}
           />
           <InputBox
-            labelData={"Total Class"}
+            labelData={"Total Assigned Days"}
             dataValue={formData.totalClass}
             setDataValue={text => handleInputChange('totalClass', text.toString())}
           />

@@ -2,7 +2,7 @@ import React, { SetStateAction, useState } from 'react'
 import BaseContainer from '@/app/components/BaseContainer'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import InputBox from '@/app/components/InputBox'
-import { StudentTypeFormData, StudentUpdateTypeFormData } from '@/app/FromTypes'
+import { StudentUpdateTypeFormData } from '@/app/FromTypes'
 import useClassContext from '@/app/context/ClassContext'
 import useUpdateStudent from '@/app/hooks/useUpdateStudent'
 import Toast from 'react-native-toast-message'
@@ -58,12 +58,12 @@ const updateStudent = () => {
       <SafeAreaView edges={['top', 'bottom']} className='w-full h-full dark:bg-[#061526]  bg-[#3A87BD] '>
         <BaseContainer
           btnAction={handleUpdateClick}
-          headerLabel={"Edit Student"}
+          headerLabel={"Update Member"}
           btnLabel={"Update"} >
           <InputBox
             disable={false}
-            labelData={"Student ID"}
-            inputValue={selectedStudent.tca}
+            labelData={"ID"}
+            // inputValue={selectedStudent.tca}
             dataValue={formData.tca}
             setDataValue={text => handleInputChange("tca", text)}
 
@@ -71,13 +71,13 @@ const updateStudent = () => {
           <InputBox
             disable={false}
             labelData={"Name"}
-            inputValue={selectedStudent.name}
+            // inputValue={selectedStudent.name}
             dataValue={formData.name}
             setDataValue={text => handleInputChange("name", text)}
           />
           <InputBox
             labelData={"New Attendance"}
-            inputValue={totalAttendance.toString()}
+            // inputValue={totalAttendance.toString()}
             dataValue={formData.newAttendance}
             setDataValue={text => handleInputChange("newAttendance", text.toString())}
           />
