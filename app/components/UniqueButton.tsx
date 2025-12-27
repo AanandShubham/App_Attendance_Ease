@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
 import { Text, Pressable, Animated } from 'react-native'
-import AddStudent from '@/assets/images/AddStudent.png'
+// import AddStudent from '@/assets/images/AddStudent.png'
 
 type UniqueButtonProps = {
   btnStyleClass?: string
   itemStyleClass?: string
-  label?: string
+  label?: String
   btnAction?: () => void
   shakeAnim?: Animated.Value
   btnImageSource?: any
@@ -19,6 +19,8 @@ const UniqueButton: React.FC<UniqueButtonProps> = ({
   shakeAnim,
   btnImageSource
 }) => {
+
+  const AddStudent = require('../../assets/images/AddStudent.png')
 
   // Create animation value only once
   const internalShakeAnim = useRef(new Animated.Value(0)).current
