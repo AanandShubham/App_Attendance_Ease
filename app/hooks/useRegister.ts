@@ -113,6 +113,22 @@ const inputValidation = (formData: RegisterTypeFormData, imageUrl: string | null
         return false
     }
 
+    if (formData.username.includes(' ')) {
+        Toast.show({
+            type: "error",
+            text1: "Username can't contains",
+            text2: "White Spaces !!",
+            text2Style: {
+                backgroundColor: 'red',
+                padding: 4,
+                fontSize: 15,
+                color: "white"
+            }
+        })
+        return false
+    }
+
+
     // if (imageUrl == null) {
     //     Toast.show({
     //         type: "info",

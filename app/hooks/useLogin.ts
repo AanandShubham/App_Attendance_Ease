@@ -90,12 +90,19 @@ const InputValidation = (formData: LoginTypeFormData): Boolean => {
     return false
   }
 
-  if(formData.username.includes(' ')){
+  if (formData.username.includes(' ')) {
     Toast.show({
-      type:"error",
-      text1:"Username can't contains",
-      text2:"White Spaces !!"
+      type: "error",
+      text1: "Username can't contains",
+      text2: "White Spaces !!",
+      text2Style: {
+        backgroundColor: 'red',
+        padding: 4,
+        fontSize: 15,
+        color: "white"
+      }
     })
+    return false
   }
 
   if (formData.password.length < 6) {
