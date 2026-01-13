@@ -2,8 +2,8 @@ import { View, TextInput, Animated, StyleSheet, Pressable, Modal, Text } from 'r
 import React, { useState, useRef } from 'react'
 import { useColorScheme } from 'nativewind'
 import { Ionicons } from '@expo/vector-icons'
-import Toast from 'react-native-toast-message'
-import { Dimensions } from 'react-native'
+// import Toast from 'react-native-toast-message'
+// import { Dimensions } from 'react-native'
 
 type inputBoxProps<T> = {
   labelData?: string,
