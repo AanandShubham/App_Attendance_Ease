@@ -94,27 +94,37 @@ const Register = () => {
         />
 
         <InputBox
+          infoMode={true}
+          info={"Enter your full name as per official records."}
           labelData={"fullname"}
           dataValue={formData.fullname}
           setDataValue={text => handleInputChange('fullname', text)}
         />
         <InputBox
+          infoMode={true}
+          info={"Choose a unique username for your account."}
           labelData={"username"}
           dataValue={formData.username}
           setDataValue={text => handleInputChange('username', text)}
         />
         <InputBox
+          infoMode={true}
+          info={"Provide a security key for account recovery."}
           labelData={"security key"}
           dataValue={formData.securityKey}
           setDataValue={text => handleInputChange('securityKey', text)}
         />
         <InputBox
+          infoMode={true}
+          info={"Create a strong password to secure your account."}
           labelData={"password"}
           dataValue={formData.password}
           setDataValue={text => handleInputChange('password', text)}
           passwordMode={true}
         />
         <InputBox
+          infoMode={true}
+          info={"Re-enter your password to confirm it."}
           labelData={"confirm password"}
           dataValue={formData.confirmPassword}
           setDataValue={text => handleInputChange('confirmPassword', text)}

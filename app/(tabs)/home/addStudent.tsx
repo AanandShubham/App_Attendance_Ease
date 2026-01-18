@@ -54,16 +54,22 @@ const addStudent = () => {
                     btnAction={handleClick}
                 >
                     <InputBox
+                        infoMode={true}
+                        info={"Provide official ID issued by your institution or organization EX:- studentID,employeeID,or any unique identifier"}
                         labelData={"ID"}
                         dataValue={formData.tca}
                         setDataValue={text => handleInputChange('tca', text)}
                     />
                     <InputBox
+                        infoMode={true}
+                        info={"Full name of the member. EX- 'Suresh Jain', 'Vikash Deshwal' or 'Anuj Kumar Ragav' "}
                         labelData={"Name"}
                         dataValue={formData.name}
                         setDataValue={text => handleInputChange('name', text)}
                     />
                     <InputBox
+                        infoMode={true}
+                        info={"Total number of sessions the member has attended Initially set to 0 if new member. "}
                         labelData={"Total Attendance"}
                         dataValue={formData.totalAttendance}
                         setDataValue={text => handleInputChange("totalAttendance", text.toString())}

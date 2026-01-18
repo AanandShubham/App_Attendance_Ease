@@ -81,23 +81,33 @@ const ForgetPassword = () => {
         btnLabel={"Forget"}
       >
         <InputBox
+          infoMode={true}
+          info={"Enter your registered username to reset your password."}
           labelData={"username"}
           dataValue={formData.username}
           setDataValue={text => handleInputChange("username", text)}
         />
         <InputBox
+          infoMode={true}
+          info={"Provide the security key associated with your account for verification."}
           labelData={"security Key"}
           dataValue={formData.securityKey}
           setDataValue={text => handleInputChange("securityKey", text)}
         />
         <InputBox
+          infoMode={true}
+          info={"Create a new password for your account. Make sure it's strong and secure."}
           labelData={"password"}
           dataValue={formData.password}
+          passwordMode={true}
           setDataValue={text => handleInputChange("password", text)}
         />
         <InputBox
+          infoMode={true}
+          info={"Re-enter your new password to confirm it matches the one above."}
           labelData={"confirm password"}
           dataValue={formData.confirmPassword}
+          passwordMode={true}
           setDataValue={text => handleInputChange("confirmPassword", text)}
         />
 

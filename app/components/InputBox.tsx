@@ -111,6 +111,8 @@ const InputBox = <T,>(
 
         <View className='w-full ml-4'>
           <TextInput
+          // autoCapitalize='characters'
+            selectTextOnFocus={true}
             editable={disable}
             secureTextEntry={passwordMode ? !showPassword : false}
             value={dataValue}
@@ -120,7 +122,7 @@ const InputBox = <T,>(
               setIsFocused(true)
               // setDataValue(inputValue as string as T)
             }}
-
+            placeholderTextColor={''}
             inputMode='text'
             onBlur={() => setIsFocused(false)}
             className='w-full h-[90%] text-xl  dark:placeholder:text-white   dark:text-white text-neutral-950 mt-2 pl-2 pr-2'

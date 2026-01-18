@@ -26,9 +26,9 @@ const updateClass = () => {
     const [formData, setFormData] = useState<ClassTypeFormData>({
         id: selectedClass?._id,
         name: selectedClass.name,
-        roomNo:selectedClass.roomNo,
-        totalClass:selectedClass.totalClass.toString(),
-        timeTable:selectedClass.timeTable,
+        roomNo: selectedClass.roomNo,
+        totalClass: selectedClass.totalClass.toString(),
+        timeTable: selectedClass.timeTable,
         subject: selectedClass.subject
     })
 

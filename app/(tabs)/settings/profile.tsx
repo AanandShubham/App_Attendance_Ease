@@ -133,7 +133,7 @@ const Profile = () => {
                         passwordMode={true}
                     />
                     <InputBox
-                        labelData={"password"}
+                        labelData={"new password"}
                         // inputValue={"**********"}
                         dataValue={fromData.password}
                         setDataValue={text => handleInputChange('password', text)}

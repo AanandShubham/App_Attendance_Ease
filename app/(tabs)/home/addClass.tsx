@@ -28,7 +28,6 @@ const addClass = () => {
   }
 
   const btnControl = async () => {
-
     // console.log(formData)
     const flag = await addClass(formData)
     if (flag) {
@@ -38,9 +37,7 @@ const addClass = () => {
       })
       router.back()
     }
-
     // console.log("request done ")
-
   }
 
 
@@ -52,24 +49,34 @@ const addClass = () => {
           btnAction={btnControl}
           btnLabel={"Add"} >
           <InputBox
+            infoMode={true}
+            info={"Provide the group's name or department as issued by organization refers to a class,batch,team or official department depending on your role Eg:- [MCA-SecA],[CS-3rd year],[Sales Dept],[Producton Unit]"}
             labelData={"Group Name"}
             dataValue={formData.name}
             setDataValue={text => handleInputChange('name', text)} />
           <InputBox
+            infoMode={true}
+            info={"Subject or focus area of the group. EX- 'Mathematics', 'Computer Science', or 'Web Development' "}
             labelData={"Assigned For"}
             dataValue={formData.subject}
             setDataValue={text => handleInputChange('subject', text)} />
           <InputBox
+            infoMode={true}
+            info={"Time slot which attendance is being marked . it's like class period (for Student) or work shift Eg:- [09:00am to 09:45am],[09:00am to 05:00pm],etc"}
             labelData={"Time"}
             dataValue={formData.timeTable}
             setDataValue={text => handleInputChange('timeTable', text)}
           />
           <InputBox
-            labelData={"Total Assigned Days"}
+            infoMode={true}
+            info={"Total number of days the group is scheduled to meet or hold classes. EX- '30', '45', or '60' "}
+            labelData={"Assigned Days"}
             dataValue={formData.totalClass}
             setDataValue={text => handleInputChange('totalClass', text.toString())}
           />
           <InputBox
+            infoMode={true}
+            info={"Room number or location where the group meets. EX- 'Room 101', 'Lab A', or 'Building B, Room 202' "}
             labelData={"Room"}
             dataValue={formData.roomNo}
             setDataValue={text => handleInputChange('roomNo', text)}
