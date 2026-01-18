@@ -9,13 +9,13 @@ import Constants from 'expo-constants'
 const useUpdateStudent = () => {
     
     const { token } = useAuthContext()
-    const { students, setStudents, selectedStudent } = useClassContext()
+    const { students, setStudents, selectedStudent ,selectedClass} = useClassContext()
     const [loading, setLoading] = useState(false)
     const {apiUrl} = Constants.expoConfig?.extra || {}
     
     const updateStudent = async (studentData: StudentUpdateTypeFormData) => {
 
-        const flag = inputValidation(studentData)
+        const flag = inputValidation(studentData,selectedClass)
 
         if (!flag) return false
 
@@ -65,7 +65,7 @@ const useUpdateStudent = () => {
 export default useUpdateStudent
 
 
-const inputValidation = (studentData: StudentUpdateTypeFormData) => {
+const inputValidation = (studentData: StudentUpdateTypeFormData,selectedClass:any) => {
 
     if (!studentData.newAttendance) {
         Toast.show({
@@ -78,6 +78,21 @@ const inputValidation = (studentData: StudentUpdateTypeFormData) => {
                 color: "white"
             },
             text2: ""
+        })
+        return false
+    }
+
+    if(studentData.newAttendance > selectedClass.attendance.length){
+        Toast.show({
+            type: "error",
+            text1: `Attendance can't be more than`,
+            text1Style: {
+                backgroundColor: 'red',
+                padding: 4,
+                fontSize: 15,
+                color: "white"
+            },
+            text2: `${selectedClass.attendance.length} !!!!!`
         })
         return false
     }
